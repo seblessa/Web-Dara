@@ -1,0 +1,125 @@
+html, body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    background-color: #FFB6C1;
+    padding: 10px;
+}
+
+#header h1 {
+    font-size: 60px;
+    color: #8B0000;
+    font-family: "Arial", sans-serif;
+    text-transform: uppercase;
+    background-image: linear-gradient(to bottom, #FFB6C1, #FFB6C1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.login-container {
+    text-align: center;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.game-board {
+    text-align: center;
+    background-color: white;
+    padding: 0;
+    border-radius: 75px;
+    width: 60%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
+    border: 2px solid black;
+}
+
+.cell {
+    display: flex;
+    width: 100%;
+    height: 1px;
+    margin: 10px;
+    padding-top: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.player-pieces {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 20px;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.piece {
+    width: 80px;
+    height: 80px;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.piece:hover {
+    background-color: #2980b9;
+}
+
+.piece + .piece {
+    margin-top: 10px; /* Adjust the margin as needed */
+}
+
+.player-turn {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Media Query for responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .player-section {
+        width: 90%;
+        margin-top: 20px;
+    }
+    .game-container {
+        width: 90%;
+        margin-top: 20px;
+    }
+    .game-board {
+        padding: 10px;
+    }
+}
