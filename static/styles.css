@@ -7,40 +7,46 @@ html, body {
 
 #header {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center content horizontally */
     align-items: center;
     height: 150px;
     background-color: #d8a98d;
     padding: 10px;
 }
 
-#header h1 {
-    font-size: 70px;
+h1 {
     font-family: Blanka, "Arial", sans-serif;
+    font-size: 70px;
     color: #db6304;
     text-transform: uppercase;
     background-image: linear-gradient(to bottom, #FFB6C1, #FFB6C1);
     -webkit-background-clip: text;
     background-clip: text;
-    padding: 10px; /* Increase the padding for width and height */
-    height: auto; /* Allow the height to adjust based on content */
-    width: auto; /* Allow the width to adjust based on content */
+    padding: 10px;
 }
 
-.newgame-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+.header-container {
+    display: flex;
+    align-items: center; /* Center content vertically */
 }
 
-.new-game-button {
+#new-game-button {
     background-color: black;
     color: white;
-    font-family: Blanka, "Arial", sans-serif;
-    font-size: 20px; /* Adjust the font size as needed */
+    font-family: 'Blanka', 'Arial', sans-serif;
+    font-size: 20px;
     border: 2px solid black;
-    padding: 10px 20px; /* Adjust padding to make the button bigger */
+    padding: 10px 20px;
     border-radius: 10px;
+    width: 150px; /* Square with the height of the header */
+}
+
+#new-game-button:hover {
+    background-color: darkgrey;
+}
+
+#new-game-button:focus {
+    outline: none; /* Remove focus outline on click */
 }
 
 .login-container {
