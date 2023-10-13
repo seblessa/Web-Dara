@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+
+<!-- Dara text type -->
+<link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
+<style>
+    @import url('https://fonts.cdnfonts.com/css/blanka');
+</style>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,23 +14,43 @@
     <link rel="stylesheet" href="../static/styles.css">
     <title>Web Dara</title>
 </head>
+
 <body>
 
 <header id="header">
-    <h1>DARA</h1>
+    <h1>DARA GAME</h1>
 </header>
+
+<!-- New game button -->
+<div class="newgame-container">
+    <form id="new-game">
+        <!-- Your game inputs and elements go here -->
+
+        <!-- Add a reset button to reset the game -->
+        <button type="reset">Reset Game</button>
+    </form>
+</div>
+
 
 <!-- Login Form -->
 <div class="login-container">
-    <h2>Login</h2>
     <form id="login-form" onsubmit="login(); return false;">
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter your username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
         <button type="submit">Login</button>
     </form>
 </div>
+
+
+
+
+
 
 <!-- Game Board -->
 <div class="game-container">
