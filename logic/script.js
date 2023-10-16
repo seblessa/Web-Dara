@@ -1,6 +1,11 @@
 const pieces = document.querySelectorAll('.piece1, .piece2');
 const cells = document.querySelectorAll('.cell');
 
+
+
+
+
+
 let draggedPiece = null;
 
 // Event listener for when a piece starts to be dragged
