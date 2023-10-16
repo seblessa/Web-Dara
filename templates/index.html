@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-
-<!-- Dara text type -->
-<link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
-<style>
-    @import url('https://fonts.cdnfonts.com/css/blanka');
-</style>
-
-<script src="../logic/script.js"></script>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/styles.css">
+    <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
     <title>Web Dara</title>
 </head>
-
 <body>
+<script src="../logic/script.js"></script>
 
 <header id="header">
     <div class="header-container">
         <div class="buttons-container">
             <button id="new-game-button">New Game</button>
-            <button id="rules-button">rules</button>
-            <button id="podium-button">Podium</button>
+            <button id="rules-button">Rules</button>
             <div id="popup" class="hidden-popup" style="display: none;">
                 <div id="popup-content">
                     <span id="close-popup">X</span>
@@ -59,32 +50,29 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <h1>DARA GAME</h1>
     </div>
-    <script>
-        document.getElementById("rules-button").addEventListener("click", function() {
-            document.getElementById("popup").style.display = "block";
-        });
-
-        document.getElementById("close-popup").addEventListener("click", function() {
-            document.getElementById("popup").style.display = "none";
-        });
-    </script>
 </header>
 
-    </style>
-</head>
-<body>
 <div class="first-step">
-    <h2>Choose game players</h2>
-    <button id="ai-button">AI</button>
-    <button id="person-button">Person</button>
+    <div class="game-mode">
+        <h2>Choose game players</h2>
+        <button id="ai-button" class="toggle-button1">AI</button>
+        <button id="person-button" class="toggle-button1">Person</button>
+    </div>
+    <div class="game-board-selector">
+        <h2>Choose board</h2>
+        <button id="game-board1" class="toggle-button2">5x6</button>
+        <button id="game-board2" class="toggle-button2">6x7</button>
+        <button id="game-board3" class="toggle-button2">7x8</button>
+    </div>
+    <br>
+    <div class="game-starter">
+        <button id="start-button" class="toggle-button-start"> <h3> Start Game </h3> </button>
+    </div>
 </div>
-</body>
 
-<!-- Login Form -->
 <div class="login-container">
     <form id="login-form" onsubmit="login(); return false;">
         <div class="form-group">
@@ -99,108 +87,10 @@
     </form>
 </div>
 
-
-<!-- Game Board -->
 <div class="game-container">
-
-    <div class="player-box">
-        <div class="player1-turn">
-            <h2> Player 1:</h2>
-            <h3> Player</h3>
-        </div>
-        <div class="player-pieces">
-            <div class="piece1" draggable="true" id="piece1"></div>
-            <div class="piece1" draggable="true" id="piece2"></div>
-            <div class="piece1" draggable="true" id="piece3"></div>
-            <div class="piece1" draggable="true" id="piece4"></div>
-            <div class="piece1" draggable="true" id="piece5"></div>
-            <div class="piece1" draggable="true" id="piece6"></div>
-            <div class="piece1" draggable="true" id="piece7"></div>
-            <div class="piece1" draggable="true" id="piece8"></div>
-            <div class="piece1" draggable="true" id="piece9"></div>
-            <div class="piece1" draggable="true" id="piece10"></div>
-            <div class="piece1" draggable="true" id="piece11"></div>
-            <div class="piece1" draggable="true" id="piece12"></div>
-        </div>
-    </div>
-
     <div class="game-board">
-        <div class="cell" id="cell1"></div>
-        <div class="cell" id="cell2"></div>
-        <div class="cell" id="cell3"></div>
-        <div class="cell" id="cell4"></div>
-        <div class="cell" id="cell5"></div>
-        <div class="cell" id="cell6"></div>
-        <div class="cell" id="cell7"></div>
-        <div class="cell" id="cell8"></div>
-        <div class="cell" id="cell9"></div>
-        <div class="cell" id="cell10"></div>
-        <div class="cell" id="cell11"></div>
-        <div class="cell" id="cell12"></div>
-        <div class="cell" id="cell13"></div>
-        <div class="cell" id="cell14"></div>
-        <div class="cell" id="cell15"></div>
-        <div class="cell" id="cell16"></div>
-        <div class="cell" id="cell17"></div>
-        <div class="cell" id="cell18"></div>
-        <div class="cell" id="cell19"></div>
-        <div class="cell" id="cell20"></div>
-        <div class="cell" id="cell21"></div>
-        <div class="cell" id="cell22"></div>
-        <div class="cell" id="cell23"></div>
-        <div class="cell" id="cell24"></div>
-        <div class="cell" id="cell25"></div>
-        <div class="cell" id="cell26"></div>
-        <div class="cell" id="cell27"></div>
-        <div class="cell" id="cell28"></div>
-        <div class="cell" id="cell29"></div>
-        <div class="cell" id="cell30"></div>
+        <!-- Your game board content goes here -->
     </div>
-
-    <div class="player-box">
-        <div class="player2-turn">
-            <h2> Player 2:</h2>
-            <h3> Player / AI </h3>
-        </div>
-        <div class="player-pieces">
-        <div class="piece2" draggable="true" id="piece-1"></div>
-        <div class="piece2" draggable="true" id="piece-2"></div>
-        <div class="piece2" draggable="true" id="piece-3"></div>
-        <div class="piece2" draggable="true" id="piece-4"></div>
-        <div class="piece2" draggable="true" id="piece-5"></div>
-        <div class="piece2" draggable="true" id="piece-6"></div>
-        <div class="piece2" draggable="true" id="piece-7"></div>
-        <div class="piece2" draggable="true" id="piece-8"></div>
-        <div class="piece2" draggable="true" id="piece-9"></div>
-        <div class="piece2" draggable="true" id="piece-10"></div>
-        <div class="piece2" draggable="true" id="piece-11"></div>
-        <div class="piece2" draggable="true" id="piece-12"></div>
-        </div>
-    </div>
-
-
 </div>
-
-<div class="podium-container">
-    <div class="podium-item">
-        <p class="podium-ity">Annecy</p>
-        <div class="podium__rank second">2</div>
-    </div>
-    <div class="podium__item">
-        <p class="podium__city">Saint-Gervais</p>
-        <div class="podium__rank first">
-            <svg class="podium__number" viewBox="0 0 27.476 75.03" xmlns="http://www.w3.org/2000/svg">
-                <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)">
-                    <path class="st8" d="M -198.928 43.419 C -200.528 47.919 -203.528 51.819 -207.828 55.219 C -210.528 57.319 -213.028 58.819 -215.428 60.019 L -215.428 72.819 C -210.328 70.619 -205.628 67.819 -201.628 64.119 L -201.628 117.219 L -187.528 117.219 L -187.528 43.419 L -198.928 43.419 L -198.928 43.419 Z" style="fill: #000;"/>
-                </g>
-            </svg>
-        </div>
-    </div>
-    <div class="podium__item">
-        <p class="podium__city">Clermont-Ferrand Essentielle</p>
-        <div class="podium__rank third">3</div>
-    </div>
-</>
-
 </body>
 </html>
