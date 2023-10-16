@@ -20,7 +20,7 @@ cells.forEach(cell => {
 // Function to handle the drag start
 function dragStart(event) {
     draggedPiece = event.target;
-    setTimeout(() => (event.target.style.display = 'none'), 0);
+    event.target.style.display = 'none';
 }
 
 // Functions to handle the drag over, enter, leave, and drop events
@@ -43,17 +43,30 @@ function dragDrop() {
     draggedPiece.style.display = 'block';
 }
 
-
-
-
-
-
-
-
-
-
-function login(){
-    console.log("\nLogin attempted:")
-    console.log("Username: " + document.getElementById("username").value)
-    console.log("Password: " + document.getElementById("password").value)
+// Login function
+function login() {
+    console.log('\nLogin attempted:');
+    console.log('Username: ' + document.getElementById('username').value);
+    console.log('Password: ' + document.getElementById('password').value);
 }
+
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the form submission
+    login();
+});
+
+// Add event listeners for opening and closing the popup
+const openButton = document.getElementById('rules-button');
+const popup = document.getElementById('popup');
+const closeButton = document.getElementById('close-popup');
+
+openButton.addEventListener('click', () => {
+    popup.style.display = 'block';
+});
+
+closeButton.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+
+// Hide the popup initially
+popup.style.display = 'none';

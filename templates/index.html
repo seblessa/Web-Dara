@@ -20,11 +20,69 @@
 
 <header id="header">
     <div class="header-container">
-        <button id="new-game-button">New Game</button>
+        <div class="buttons-container">
+            <button id="new-game-button">New Game</button>
+            <button id="rules-button">rules</button>
+            <button id="podium-button">Podium</button>
+            <div id="popup" class="hidden-popup" style="display: none;">
+                <div id="popup-content">
+                    <span id="close-popup">X</span>
+                    <h2>Game Rules</h2>
+                    <p><strong>Here are the rules of the game:</strong></p>
+                    <div class="Fase1">
+                        <div class="title">Fase 1 - Pôr as peças (drop):</div>
+                        <p>Jogadores escolhem uma cor e decidem quem joga primeiro.</p>
+                        <p>Inicialmente, o tabuleiro está vazio.</p>
+                        <p>Jogadores põem alternadamente uma peça sua numa casa livre.</p>
+                        <p>Não podem ser postas mais de 3 peças em linha.</p>
+                        <p>Podem existir 3 peças em linha (mas não é vantajoso).</p>
+                    </div>
+
+                    <div class="Fase2">
+                        <div class="title">Fase 2 - Mover as peças (move):</div>
+                        <p>Cada jogador move alternadamente uma peça da sua cor.</p>
+                        <p>Uma peça só pode ser movida para uma casa contígua.</p>
+                        <p>Peças movidas apenas na horizontal ou vertical (não na diagonal).</p>
+                        <p>Uma linha de tamanho 3 permite capturar uma peça do adversário.</p>
+                        <p>Neste caso, remove uma peça do adversário à sua escolha.</p>
+                        <p>Só uma peça é removida por jogada (mesmo sendo formadas várias linhas).</p>
+                        <p>Não podem ser formadas linhas com mais de 3 peças.</p>
+                        <p>Uma peça não pode retornar à posição da jogada anterior.</p>
+                        <p>Só poderá retornar a essa casa nas jogadas seguintes.</p>
+                    </div>
+
+                    <div class="Jogo-terminado">
+                        <div class="title">O jogo termina quando:</div>
+                        <p>Um jogador não puder ganhar, por exemplo, se tiver apenas 2 peças no tabuleiro.</p>
+                        <p>Ou se não puder realizar uma jogada válida.</p>
+                        <p>O jogador que não pode ganhar perde o jogo.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <h1>DARA GAME</h1>
     </div>
+    <script>
+        document.getElementById("rules-button").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "block";
+        });
+
+        document.getElementById("close-popup").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+        });
+    </script>
 </header>
 
+    </style>
+</head>
+<body>
+<div class="first-step">
+    <h2>Choose game players</h2>
+    <button id="ai-button">AI</button>
+    <button id="person-button">Person</button>
+</div>
+</body>
 
 <!-- Login Form -->
 <div class="login-container">
@@ -43,7 +101,7 @@
 
 
 <div class="player-turn" id="player-turn">
-    player turn:
+    player's turn:
 
 </div>
 
@@ -114,6 +172,27 @@
     </div>
 
 </div>
+
+<div class="podium-container">
+    <div class="podium-item">
+        <p class="podium-ity">Annecy</p>
+        <div class="podium__rank second">2</div>
+    </div>
+    <div class="podium__item">
+        <p class="podium__city">Saint-Gervais</p>
+        <div class="podium__rank first">
+            <svg class="podium__number" viewBox="0 0 27.476 75.03" xmlns="http://www.w3.org/2000/svg">
+                <g transform="matrix(1, 0, 0, 1, 214.957736, -43.117417)">
+                    <path class="st8" d="M -198.928 43.419 C -200.528 47.919 -203.528 51.819 -207.828 55.219 C -210.528 57.319 -213.028 58.819 -215.428 60.019 L -215.428 72.819 C -210.328 70.619 -205.628 67.819 -201.628 64.119 L -201.628 117.219 L -187.528 117.219 L -187.528 43.419 L -198.928 43.419 L -198.928 43.419 Z" style="fill: #000;"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <div class="podium__item">
+        <p class="podium__city">Clermont-Ferrand Essentielle</p>
+        <div class="podium__rank third">3</div>
+    </div>
+</>
 
 </body>
 </html>

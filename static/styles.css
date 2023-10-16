@@ -27,8 +27,23 @@ h1 {
 
 .header-container {
     display: flex;
-    align-items: center; /* Center content vertically */
+    align-items: center; /* Center content  vertically */
 }
+
+.buttons-container{
+    position: absolute;
+    top: 0;
+    left:0;
+    margin: 50px;
+}
+
+.hidden-popup {
+    display: none;
+    /* Add styles for positioning and appearance of the pop-up */
+}
+
+/* Additional styles for the pop-up and close button */
+
 
 #new-game-button {
     background-color: black;
@@ -47,6 +62,180 @@ h1 {
 
 #new-game-button:focus {
     outline: none; /* Remove focus outline on click */
+}
+
+#rules-button {
+    background-color: black;
+    color: white;
+    font-family: 'Blanka', 'Arial', sans-serif;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 150px; /* Square with the height of the header */
+}
+
+#rules-button:hover {
+    background-color: darkgrey;
+}
+
+#rules-button:focus {
+    outline: none; /* Remove focus outline on click */
+}
+.hidden-popup {
+    display: table; /* Add display: table to the container */
+    background-color: #db6304; /* Set background to white */
+    width: 500px; /* Adjust width for the desired size */
+    height: auto; /* Set height to match width for a square shape */
+    text-align: justify; /* centering the  text */
+    position: fixed; /* Position it relative to the viewport */
+    top: 50%; /* Vertically center it on the screen */
+    left: 50%; /* Horizontally center it on the screen */
+    transform: translate(-50%, -50%); /* Center it perfectly */
+    padding: 70px;
+    border-radius: 5px;
+}
+
+#popup-content {
+    margin: 0;
+    padding: 0;
+}
+
+#close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#close-popup:hover {
+    background-color: #e0e0e0;
+}
+
+#podium-button {
+    background-color: black;
+    color: white;
+    font-family: 'Blanka', 'Arial', sans-serif;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 150px; /* Square with the height of the header */
+}
+
+#podium-button:hover {
+    background-color: darkgrey;
+}
+
+#podium-button:focus {
+    outline: none; /* Remove focus outline on click */
+}
+.hidden-popup-2 {
+    display: table; /* Add display: table to the container */
+    background-color: #db6304; /* Set background to white */
+    width: 400px; /* Adjust width for the desired size */
+    height: 400px; /* Set height to match width for a square shape */
+    text-align: justify; /* centering the  text */
+    position: fixed; /* Position it relative to the viewport */
+    top: 50%; /* Vertically center it on the screen */
+    left: 50%; /* Horizontally center it on the screen */
+    transform: translate(-50%, -50%); /* Center it perfectly */
+    padding: 70px;
+    border-radius: 5px;
+}
+
+#popup-content-2 {
+    margin: 0;
+    padding: 0;
+}
+
+#close-popup-2 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#close-popup-2:hover {
+    background-color: #e0e0e0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.container {
+    display: flex;
+    align-items: flex-end;
+}
+
+.podium-item {
+    width: 200px;
+}
+
+.podium__rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    color: #fff;
+}
+
+.podium__city {
+    text-align: center;
+    padding: 0 .5rem;
+}
+
+.podium__number {
+    width: 27px;
+    height: 75px;
+}
+
+.podium .first {
+    min-height: 300px;
+    background: rgb(255,172,37);
+    background:
+            linear-gradient(333deg,
+            rgba(255,172,37,1) 0%,
+            rgba(254,207,51,1) 13%,
+            rgba(254,224,51,1) 53%,
+            rgba(255,172,37,1) 100%);
+}
+
+.podium .second {
+    min-height: 200px;
+    background: blue;
+}
+
+.podium .third {
+    min-height: 100px;
+    background: green;
+}
+
+.first-step {
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+.first-step h2 {
+    font-size: 24px;
+}
+
+.first-step button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.first-step button:hover {
+    background-color: #0056b3;
 }
 
 .login-container {
@@ -90,24 +279,22 @@ h1 {
 
 .game-container {
     display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
+    border-radius: 10px; /* Rounded border corners */
 }
 
 
 .game-board {
-    width: auto;
-    height: auto;
-    text-align: center;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, 1fr);
     gap: 5px;
-    border-radius: 10px;
-    border: 2px solid black;
+    padding: 20px;
+    background: url('wooden-textured-background_53876-14865.avif');
+    border: 10px solid #301e15; /* Brown color for the border */
+    border-radius: 10px; /* Rounded border corners */
 }
 
 
@@ -130,8 +317,8 @@ h1 {
     width: 100px;
     height: 100px;
     margin: 5px;
-    background-color: white;
-    border: 1px solid #ddd;
+    background: url('wooden-textured-background_53876-14865.avif');
+    border: 10px solid #301e15;
     line-height: 80px;
     border-radius: 5px;
     cursor: pointer;
@@ -142,25 +329,26 @@ h1 {
     width: 100px;
     height: 100px;
     margin: 5px;
-    background-color: darkslateblue;
+    background: linear-gradient(to bottom, darkslateblue, #1d2a5a); /* Apply a gradient background */
     color: white;
     line-height: 80px;
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
 }
 
 .piece2 {
     width: 100px;
     height: 100px;
     margin: 5px;
-    background-color: darkred;
+    background: linear-gradient(to bottom, darkred, #9b2520); /* Apply a gradient background */
     color: white;
-    text-align: center;
     line-height: 80px;
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
 }
 
 .piece:hover {
