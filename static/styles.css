@@ -122,6 +122,9 @@ body {
     align-items: flex-end;
 }
 
+
+
+
 .first-step {
     display: flex;
     flex-direction: row;
@@ -264,6 +267,75 @@ body {
     cursor: pointer;
 }
 
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Adjust the margin as needed to move the podium */
+    border: 5px solid #db6304;
+    padding: 30px
+
+}
+
+.podium-container {
+    border: 2px solid #000;
+    padding: 20px;
+    align-items: flex-start;
+}
+
+.podium {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.podium-item {
+    background: #fff;
+    border: 2px solid #000;
+    padding: 10px;
+    text-align: center;
+    width: 30%;
+}
+
+.first {
+    background: red;
+    height: 200px;
+}
+
+.second {
+    background: orange;
+    height: 150px;
+    margin-top: 50px;
+}
+
+.third {
+    background: yellow;
+    height: 100px;
+    margin-top: 100px;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+.rank {
+    margin-top: 10px;
+}
+
+.position {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background: #000;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.games-won {
+    font-size: 16px;
+}
 
 
 /* Media Query for responsive design */
