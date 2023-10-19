@@ -7,7 +7,7 @@ html, body {
 
 #header {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 150px;
     background-color: #d8a98d;
@@ -27,22 +27,31 @@ h1 {
 
 .header-container {
     display: flex;
-    align-items: center; /* Center content  vertically */
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.buttons-container{
-    position: absolute;
-    top: 0;
-    left:0;
-    margin: 50px;
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
+
 
 .hidden-popup {
-    display: none;
-    /* Add styles for positioning and appearance of the pop-up */
+    z-index: 3;
+    background-color: #d8a98d; /* Match the header background color */
+    width: 70%; /* Adjust the width to fit the content */
+    max-width: 600px; /* Set a maximum width */
+    text-align: left; /* Align text to the left */
+    border: 2px solid #db6304; /* Add a border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    border-radius: 10px;
+    padding: 20px;
 }
 
-/* Additional styles for the pop-up and close button */
 
 
 #new-game-button {
@@ -53,7 +62,7 @@ h1 {
     border: 2px solid black;
     padding: 10px 20px;
     border-radius: 10px;
-    width: 150px; /* Square with the height of the header */
+    width: 150px;
 }
 
 #new-game-button:hover {
@@ -72,7 +81,7 @@ h1 {
     border: 2px solid black;
     padding: 10px 20px;
     border-radius: 10px;
-    width: 150px; /* Square with the height of the header */
+    width: 150px;
 }
 
 #rules-button:hover {
@@ -82,6 +91,12 @@ h1 {
 #rules-button:focus {
     outline: none; /* Remove focus outline on click */
 }
+
+.game-rules-title{
+    display: flex;
+    justify-content: center;
+}
+
 .hidden-popup {
     display: table; /* Add display: table to the container */
     background-color: #db6304; /* Set background to white */
@@ -176,39 +191,92 @@ body {
     justify-content: center;
 }
 
-
-.login-container button {
+.button-container {
     display: flex;
     justify-content: center;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin: 10px;
-    cursor: pointer;
 }
+
+.button-container button {
+    background-color: black;
+    color: white;
+    font-family: 'Blanka', 'Arial', sans-serif;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 150px;
+}
+
+.spacer {
+    flex: 1; /* This spacer expands to fill available space */
+}
+
+.welcome-box {
+    display: flex;
+    align-items: center; /* Vertically center its contents */
+}
+
+
+#user-welcome-message {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: green;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+}
+
+#logout-button {
+    background-color: black;
+    color: white;
+    font-family: 'Blanka', 'Arial', sans-serif;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+#logout-button:hover {
+    background-color: #0056b3;
+}
+
+/* Customize the Error Message */
+.error-message {
+    display: flex;
+    justify-content: center;
+    background-color: #FF5733; /* Background color */
+    color: white; /* Text color */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
 
 .first-step button:hover {
     background-color: #0056b3;
 }
 
 .login-container {
+    z-index: 2;
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: 20px;
+    top: 35%; /* Center it vertically */
+    left: 50%; /* Center it horizontally */
+    transform: translate(-50%, -50%); /* Center it perfectly */
     background-color: white;
     padding: 10px;
     border-radius: 10px;
-    border: 2px black;
-    width: 300px; /* Increase the width to accommodate the wider form elements */
+    border: 2px solid black;
+    width: 300px; /* Adjust the width as needed */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
     /* Additional CSS for the form elements */
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
+
 
 .form-group {
     display: flex;
@@ -228,6 +296,7 @@ body {
 
 #login-form button {
     align-self: flex-end;
+    width: 100%;
 }
 
 .game-container {

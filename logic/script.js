@@ -1,4 +1,46 @@
+// User object with the username and password
+const user = { username: "user", password: "user" };
+
+let isLoggedIn = false; // Variable to track the login status
+
+
 function login() {
+    const usernameInput = document.getElementById('username').value;
+    const passwordInput = document.getElementById('password').value;
+
+    if (usernameInput === user.username && passwordInput === user.password) {
+        isLoggedIn = true;
+        hideLoginDiv();
+        showWelcomeMessage(usernameInput);
+        document.getElementById("new-game-button").style.display = "block";
+    } else {
+        showErrorMessage();
+    }
+}
+
+function showWelcomeMessage(username) {
+    const welcomeMessage = document.getElementById('user-welcome-message'); // Updated ID here
+    welcomeMessage.textContent = `Welcome ${username}`;
+    welcomeMessage.style.display = 'block';
+}
+
+function showErrorMessage() {
+    const errorMessage = document.querySelector('.error-message');
+    errorMessage.style.display = 'block';
+}
+
+
+function hideLoginDiv() {
+    const loginDiv = document.querySelector('.login-container');
+    loginDiv.style.display = 'none';
+}
+function ShowLoginDiv() {
+    const loginDiv = document.querySelector('.login-container');
+    loginDiv.style.display = 'block';
+}
+
+
+function show_login_cred() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     console.log('\nLogin attempted:');
@@ -18,6 +60,20 @@ function generateGameBoard(rows, columns) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    const welcomeMessage = document.querySelector('.welcome-message');
+    const errorMessage = document.querySelector('.error-message');
+    const gameBoard = document.querySelector(".game-container");
+    const firstStep = document.querySelector(".first-step");
+    const gameModeButtons = document.querySelectorAll(".toggle-button1");
+    const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
+    const startButton = document.getElementById("start-button");
+
+    errorMessage.style.display = 'none';
+    welcomeMessage.style.display = 'none';
+    gameBoard.style.display = "none";
+    firstStep.style.display = "none";
+    document.getElementById("new-game-button").style.display = "none";
+
     document.getElementById("rules-button").addEventListener("click", function() {
         document.getElementById("popup").style.display = "block";
     });
@@ -26,17 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("popup").style.display = "none";
     });
 
-    const gameBoard = document.querySelector(".game-container");
-    const firstStep = document.querySelector(".first-step");
-    gameBoard.style.display = "none";
-    firstStep.style.display = "none";
-
-    const gameModeButtons = document.querySelectorAll(".toggle-button1");
-    const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
-    const startButton = document.getElementById("start-button");
+    document.getElementById('logout-button').addEventListener('click', function () {
+        document.getElementById('user-welcome-message').style.display = 'none';
+        document.getElementById('new-game-button').style.display = 'none'; // Hide the "New Game" button on logout
+    });
 
     document.getElementById("new-game-button").addEventListener("click", function () {
-        // Show the 'first-step' div when 'New Game' button is pressed
         firstStep.style.display = "block";
     });
 
