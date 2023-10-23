@@ -85,51 +85,49 @@
         <button id="start-button" class="toggle-button-start"> <h3> Start Game </h3> </button>
     </div>
 </div>
-
-<div class="login-container">
-    <form id="login-form" onsubmit="show_login_cred();login(); return false;">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter your username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
-        </div>
-        <div class="button-container">
-            <button type="submit">Login</button>
-        </div>
-    </form>
-    <div class="error-message">Wrong username or password</div>
-</div>
-
 <div class="game-container">
     <div class="game-board"></div>
 </div>
 <div class="center-container">
-<div class="podium">
-    <div class="podium-item second">
-        <p class="podium-username">User 2</p>
-        <div class="podium-rank">
-            <span class="podium-position">2nd</span>
-            <span class="podium-games-won">8 Games Won</span>
+    <div class="login-container">
+        <form id="login-form" onsubmit="show_login_cred();login(); return false;">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <div class="button-container">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <div class="error-message">Wrong username or password</div>
+    </div>
+    <div class="podium">
+        <div class="podium-item second">
+            <p class="podium-username">User 2</p>
+            <div class="podium-rank">
+                <span class="podium-position">2nd</span>
+                <span class="podium-games-won">8 Games Won</span>
+            </div>
+        </div>
+        <div class="podium-item first">
+            <p class="podium-username">User 1</p>
+            <div class="podium-rank">
+                <span class="podium-position">1st</span>
+                <span class="podium-games-won">10 Games Won</span>
+            </div>
+        </div>
+        <div class="podium-item third">
+            <p class="podium-username">User 3</p>
+            <div class="podium-rank">
+                <span class="podium-position">3rd</span>
+                <span class="podium-games-won">5 Games Won</span>
+            </div>
         </div>
     </div>
-    <div class="podium-item first">
-        <p class="podium-username">User 1</p>
-        <div class="podium-rank">
-            <span class="podium-position">1st</span>
-            <span class="podium-games-won">10 Games Won</span>
-        </div>
-    </div>
-    <div class="podium-item third">
-        <p class="podium-username">User 3</p>
-        <div class="podium-rank">
-            <span class="podium-position">3rd</span>
-            <span class="podium-games-won">5 Games Won</span>
-        </div>
-    </div>
-</div>
 </div>
 </body>
 </html>
