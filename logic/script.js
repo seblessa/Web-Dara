@@ -76,6 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
     firstStep.style.display = "none";
     document.getElementById("new-game-button").style.display = "none";
 
+    document.getElementById("new-game-button").addEventListener("click", function () {
+        firstStep.style.display = "block";
+    });
+
     document.getElementById("rules-button").addEventListener("click", function() {
         document.getElementById("popup").style.display = "block";
     });
@@ -97,10 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('logout-button').addEventListener('click', function () {
         document.getElementById('user-welcome-message').style.display = 'none';
         document.getElementById('new-game-button').style.display = 'none'; // Hide the "New Game" button on logout
-    });
-
-    document.getElementById("new-game-button").addEventListener("click", function () {
-        firstStep.style.display = "block";
     });
 
     gameModeButtons.forEach(function (button) {
