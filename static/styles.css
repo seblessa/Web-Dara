@@ -245,7 +245,7 @@ body {
 }
 
 #logout-button:hover {
-    background-color: #0056b3;
+    background-color: darkgrey;
 }
 
 /* Customize the Error Message */
@@ -325,6 +325,8 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust cell size as needed */
     min-width: 650px;
     min-height: 650px;
+    max-width: 650px;
+    max-height: 650px;
 }
 
 .cell {
@@ -343,16 +345,12 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    border: 5px solid #db6304;
     padding: 30px
 
 }
 
-.podium-container {
-    border: 2px solid #000;
-    padding: 20px;
-    align-items: flex-start;
-    margin-top: 20px;
+#podium-button:hover {
+    background-color: darkgrey;
 }
 
 .podium {

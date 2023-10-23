@@ -67,7 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const gameModeButtons = document.querySelectorAll(".toggle-button1");
     const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
     const startButton = document.getElementById("start-button");
+    const podiumContainer = document.querySelector(".podium");
 
+    podiumContainer.style.display = "none";
     errorMessage.style.display = 'none';
     welcomeMessage.style.display = 'none';
     gameBoard.style.display = "none";
@@ -80,6 +82,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("close-popup").addEventListener("click", function() {
         document.getElementById("popup").style.display = "none";
+    });
+
+    // Show the podium when the "Podium" button is clicked
+    document.getElementById("podium-button").addEventListener("click", function () {
+        podiumContainer.style.display = "block";
+    });
+
+    // Hide the podium when the "Close Podium" button is clicked
+    document.getElementById("close-podium").addEventListener("click", function () {
+        podiumContainer.style.display = "none";
     });
 
     document.getElementById('logout-button').addEventListener('click', function () {
