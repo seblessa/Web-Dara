@@ -51,8 +51,8 @@ function show_login_cred() {
 function generateGameBoard(rows, columns) {
     const gameBoard = document.querySelector(".game-board");
     gameBoard.innerHTML = "";
-
-    for (let i = 0; i < rows * columns; i++) { // Use a single loop to create cells
+    gameBoard.style.width = (columns * ( 100 + 10 ) + 10) + "px";
+    for (let i = 0; i < rows * columns; i++) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
         gameBoard.appendChild(cell);
@@ -119,26 +119,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!selectedGameModeButton || !selectedBoardSelectorButton) {
             alert("Please select both a game mode and a board to start the game.");
-        }else{
-            document.getElementById("start-button").addEventListener("click", function () {
-                // Hide the 'first-step' div
-                firstStep.style.display = "none";
+        } else {
+            // Get the selected game board size
+            const boardSize = selectedBoardSelectorButton.textContent;
+            const [rows, columns] = boardSize.split("x");
 
-                // Get the selected game board size
-                const selectedBoardButton = Array.from(boardSelectorButtons).find(
-                    (button) => button.classList.contains("active")
-                );
+            // Call generateGameBoard() with rows and columns
+            generateGameBoard(parseInt(rows), parseInt(columns));
 
-                // Set game conditions and logic here
-                const boardSize = selectedBoardButton.textContent;
-                const [rows, columns] = boardSize.split("x");
+            // Hide the 'first-step' div
+            firstStep.style.display = "none";
 
-                // Generate the game board
-                generateGameBoard(parseInt(rows), parseInt(columns));
-
-                // Show the game board
-                gameBoard.style.display = "block";
-            });
+            // Show the game board
+            gameBoard.style.display = "block";
         }
     });
 
