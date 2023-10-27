@@ -1,134 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
-    <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/styles.css" />
+    <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet" />
     <title>Web Dara</title>
-</head>
-<body>
-<script src="../logic/script.js"></script>
+  </head>
+  <body>
+    <script src="../logic/script.js"></script>
 
-
-<header id="header">
-    <div class="header-container">
+    <header id="header">
+      <div class="header-container">
         <div class="button-container">
-            <button id="new-game-button">New Game</button>
-            <button id="podium-button" class="toggle-button1">Podium</button>
-            <button id="rules-button">Rules</button>
-            <div id="popup" class="hidden-popup" style="display: none;">
-                <div id="popup-content">
-                    <span id="close-popup">X</span>
-                    <div class="game-rules-title"><h2>Game Rules</h2></div>
-                    <div class="Fase1">
-                        <div><h3>Fase 1 - Pôr as peças (drop):</h3></div>
-                        <p>Jogadores escolhem uma cor e decidem quem joga primeiro.</p>
-                        <p>Inicialmente, o tabuleiro está vazio.</p>
-                        <p>Jogadores põem alternadamente uma peça sua numa casa livre.</p>
-                        <p>Não podem ser postas mais de 3 peças em linha.</p>
-                        <p>Podem existir 3 peças em linha (mas não é vantajoso).</p>
-                    </div>
+          <button id="new-game-button">New Game</button>
+          <button id="podium-button" class="toggle-button1">Podium</button>
+          <button id="rules-button">Rules</button>
+          <div id="popup" class="hidden-popup" style="display: none">
+            <div id="popup-content">
+              <span id="close-popup">X</span>
+              <div class="game-rules-title"><h2>Game Rules</h2></div>
+              <div class="Fase1">
+                <div><h3>Fase 1 - Pôr as peças (drop):</h3></div>
+                <p>Jogadores escolhem uma cor e decidem quem joga primeiro.</p>
+                <p>Inicialmente, o tabuleiro está vazio.</p>
+                <p>
+                  Jogadores põem alternadamente uma peça sua numa casa livre.
+                </p>
+                <p>Não podem ser postas mais de 3 peças em linha.</p>
+                <p>Podem existir 3 peças em linha (mas não é vantajoso).</p>
+              </div>
 
-                    <div class="Fase2">
-                        <div><h3>Fase 2 - Mover as peças (move):</h3></div>
-                        <p>Cada jogador move alternadamente uma peça da sua cor.</p>
-                        <p>Uma peça só pode ser movida para uma casa contígua.</p>
-                        <p>Peças movidas apenas na horizontal ou vertical (não na diagonal).</p>
-                        <p>Uma linha de tamanho 3 permite capturar uma peça do adversário.</p>
-                        <p>Neste caso, remove uma peça do adversário à sua escolha.</p>
-                        <p>Só uma peça é removida por jogada (mesmo sendo formadas várias linhas).</p>
-                        <p>Não podem ser formadas linhas com mais de 3 peças.</p>
-                        <p>Uma peça não pode retornar à posição da jogada anterior.</p>
-                        <p>Só poderá retornar a essa casa nas jogadas seguintes.</p>
-                    </div>
+              <div class="Fase2">
+                <div><h3>Fase 2 - Mover as peças (move):</h3></div>
+                <p>Cada jogador move alternadamente uma peça da sua cor.</p>
+                <p>Uma peça só pode ser movida para uma casa contígua.</p>
+                <p>
+                  Peças movidas apenas na horizontal ou vertical (não na
+                  diagonal).
+                </p>
+                <p>
+                  Uma linha de tamanho 3 permite capturar uma peça do
+                  adversário.
+                </p>
+                <p>Neste caso, remove uma peça do adversário à sua escolha.</p>
+                <p>
+                  Só uma peça é removida por jogada (mesmo sendo formadas várias
+                  linhas).
+                </p>
+                <p>Não podem ser formadas linhas com mais de 3 peças.</p>
+                <p>Uma peça não pode retornar à posição da jogada anterior.</p>
+                <p>Só poderá retornar a essa casa nas jogadas seguintes.</p>
+              </div>
 
-                    <div class="Jogo-terminado">
-                        <div><h3>Fase final - Condições para a conclusão do jogo:</h3></div>
-                        <p>Um jogador não puder ganhar, por exemplo, se tiver apenas 2 peças no tabuleiro.</p>
-                        <p>Ou se não puder realizar uma jogada válida.</p>
-                        <p>O jogador que não pode ganhar perde o jogo.</p>
-                    </div>
+              <div class="Jogo-terminado">
+                <div>
+                  <h3>Fase final - Condições para a conclusão do jogo:</h3>
                 </div>
+                <p>
+                  Um jogador não puder ganhar, por exemplo, se tiver apenas 2
+                  peças no tabuleiro.
+                </p>
+                <p>Ou se não puder realizar uma jogada válida.</p>
+                <p>O jogador que não pode ganhar perde o jogo.</p>
+              </div>
             </div>
+          </div>
         </div>
         <h1>DARA GAME</h1>
         <div class="spacer"></div>
         <div class="welcome-box">
-            <div class="welcome-message" id="user-welcome-message">Welcome Seb</div>
-            <button id="logout-button">Logout</button>
+          <div class="welcome-message" id="user-welcome-message">
+            Welcome Seb
+          </div>
+          <button id="logout-button">Logout</button>
         </div>
-    </div>
-</header>
+      </div>
+    </header>
 
-
-<div class="first-step">
-    <div class="Player's colours">
+    <div class="first-step">
+      <div class="Player's colours">
         <h2>Colour's of the player's pieces</h2>
         <label for="player1-colour"> Player 1</label>
-        <input type ="color" id="player1-colour" value="#0000FF">
+        <input type="color" id="player1-colour" value="#0000FF" />
         <label for="player2-colour"> Player 2</label>
-        <input type ="color" id="player2-colour" value="#FF0000">
-    </div>
-    <div class="game-mode">
+        <input type="color" id="player2-colour" value="#FF0000" />
+      </div>
+      <div class="game-mode">
         <h2>Choose player 2</h2>
         <button id="ai-button" class="toggle-button1">AI</button>
         <button id="person-button" class="toggle-button1">Person</button>
-    </div>
-    <div class="game-board-selector">
+      </div>
+      <div class="game-board-selector">
         <h2>Choose board</h2>
         <button id="game-board5x6" class="toggle-button2">5x6</button>
         <button id="game-board6x6" class="toggle-button2">6x6</button>
         <button id="game-board6x5" class="toggle-button2">6x5</button>
+      </div>
+      <br />
+      <div class="game-starter">
+        <button id="start-button" class="toggle-button-start">
+          <h3>Start Game</h3>
+        </button>
+      </div>
     </div>
-    <br>
-    <div class="game-starter">
-        <button id="start-button" class="toggle-button-start"> <h3> Start Game </h3> </button>
+    <div class="game-container">
+      <div class="game-board"></div>
     </div>
-</div>
-<div class="game-container">
-    <div class="game-board"></div>
-</div>
-<div class="center-container">
-    <div class="login-container">
-        <form id="login-form" onsubmit="show_login_cred();login(); return false;">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
-            </div>
-            <div class="button-container">
-                <button type="submit">Login</button>
-            </div>
+    <div class="center-container">
+      <div class="login-container">
+        <form
+          id="login-form"
+          onsubmit="show_login_cred();login(); return false;"
+        >
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <div class="button-container">
+            <button type="submit">Login</button>
+          </div>
         </form>
         <div class="error-message">Wrong username or password</div>
-    </div>
-    <div class="podium">
+      </div>
+      <div class="podium">
         <div class="podium-item second">
-            <p class="podium-username">User 2</p>
-            <div class="podium-rank">
-                <span class="podium-position">2nd</span>
-                <span class="podium-games-won">8 Games Won</span>
-            </div>
+          <p class="podium-username">User 2</p>
+          <div class="podium-rank">
+            <span class="podium-position">2nd</span>
+            <span class="podium-games-won">8 Games Won</span>
+          </div>
         </div>
         <div class="podium-item first">
-            <p class="podium-username">User 1</p>
-            <div class="podium-rank">
-                <span class="podium-position">1st</span>
-                <span class="podium-games-won">10 Games Won</span>
-            </div>
+          <p class="podium-username">User 1</p>
+          <div class="podium-rank">
+            <span class="podium-position">1st</span>
+            <span class="podium-games-won">10 Games Won</span>
+          </div>
         </div>
         <div class="podium-item third">
-            <p class="podium-username">User 3</p>
-            <div class="podium-rank">
-                <span class="podium-position">3rd</span>
-                <span class="podium-games-won">5 Games Won</span>
-            </div>
+          <p class="podium-username">User 3</p>
+          <div class="podium-rank">
+            <span class="podium-position">3rd</span>
+            <span class="podium-games-won">5 Games Won</span>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</body>
+  </body>
 </html>
