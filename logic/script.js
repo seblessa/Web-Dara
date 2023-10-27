@@ -89,13 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("popup").style.display = "none";
   });
 
-  // Hide the podium when the "Close Podium" button is clicked
-  document
-    .getElementById("close-podium")
-    .addEventListener("click", function () {
-      podiumContainer.style.display = "none";
-    });
-
   document
     .getElementById("logout-button")
     .addEventListener("click", function () {
@@ -146,4 +139,15 @@ document.addEventListener("DOMContentLoaded", function () {
       gameBoard.style.display = "block";
     }
   });
+
+    // Show the podium when the "Podium" button is clicked
+    document.getElementById("podium-button").addEventListener("click", function () {
+        podiumContainer.style.display = "block";
+    });
+
+    // Hide the podium when the "Close Podium" button is clicked
+    document.getElementById("close-podium").addEventListener("click", function () {
+        podiumContainer.style.display = "none";
+    });
+
 });
