@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     welcomeMessage.style.display = 'none';
     gameBoard.style.display = "none";
     firstStep.style.display = "none";
+
     document.getElementById("new-game-button").style.display = "none";
 
     document.getElementById("new-game-button").addEventListener("click", function () {
@@ -88,20 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("popup").style.display = "none";
     });
 
-    // Show the podium when the "Podium" button is clicked
-    document.getElementById("podium-button").addEventListener("click", function () {
-        podiumContainer.style.display = "block";
-    });
-
-    // Hide the podium when the "Close Podium" button is clicked
-    document.getElementById("close-podium").addEventListener("click", function () {
-        podiumContainer.style.display = "none";
-    });
-
     document.getElementById('logout-button').addEventListener('click', function () {
         document.getElementById('user-welcome-message').style.display = 'none';
         document.getElementById('new-game-button').style.display = 'none'; // Hide the "New Game" button on logout
     });
+
 
     gameModeButtons.forEach(function (button) {
         button.addEventListener("click", function () {
@@ -145,6 +137,17 @@ document.addEventListener("DOMContentLoaded", function () {
             // Show the game board
             gameBoard.style.display = "block";
         }
+    });
+
+
+    // Show the podium when the "Podium" button is clicked
+    document.getElementById("podium-button").addEventListener("click", function () {
+        podiumContainer.style.display = "block";
+    });
+
+    // Hide the podium when the "Close Podium" button is clicked
+    document.getElementById("close-podium").addEventListener("click", function () {
+        podiumContainer.style.display = "none";
     });
 
 
