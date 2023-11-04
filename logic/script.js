@@ -49,10 +49,14 @@ function generateGameBoard(rows, columns) {
   const gameBoard = document.querySelector(".game-board");
   gameBoard.innerHTML = "";
   gameBoard.style.width = columns * (100 + 10) + 10 + "px";
-  for (let i = 0; i < rows * columns; i++) {
-    const cell = document.createElement("div");
-    cell.classList.add("cell");
-    gameBoard.appendChild(cell);
+  for (let i = 0; i < rows; i++) {
+    const cellRow = document.createElement("tr");
+    for (let j = 0; j < columns; j++) {
+      const cell = document.createElement("td");
+      cell.classList.add("cell");
+      cellRow.appendChild(cell);
+    }
+    gameBoard.appendChild(cellRow);
   }
 }
 
@@ -140,14 +144,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-    // Show the podium when the "Podium" button is clicked
-    document.getElementById("podium-button").addEventListener("click", function () {
-        podiumContainer.style.display = "block";
+  // Show the podium when the "Podium" button is clicked
+  document
+    .getElementById("podium-button")
+    .addEventListener("click", function () {
+      podiumContainer.style.display = "block";
     });
 
-    // Hide the podium when the "Close Podium" button is clicked
-    document.getElementById("close-podium").addEventListener("click", function () {
-        podiumContainer.style.display = "none";
+  // Hide the podium when the "Close Podium" button is clicked
+  document
+    .getElementById("close-podium")
+    .addEventListener("click", function () {
+      podiumContainer.style.display = "none";
     });
-
 });

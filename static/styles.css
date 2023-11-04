@@ -1,429 +1,415 @@
-html, body {
-    background-color: #e08767;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+html,
+body {
+  background-color: #e08767;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 #header {
-    margin: auto;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 150px;
-    background-color: #d8a98d;
-    padding: 10px;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 150px;
+  background-color: #d8a98d;
+  padding: 10px;
 }
 
 h1 {
-    margin: auto;
-    font-family: Blanka, "Arial", sans-serif;
-    font-size: 70px;
-    color: #db6304;
-    text-transform: uppercase;
-    background-image: linear-gradient(to bottom, #FFB6C1, #FFB6C1);
-    -webkit-background-clip: text;
-    background-clip: text;
-    padding: 10px;
+  margin: auto;
+  font-family: Blanka, "Arial", sans-serif;
+  font-size: 70px;
+  color: #db6304;
+  text-transform: uppercase;
+  background-image: linear-gradient(to bottom, #ffb6c1, #ffb6c1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding: 10px;
 }
 
 .header-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
-
 
 .button-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
-
 
 .hidden-popup {
-    z-index: 3;
-    background-color: #d8a98d; /* Match the header background color */
-    width: 70%; /* Adjust the width to fit the content */
-    max-width: 600px; /* Set a maximum width */
-    text-align: left; /* Align text to the left */
-    border: 2px solid #db6304; /* Add a border */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-    border-radius: 10px;
-    padding: 20px;
+  z-index: 3;
+  background-color: #d8a98d; /* Match the header background color */
+  width: 70%; /* Adjust the width to fit the content */
+  max-width: 600px; /* Set a maximum width */
+  text-align: left; /* Align text to the left */
+  border: 2px solid #db6304; /* Add a border */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  border-radius: 10px;
+  padding: 20px;
 }
 
-
-
 #new-game-button {
-    background-color: black;
-    color: white;
-    font-family: 'Blanka', 'Arial', sans-serif;
-    font-size: 20px;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 10px;
-    width: 150px;
+  background-color: black;
+  color: white;
+  font-family: "Blanka", "Arial", sans-serif;
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 150px;
 }
 
 #new-game-button:hover {
-    background-color: darkgrey;
+  background-color: darkgrey;
 }
 
 #new-game-button:focus {
-    outline: none; /* Remove focus outline on click */
+  outline: none; /* Remove focus outline on click */
 }
 
 #rules-button {
-    background-color: black;
-    color: white;
-    font-family: 'Blanka', 'Arial', sans-serif;
-    font-size: 20px;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 10px;
-    width: 150px;
+  background-color: black;
+  color: white;
+  font-family: "Blanka", "Arial", sans-serif;
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 150px;
 }
 
 #rules-button:hover {
-    background-color: darkgrey;
+  background-color: darkgrey;
 }
 
 #rules-button:focus {
-    outline: none; /* Remove focus outline on click */
+  outline: none; /* Remove focus outline on click */
 }
 
-.game-rules-title{
-    display: flex;
-    justify-content: center;
+.game-rules-title {
+  display: flex;
+  justify-content: center;
 }
 
 .hidden-popup {
-    display: table; /* Add display: table to the container */
-    background-color: #db6304; /* Set background to white */
-    width: 500px; /* Adjust width for the desired size */
-    height: auto; /* Set height to match width for a square shape */
-    text-align: justify; /* centering the  text */
-    position: fixed; /* Position it relative to the viewport */
-    top: 50%; /* Vertically center it on the screen */
-    left: 50%; /* Horizontally center it on the screen */
-    transform: translate(-50%, -50%); /* Center it perfectly */
-    padding: 70px;
-    border-radius: 5px;
+  display: table; /* Add display: table to the container */
+  background-color: #db6304; /* Set background to white */
+  width: 500px; /* Adjust width for the desired size */
+  height: auto; /* Set height to match width for a square shape */
+  text-align: justify; /* centering the  text */
+  position: fixed; /* Position it relative to the viewport */
+  top: 50%; /* Vertically center it on the screen */
+  left: 50%; /* Horizontally center it on the screen */
+  transform: translate(-50%, -50%); /* Center it perfectly */
+  padding: 70px;
+  border-radius: 5px;
 }
 
 #popup-content {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #close-popup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 #close-popup:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
-
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 .container {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
 
-
-
-
 .first-step {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    text-align: center;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border: 2px solid #333;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 2px solid #333;
+  border-radius: 10px;
 }
 
 .first-step h2 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .first-step button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin: 10px;
-    cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .toggle-button1 {
-    background-color: #3498db; /* Initial color */
-    color: #fff;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+  background-color: #3498db; /* Initial color */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
 }
 
 .toggle-button1.active {
-    background-color: #e74c3c;
+  background-color: #e74c3c;
 }
 
 .toggle-button2 {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
 }
 
 .toggle-button2.active {
-    background-color: #e74c3c;
+  background-color: #e74c3c;
 }
 
-.game-starter{
-    display: flex;
-    justify-content: center;
+.game-starter {
+  display: flex;
+  justify-content: center;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .button-container button {
-    background-color: black;
-    color: white;
-    font-family: 'Blanka', 'Arial', sans-serif;
-    font-size: 20px;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 10px;
-    width: 150px;
+  background-color: black;
+  color: white;
+  font-family: "Blanka", "Arial", sans-serif;
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 150px;
 }
 
 .spacer {
-    flex: 1; /* This spacer expands to fill available space */
+  flex: 1; /* This spacer expands to fill available space */
 }
 
 .welcome-box {
-    display: flex;
-    align-items: center; /* Vertically center its contents */
+  display: flex;
+  align-items: center; /* Vertically center its contents */
 }
 
-
 #user-welcome-message {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: green;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 1.5em;
-    display: flex;
-    align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: green;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
 }
 
 #logout-button {
-    background-color: black;
-    color: white;
-    font-family: 'Blanka', 'Arial', sans-serif;
-    font-size: 20px;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 10px;
+  background-color: black;
+  color: white;
+  font-family: "Blanka", "Arial", sans-serif;
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 #logout-button:hover {
-    background-color: darkgrey;
+  background-color: darkgrey;
 }
 
 /* Customize the Error Message */
 .error-message {
-    display: flex;
-    justify-content: center;
-    background-color: #FF5733; /* Background color */
-    color: white; /* Text color */
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
+  display: flex;
+  justify-content: center;
+  background-color: #ff5733; /* Background color */
+  color: white; /* Text color */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
 }
 
-
 .first-step button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .login-container {
-    z-index: 2;
-    position: absolute;
-    top: 35%; /* Center it vertically */
-    left: 50%; /* Center it horizontally */
-    transform: translate(-50%, -50%); /* Center it perfectly */
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid black;
-    width: 300px; /* Adjust the width as needed */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    /* Additional CSS for the form elements */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  z-index: 2;
+  position: absolute;
+  top: 35%; /* Center it vertically */
+  left: 50%; /* Center it horizontally */
+  transform: translate(-50%, -50%); /* Center it perfectly */
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
+  width: 300px; /* Adjust the width as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  /* Additional CSS for the form elements */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-
 .form-group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 #login-form label {
-    flex: 1;
-    margin-right: 10px;
+  flex: 1;
+  margin-right: 10px;
 }
 
 #login-form input {
-    flex: 2;
-    padding: 5px;
+  flex: 2;
+  padding: 5px;
 }
 
 #login-form button {
-    align-self: flex-end;
-    width: 100%;
+  align-self: flex-end;
+  width: 100%;
 }
 
 .game-container {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .game-board {
-    margin: auto;
-    gap: 5px;
-    padding: 20px;
-    background: url('wooden-textured-background_53876-14865.avif');
-    border: 10px solid #301e15;
-    border-radius: 10px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adjust cell size as needed */
-    min-width: 650px;
-    min-height: 650px;
-    max-width: 650px;
-    max-height: 650px;
+  margin: auto;
+  gap: 5px;
+  padding: 20px;
+  background: url("wooden-textured-background_53876-14865.avif");
+  border: 10px solid #301e15;
+  border-radius: 10px;
+
+  min-width: 650px;
+  min-height: 650px;
+  max-width: 650px;
+  max-height: 650px;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
-    background: url('wooden-textured-background_53876-14865.avif');
-    border: 10px solid #301e15;
-    line-height: 80px;
-    border-radius: 5px;
-    cursor: pointer;
+  width: 100px;
+  height: 100px;
+  background: url("wooden-textured-background_53876-14865.avif");
+  border: 10px solid #301e15;
+  line-height: 80px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .center-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    padding: 30px
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 30px;
 }
 
 #podium-button:hover {
-    background-color: darkgrey;
+  background-color: darkgrey;
 }
 
 .podium {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .podium-item {
-    background: #fff;
-    border: 2px solid #000;
-    padding: 10px;
-    text-align: center;
-    width: 30%;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 10px;
+  text-align: center;
+  width: 30%;
 }
 
 .first {
-    background: red;
-    height: 200px;
+  background: red;
+  height: 200px;
 }
 
 .second {
-    background: orange;
-    height: 150px;
-    margin-top: 50px;
+  background: orange;
+  height: 150px;
+  margin-top: 50px;
 }
 
 .third {
-    background: yellow;
-    height: 100px;
-    margin-top: 100px;
+  background: yellow;
+  height: 100px;
+  margin-top: 100px;
 }
 
 .username {
-    font-size: 18px;
-    font-weight: bold;
-
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .rank {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .position {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    background: #000;
-    padding: 5px 10px;
-    border-radius: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  background: #000;
+  padding: 5px 10px;
+  border-radius: 10px;
 }
 
 .games-won {
-    font-size: 16px;
+  font-size: 16px;
 }
-
 
 /* Media Query for responsive design */
 @media (max-width: 768px) {
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .player-section {
-        width: 90%;
-        margin-top: 20px;
-    }
-    .game-container {
-        width: 90%;
-        margin-top: 20px;
-    }
-    .game-board {
-        padding: 10px;
-    }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .player-section {
+    width: 90%;
+    margin-top: 20px;
+  }
+  .game-container {
+    width: 90%;
+    margin-top: 20px;
+  }
+  .game-board {
+    padding: 10px;
+  }
 }
