@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="../static/styles.css" />
     <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet" />
     <title>Web Dara</title>
+    <script src="../logic/script.js"></script>
   </head>
   <body>
-    <script src="../logic/script.js"></script>
-
     <header id="header">
       <div class="header-container">
         <div class="button-container">
@@ -24,9 +23,7 @@
                 <div><h3>Fase 1 - Pôr as peças (drop):</h3></div>
                 <p>Jogadores escolhem uma cor e decidem quem joga primeiro.</p>
                 <p>Inicialmente, o tabuleiro está vazio.</p>
-                <p>
-                  Jogadores põem alternadamente uma peça sua numa casa livre.
-                </p>
+                <p>Jogadores põem alternadamente uma peça sua numa casa livre.</p>
                 <p>Não podem ser postas mais de 3 peças em linha.</p>
                 <p>Podem existir 3 peças em linha (mas não é vantajoso).</p>
               </div>
@@ -35,19 +32,10 @@
                 <div><h3>Fase 2 - Mover as peças (move):</h3></div>
                 <p>Cada jogador move alternadamente uma peça da sua cor.</p>
                 <p>Uma peça só pode ser movida para uma casa contígua.</p>
-                <p>
-                  Peças movidas apenas na horizontal ou vertical (não na
-                  diagonal).
-                </p>
-                <p>
-                  Uma linha de tamanho 3 permite capturar uma peça do
-                  adversário.
-                </p>
+                <p>Peças movidas apenas na horizontal ou vertical (não na diagonal).</p>
+                <p>Uma linha de tamanho 3 permite capturar uma peça do adversário.</p>
                 <p>Neste caso, remove uma peça do adversário à sua escolha.</p>
-                <p>
-                  Só uma peça é removida por jogada (mesmo sendo formadas várias
-                  linhas).
-                </p>
+                <p>Só uma peça é removida por jogada (mesmo sendo formadas várias linhas).</p>
                 <p>Não podem ser formadas linhas com mais de 3 peças.</p>
                 <p>Uma peça não pode retornar à posição da jogada anterior.</p>
                 <p>Só poderá retornar a essa casa nas jogadas seguintes.</p>
@@ -57,10 +45,7 @@
                 <div>
                   <h3>Fase final - Condições para a conclusão do jogo:</h3>
                 </div>
-                <p>
-                  Um jogador não puder ganhar, por exemplo, se tiver apenas 2
-                  peças no tabuleiro.
-                </p>
+                <p>Um jogador não puder ganhar, por exemplo, se tiver apenas 2 peças no tabuleiro.</p>
                 <p>Ou se não puder realizar uma jogada válida.</p>
                 <p>O jogador que não pode ganhar perde o jogo.</p>
               </div>
@@ -68,11 +53,8 @@
           </div>
         </div>
         <h1>DARA GAME</h1>
-        <div class="spacer"></div>
         <div class="welcome-box">
-          <div class="welcome-message" id="user-welcome-message">
-            Welcome Seb
-          </div>
+          <div class="welcome-message" id="user-welcome-message">Welcome Seb</div>
           <button id="logout-button">Logout</button>
         </div>
       </div>
@@ -104,32 +86,24 @@
         </button>
       </div>
     </div>
-    <div class="game-container">
-      <table class="game-board"></table>
+    <div>
+      <div class="message-box" id="message-box">Test</div>
+      <div class="game-container">
+        <div id="player-pieces" class="game-pieces"></div>
+        <table id="game-board" class="game-board"></table>
+        <div id="opponent-pieces" class="game-pieces"></div>
+      </div>
     </div>
     <div class="center-container">
       <div class="login-container">
-        <form
-          id="login-form"
-          onsubmit="show_login_cred();login(); return false;"
-        >
+        <form id="login-form" onsubmit="show_login_cred();login(); return false;">
           <div class="form-group">
             <label for="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              placeholder="Enter your username"
-              required
-            />
+            <input type="text" id="username" placeholder="Enter your username" required />
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              required
-            />
+            <input type="password" id="password" placeholder="Enter your password" required />
           </div>
           <div class="button-container">
             <button type="submit">Login</button>

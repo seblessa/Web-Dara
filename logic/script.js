@@ -1,7 +1,9 @@
 // User object with the username and password
 const user = { username: "user", password: "user" };
-
 let isLoggedIn = false; // Variable to track the login status
+let rows;
+let columns;
+let board;
 
 function login() {
   const usernameInput = document.getElementById("username").value;
@@ -12,6 +14,7 @@ function login() {
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
     document.getElementById("new-game-button").style.display = "block";
+    document.getElementById("logout-button").style.display = "block";
   } else {
     showErrorMessage();
   }
@@ -32,6 +35,7 @@ function hideLoginDiv() {
   const loginDiv = document.querySelector(".login-container");
   loginDiv.style.display = "none";
 }
+
 function ShowLoginDiv() {
   const loginDiv = document.querySelector(".login-container");
   loginDiv.style.display = "block";
@@ -54,10 +58,97 @@ function generateGameBoard(rows, columns) {
     for (let j = 0; j < columns; j++) {
       const cell = document.createElement("td");
       cell.classList.add("cell");
+      cell.id = i + "-" + j;
       cellRow.appendChild(cell);
     }
     gameBoard.appendChild(cellRow);
   }
+}
+
+function generateGamePieces(Playercolour, Opponentcolour) {
+  const playerPieces = document.getElementById("player-pieces");
+  playerPieces.innerHTML = "";
+  for (let i = 0; i < 12; i++) {
+    const piece = document.createElement("div");
+    piece.id = "Playerpiece-" + i;
+    piece.classList.add("piece");
+    piece.style.backgroundColor = Playercolour;
+    playerPieces.appendChild(piece);
+  }
+
+  const opponentPieces = document.getElementById("opponent-pieces");
+  opponentPieces.innerHTML = "";
+  for (let i = 0; i < 12; i++) {
+    const piece = document.createElement("div");
+    piece.classList.add("piece");
+    piece.id = "Opponentpiece-" + i;
+    piece.style.backgroundColor = Opponentcolour;
+    opponentPieces.appendChild(piece);
+  }
+}
+
+let phase = "Drop";
+let playerTurn = "player1";
+
+function startGame() {
+  //start move phase
+  let DropabblePlayerPieces = 12;
+  let DropabbleOpponentPieces = 12;
+  let TotalPlayerPieces = 12;
+  let TotalOpponentPieces = 12;
+  const cells = document.querySelectorAll(".cell");
+  const pieces = document.querySelectorAll(".piece");
+  const playerPieces = document.getElementById("player-pieces");
+  const opponentPieces = document.getElementById("opponent-pieces");
+  const messageBox = document.getElementById("message-box");
+  messageBox.style.display = "block";
+  messageBox.innerText = phase + " Phase " + playerTurn;
+
+  board = new Array(rows);
+  for (let i = 0; i < rows; i++) {
+    board[i] = new Array(columns);
+    for (let j = 0; j < columns; j++) {
+      board[i][j] = 0;
+    }
+  }
+
+  cells.forEach(function (cell) {
+    cell.addEventListener("click", function () {
+      let [x, y] = cell.id.split("-");
+      if (phase == "Drop") {
+        if (playerTurn == "player1" && DropabblePlayerPieces > 0) {
+          if (board[parseInt(x)][parseInt(y)] == 0) {
+            board[parseInt(x)][parseInt(y)] = 1;
+            cell.id = cell.appendChild(playerPieces.lastChild);
+            playerTurn = "player2";
+            DropabblePlayerPieces--;
+          }
+        } else if (playerTurn == "player2" && DropabbleOpponentPieces > 0) {
+          if (board[parseInt(x)][parseInt(y)] == 0) {
+            board[parseInt(x)][parseInt(y)] = 2;
+            cell.appendChild(opponentPieces.lastChild);
+            playerTurn = "player1";
+            DropabbleOpponentPieces--;
+          }
+        }
+      } else if (phase == "Move") {
+        let [x, y] = cell.id.split("-");
+        console.log(x, y);
+        if (playerTurn == "player1" && board[parseInt(x)][parseInt(y)] == 1) {
+          console.log("selected");
+          if (cell.classList.contains("selected")) {
+            cell.classList.remove("selected");
+            return;
+          }
+          cell.classList.add("selected");
+        }
+      }
+      if (DropabblePlayerPieces == 0 && DropabbleOpponentPieces == 0) {
+        phase = "Move";
+      }
+      messageBox.innerText = phase + " Phase " + playerTurn;
+    });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -77,28 +168,24 @@ document.addEventListener("DOMContentLoaded", function () {
   firstStep.style.display = "none";
   document.getElementById("new-game-button").style.display = "none";
 
-  document
-    .getElementById("new-game-button")
-    .addEventListener("click", function () {
-      firstStep.style.display = "block";
-    });
+  document.getElementById("new-game-button").addEventListener("click", function () {
+    firstStep.style.display = "block";
+  });
 
-  document
-    .getElementById("rules-button")
-    .addEventListener("click", function () {
-      document.getElementById("popup").style.display = "block";
-    });
+  document.getElementById("rules-button").addEventListener("click", function () {
+    document.getElementById("popup").style.display = "block";
+  });
 
   document.getElementById("close-popup").addEventListener("click", function () {
     document.getElementById("popup").style.display = "none";
   });
 
-  document
-    .getElementById("logout-button")
-    .addEventListener("click", function () {
-      document.getElementById("user-welcome-message").style.display = "none";
-      document.getElementById("new-game-button").style.display = "none"; // Hide the "New Game" button on logout
-    });
+  document.getElementById("logout-button").addEventListener("click", function () {
+    document.getElementById("user-welcome-message").style.display = "none";
+    document.getElementById("logout-button").style.display = "none";
+    document.getElementById("new-game-button").style.display = "none"; // Hide the "New Game" button on logout
+    document.getElementById("game-board").style.display = "none"; // Hide the game board on logout
+  });
 
   gameModeButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -119,42 +206,38 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   startButton.addEventListener("click", function () {
-    const selectedGameModeButton = Array.from(gameModeButtons).find((button) =>
-      button.classList.contains("active")
-    );
-    const selectedBoardSelectorButton = Array.from(boardSelectorButtons).find(
-      (button) => button.classList.contains("active")
-    );
+    const selectedGameModeButton = Array.from(gameModeButtons).find((button) => button.classList.contains("active"));
+    const selectedBoardSelectorButton = Array.from(boardSelectorButtons).find((button) => button.classList.contains("active"));
+    const player1Colour = document.getElementById("player1-colour").value;
+    const player2Colour = document.getElementById("player2-colour").value;
+
+    //get selected colour
 
     if (!selectedGameModeButton || !selectedBoardSelectorButton) {
       alert("Please select both a game mode and a board to start the game.");
     } else {
       // Get the selected game board size
       const boardSize = selectedBoardSelectorButton.textContent;
-      const [rows, columns] = boardSize.split("x");
+      [rows, columns] = boardSize.split("x");
 
       // Call generateGameBoard() with rows and columns
       generateGameBoard(parseInt(rows), parseInt(columns));
+      generateGamePieces(player1Colour, player2Colour);
+      startGame();
 
       // Hide the 'first-step' div
       firstStep.style.display = "none";
 
       // Show the game board
-      gameBoard.style.display = "block";
+      gameBoard.style.display = "flex";
     }
   });
-
   // Show the podium when the "Podium" button is clicked
-  document
-    .getElementById("podium-button")
-    .addEventListener("click", function () {
-      podiumContainer.style.display = "block";
-    });
-
+  document.getElementById("podium-button").addEventListener("click", function () {
+    podiumContainer.style.display = "block";
+  });
   // Hide the podium when the "Close Podium" button is clicked
-  document
-    .getElementById("close-podium")
-    .addEventListener("click", function () {
-      podiumContainer.style.display = "none";
-    });
+  document.getElementById("close-podium").addEventListener("click", function () {
+    podiumContainer.style.display = "none";
+  });
 });
