@@ -13,7 +13,7 @@ function login() {
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
-  if (usernameInput == user.username && passwordInput == user.password) {
+  if (usernameInput === user.username && passwordInput === user.password) {
     isLoggedIn = true;
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
@@ -100,22 +100,22 @@ function generatePossibleMoves(x, y) {
     }
   }
   if (x - 1 >= 0) {
-    if (board[x - 1][y] == 0) {
+    if (board[x - 1][y] === 0) {
       if (MoreThanThreeRow(x - 1, y)) possibleMoves[x - 1][y] = 1;
     }
   }
   if (x + 1 < rows) {
-    if (board[x + 1][y] == 0) {
+    if (board[x + 1][y] === 0) {
       if (MoreThanThreeRow(x + 1, y)) possibleMoves[x + 1][y] = 1;
     }
   }
   if (y - 1 >= 0) {
-    if (board[x][y - 1] == 0) {
+    if (board[x][y - 1] === 0) {
       if (MoreThanThreeRow(x, y - 1)) possibleMoves[x][y - 1] = 1;
     }
   }
   if (y + 1 < columns) {
-    if (board[x][y + 1] == 0) {
+    if (board[x][y + 1] === 0) {
       if (MoreThanThreeRow(x, y + 1)) possibleMoves[x][y + 1] = 1;
     }
   }
@@ -138,7 +138,7 @@ function MoreThanThreeRow(x, y) {
   for (let i = x - 3; i < 7; i++) {
     if (i < 0) continue;
     if (i >= columns - 3) break;
-    if (board[i][y] == board[i + 1][y] && board[i + 1][y] == board[i + 2][y] && board[i + 2][y] == board[i + 3][y]) {
+    if (board[i][y] === board[i + 1][y] && board[i + 1][y] === board[i + 2][y] && board[i + 2][y] === board[i + 3][y]) {
       return true;
     }
   }
@@ -146,7 +146,7 @@ function MoreThanThreeRow(x, y) {
   for (let i = y - 3; i < 7; i++) {
     if (i < 0) continue;
     if (i >= rows - 3) break;
-    if (board[x][i] == board[x][i + 1] && board[x][i + 1] == board[x][i + 2] && board[x][i + 2] == board[x][i + 3]) {
+    if (board[x][i] === board[x][i + 1] && board[x][i + 1] === board[x][i + 2] && board[x][i + 2] === board[x][i + 3]) {
       return true;
     }
   }
@@ -159,7 +159,7 @@ function ThreeRow(x, y) {
   for (let i = x - 2; i < 5; i++) {
     if (i < 0) continue;
     if (i >= columns - 2) break;
-    if (board[i][y] == board[i + 1][y] && board[i + 1][y] == board[i + 2][y]) {
+    if (board[i][y] === board[i + 1][y] && board[i + 1][y] === board[i + 2][y]) {
       return true;
     }
   }
@@ -167,7 +167,7 @@ function ThreeRow(x, y) {
   for (let i = y - 2; i < 5; i++) {
     if (i < 0) continue;
     if (i >= rows - 2) break;
-    if (board[x][i] == board[x][i + 1] && board[x][i + 1] == board[x][i + 2]) {
+    if (board[x][i] === board[x][i + 1] && board[x][i + 1] === board[x][i + 2]) {
       return true;
     }
   }
@@ -181,7 +181,7 @@ function renderPossibleMoves(x, y) {
   const cells = document.querySelectorAll(".cell");
   cells.forEach(function (cell) {
     let [x, y] = cell.id.split("-");
-    if (possibleMoves[parseInt(x)][parseInt(y)] == 1) {
+    if (possibleMoves[parseInt(x)][parseInt(y)] === 1) {
       const possibleMove = document.createElement("div");
       possibleMove.classList.add("possible-move");
       cell.appendChild(possibleMove);
@@ -192,12 +192,12 @@ function renderPossibleMoves(x, y) {
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase == "Move") {
-        if (playerTurn == "player1") {
+      if (phase === "Move") {
+        if (playerTurn === "player1") {
           makeMove(x, y, startX, startY, possibleMove);
           console.log("player2", ThreeRow(parseInt(x), parseInt(y)));
           playerTurn = "player2";
-        } else if (playerTurn == "player2") {
+        } else if (playerTurn === "player2") {
           makeMove(x, y, startX, startY, possibleMove);
           console.log("player2", ThreeRow(parseInt(x), parseInt(y)));
           console.log("ola", MoreThanThreeRow(parseInt(x), parseInt(y)));
@@ -239,14 +239,14 @@ function startGame(difficulty) {
 
   // Define a function to handle the AI's move based on the chosen difficulty
   function handleAIMove() {
-    if (difficulty == "Easy") {
+    if (difficulty === "Easy") {
       // Implement a random player AI logic here
 
       // Generate a random available move
       const availableMoves = [];
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
-          if (board[i][j] == 0) {
+          if (board[i][j] === 0) {
             availableMoves.push({ x: i, y: j });
           }
         }
@@ -265,10 +265,10 @@ function startGame(difficulty) {
         // Update the remaining pieces count for the AI
         DropabbleOpponentPieces--;
       }
-    } else if (difficulty == "Medium") {
+    } else if (difficulty === "Medium") {
       // Implement a low-depth miniMax AI logic here
       // Example: makeMiniMaxMoveLowDepth();
-    } else if (difficulty == "Hard") {
+    } else if (difficulty === "Hard") {
       // Implement a deep-depth miniMax AI logic here
       // Example: makeMiniMaxMoveDeepDepth();
     }
@@ -277,26 +277,26 @@ function startGame(difficulty) {
   cells.forEach(function (cell) {
     cell.addEventListener("click", function () {
       let [x, y] = cell.id.split("-");
-      if (phase == "Drop") {
-        if (playerTurn == "player1" && DropabblePlayerPieces > 0) {
-          if (board[parseInt(x)][parseInt(y)] == 0) {
+      if (phase === "Drop") {
+        if (playerTurn === "player1" && DropabblePlayerPieces > 0) {
+          if (board[parseInt(x)][parseInt(y)] === 0) {
             board[parseInt(x)][parseInt(y)] = 1;
             cell.appendChild(playerPieces.lastChild);
             playerTurn = "player2";
             DropabblePlayerPieces--;
           }
-        } else if (playerTurn == "player2" && DropabbleOpponentPieces > 0) {
-          if (board[parseInt(x)][parseInt(y)] == 0) {
+        } else if (playerTurn === "player2" && DropabbleOpponentPieces > 0) {
+          if (board[parseInt(x)][parseInt(y)] === 0) {
             board[parseInt(x)][parseInt(y)] = 2;
             cell.appendChild(opponentPieces.lastChild);
             playerTurn = "player1";
             DropabbleOpponentPieces--;
           }
         }
-      } else if (phase == "Move") {
+      } else if (phase === "Move") {
         let [x, y] = cell.id.split("-");
         console.log(x, y);
-        if (playerTurn == "player1" && board[parseInt(x)][parseInt(y)] == 1) {
+        if (playerTurn === "player1" && board[parseInt(x)][parseInt(y)] === 1) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
@@ -312,7 +312,7 @@ function startGame(difficulty) {
             selected = true;
             renderPossibleMoves(parseInt(x), parseInt(y));
           }
-        } else if (playerTurn == "player2" && board[parseInt(x)][parseInt(y)] == 2) {
+        } else if (playerTurn === "player2" && board[parseInt(x)][parseInt(y)] === 2) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
@@ -330,7 +330,7 @@ function startGame(difficulty) {
           }
         }
       }
-      if (DropabblePlayerPieces == 0 && DropabbleOpponentPieces == 0) {
+      if (DropabblePlayerPieces === 0 && DropabbleOpponentPieces === 0) {
         phase = "Move";
       }
       messageBox.innerText = phase + " Phase " + playerTurn;
@@ -438,7 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
       generateGameBoard(parseInt(rows), parseInt(columns));
       generateGamePieces(player1Colour, player2Colour);
 
-      if (firstPlayer.textContent == "Player 1") {
+      if (firstPlayer.textContent === "Player 1") {
         playerTurn = "player1";
       } else {
         playerTurn = "player2";
