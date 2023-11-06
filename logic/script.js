@@ -175,13 +175,13 @@ function renderPossibleMoves(x, y) {
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase == "Move") {
-        if (playerTurn == "player1") {
+      if (phase === "Move") {
+        if (playerTurn === "player1") {
           makeMove(x, y, startX, startY, possibleMove);
           //console.log("player2", canCapture(parseInt(x), parseInt(y)));
 
           playerTurn = "player2";
-        } else if (playerTurn == "player2") {
+        } else if (playerTurn === "player2") {
           makeMove(x, y, startX, startY, possibleMove);
           //console.log("player2", canCapture(parseInt(x), parseInt(y)));
           playerTurn = "player1";
@@ -220,6 +220,43 @@ function startGame(difficulty) {
     }
   }
 
+  // Define a function to handle the AI's move based on the chosen difficulty
+  function handleAIMove() {
+    if (difficulty === "Easy") {
+      // Implement a random player AI logic here
+
+      // Generate a random available move
+      const availableMoves = [];
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
+          if (board[i][j] === 0) {
+            availableMoves.push({ x: i, y: j });
+          }
+        }
+      }
+
+      if (availableMoves.length > 0) {
+        const randomMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+        const { x, y } = randomMove;
+
+        // Update the board and move the AI piece
+        board[x][y] = 2; // Assuming AI's pieces are represented by 2
+        const cell = document.getElementById(`cell-${x}-${y}`);
+        cell.appendChild(opponentPieces.lastChild);
+        playerTurn = "player1"; // Switch back to the player's turn
+
+        // Update the remaining pieces count for the AI
+        DropabbleOpponentPieces--;
+      }
+    } else if (difficulty === "Medium") {
+      // Implement a low-depth miniMax AI logic here
+      // Example: makeMiniMaxMoveLowDepth();
+    } else if (difficulty === "Hard") {
+      // Implement a deep-depth miniMax AI logic here
+      // Example: makeMiniMaxMoveDeepDepth();
+    }
+  }
+
   cells.forEach(function (cell) {
     cell.addEventListener("click", function () {
       let [x, y] = cell.id.split("-");
@@ -239,10 +276,10 @@ function startGame(difficulty) {
             DropabbleOpponentPieces--;
           }
         }
-      } else if (phase == "Move") {
+      } else if (phase === "Move") {
         let [x, y] = cell.id.split("-");
         console.log(x, y);
-        if (playerTurn == "player1" && board[parseInt(x)][parseInt(y)] == 1) {
+        if (playerTurn === "player1" && board[parseInt(x)][parseInt(y)] === 1) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
@@ -258,7 +295,7 @@ function startGame(difficulty) {
             selected = true;
             renderPossibleMoves(parseInt(x), parseInt(y));
           }
-        } else if (playerTurn == "player2" && board[parseInt(x)][parseInt(y)] === 2) {
+        } else if (playerTurn === "player2" && board[parseInt(x)][parseInt(y)] === 2) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
