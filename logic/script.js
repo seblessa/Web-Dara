@@ -178,10 +178,12 @@ function renderPossibleMoves(x, y) {
       if (phase == "Move") {
         if (playerTurn == "player1") {
           makeMove(x, y, startX, startY, possibleMove);
+          console.log("player2", canCapture(parseInt(x), parseInt(y)));
+
           playerTurn = "player2";
         } else if (playerTurn == "player2") {
           makeMove(x, y, startX, startY, possibleMove);
-
+          console.log("player2", canCapture(parseInt(x), parseInt(y)));
           playerTurn = "player1";
         }
       }
