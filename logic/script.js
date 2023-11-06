@@ -132,25 +132,25 @@ function makeMove(x, y, startX, startY, possibleMove) {
 function canCapture(x, y) {
   //check if the move to the x and y made a 3 in a row
 
-  if (board[x][y + 1] == board[x][y]) {
-    if (board[x][y + 2] == board[x][y]) {
+  if (board[x][y + 1] === board[x][y]) {
+    if (board[x][y + 2] === board[x][y]) {
       return true;
     }
   }
-  if (board[x + 1][y] == board[x][y]) {
-    if (board[x + 2][y] == board[x][y]) {
-      return true;
-    }
-  }
-
-  if (board[x][y - 1] == board[x][y]) {
-    if (board[x][y - 2] == board[x][y]) {
+  if (board[x + 1][y] === board[x][y]) {
+    if (board[x + 2][y] === board[x][y]) {
       return true;
     }
   }
 
-  if (board[x - 1][y] == board[x][y]) {
-    if (board[x - 2][y] == board[x][y]) {
+  if (board[x][y - 1] === board[x][y]) {
+    if (board[x][y - 2] === board[x][y]) {
+      return true;
+    }
+  }
+
+  if (board[x - 1][y] === board[x][y]) {
+    if (board[x - 2][y] === board[x][y]) {
       return true;
     }
   }
@@ -175,13 +175,13 @@ function renderPossibleMoves(x, y, playerTurn){
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase == "Move") {
-        if (playerTurn == "player1") {
+      if (phase === "Move") {
+        if (playerTurn === "player1") {
           makeMove(x, y, startX, startY, possibleMove);
           console.log("player2", canCapture(parseInt(x), parseInt(y)));
 
           playerTurn = "player2";
-        } else if (playerTurn == "player2") {
+        } else if (playerTurn === "player2") {
           makeMove(x, y, startX, startY, possibleMove);
           console.log("player2", canCapture(parseInt(x), parseInt(y)));
           playerTurn = "player1";
@@ -197,7 +197,6 @@ function renderPossibleMoves(x, y, playerTurn){
     });
   });
 }
-let phase = "Drop";
 
 function startGame(difficulty, firstPlayer) {
   let playerTurn = firstPlayer;
@@ -303,6 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
   welcomeMessage.style.display = "none";
   gameBoard.style.display = "none";
   firstStep.style.display = "none";
+
   document.getElementById("new-game-button").style.display = "none";
 
   document.getElementById("new-game-button").addEventListener("click", function () {
