@@ -119,7 +119,7 @@ function generatePossibleMoves(x, y) {
   return possibleMoves;
 }
 
-function renderPossibleMoves(x, y) {
+function renderPossibleMoves(x, y, playerTurn){
   let possibleMoves = generatePossibleMoves(x, y);
   console.log(possibleMoves);
   const cells = document.querySelectorAll(".cell");
@@ -165,9 +165,9 @@ function renderPossibleMoves(x, y) {
   });
 }
 let phase = "Drop";
-let playerTurn = "player1";
 
-function startGame(difficulty) {
+function startGame(difficulty, firstPlayer) {
+  let playerTurn = firstPlayer;
   //start move phase
   let DropabblePlayerPieces = 12;
   let DropabbleOpponentPieces = 12;
@@ -225,7 +225,7 @@ function startGame(difficulty) {
             cell.classList.add("selected");
             selected_piece = cell.childNodes[0];
             selected = true;
-            renderPossibleMoves(parseInt(x), parseInt(y));
+            renderPossibleMoves(parseInt(x), parseInt(y), playerTurn);
           }
         } else if (playerTurn === "player2" && board[parseInt(x)][parseInt(y)] === 2) {
           console.log("selected");
@@ -241,7 +241,7 @@ function startGame(difficulty) {
             cell.classList.add("selected");
             selected_piece = cell.childNodes[0];
             selected = true;
-            renderPossibleMoves(parseInt(x), parseInt(y));
+            renderPossibleMoves(parseInt(x), parseInt(y), playerTurn);
           }
         }
       }
@@ -351,7 +351,16 @@ document.addEventListener("DOMContentLoaded", function () {
       // Call generateGameBoard() with rows and columns
       generateGameBoard(parseInt(rows), parseInt(columns));
       generateGamePieces(player1Colour, player2Colour);
-      startGame(selectedGameDifficulty.textContent);
+
+      let playerTurn;
+
+      if (firstPlayer.textContent === "Player 1") {
+        playerTurn = "player1";
+      }else {
+        playerTurn = "player2";
+      }
+
+      startGame(selectedGameDifficulty.textContent, playerTurn);
 
       // Hide the 'first-step' div
       firstStep.style.display = "none";
