@@ -5,7 +5,7 @@ let rows;
 let columns;
 let board;
 let selected_piece;
-
+let selected = false;
 function login() {
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
@@ -134,17 +134,23 @@ function renderPossibleMoves(x, y) {
 
   document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
     possibleMove.addEventListener("click", function () {
+      let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
       if (phase == "Move") {
         if (playerTurn == "player1") {
           board[parseInt(x)][parseInt(y)] = 1;
+          board[parseInt(startX)][parseInt(startY)] = 0;
           possibleMove.parentNode.appendChild(selected_piece);
           selected_piece = null;
+          selected = false;
           playerTurn = "player2";
         } else if (playerTurn == "player2") {
           board[parseInt(x)][parseInt(y)] = 2;
+          board[parseInt(startX)][parseInt(startY)] = 0;
+
           possibleMove.parentNode.appendChild(selected_piece);
           selected_piece = null;
+          selected = false;
           playerTurn = "player1";
         }
       }
@@ -154,7 +160,7 @@ function renderPossibleMoves(x, y) {
       document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
         possibleMove.remove();
       });
-      messageBox.innerText = phase + " Phase " + playerTurn;
+      document.getElementById("message-box").innerText = phase + " Phase " + playerTurn;
     });
   });
 }
@@ -167,7 +173,6 @@ function startGame() {
   let DropabbleOpponentPieces = 12;
   let TotalPlayerPieces = 12;
   let TotalOpponentPieces = 12;
-  let selected = false;
   const cells = document.querySelectorAll(".cell");
   const pieces = document.querySelectorAll(".piece");
   const playerPieces = document.getElementById("player-pieces");
