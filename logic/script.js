@@ -5,7 +5,7 @@ let rows;
 let columns;
 let board;
 let phase = "Drop";
-let playerTurn = "player1";
+let playerTurn;
 let selected_piece;
 let selected = false;
 function login() {
@@ -158,7 +158,7 @@ function canCapture(x, y) {
   return false;
 }
 
-function renderPossibleMoves(x, y, playerTurn){
+function renderPossibleMoves(x, y, playerTurn) {
   let possibleMoves = generatePossibleMoves(x, y);
   console.log(possibleMoves);
   const cells = document.querySelectorAll(".cell");
@@ -198,8 +198,7 @@ function renderPossibleMoves(x, y, playerTurn){
   });
 }
 
-function startGame(difficulty, firstPlayer) {
-  let playerTurn = firstPlayer;
+function startGame(difficulty) {
   //start move phase
   let DropabblePlayerPieces = 12;
   let DropabbleOpponentPieces = 12;
@@ -385,11 +384,9 @@ document.addEventListener("DOMContentLoaded", function () {
       generateGameBoard(parseInt(rows), parseInt(columns));
       generateGamePieces(player1Colour, player2Colour);
 
-      let playerTurn;
-
       if (firstPlayer.textContent === "Player 1") {
         playerTurn = "player1";
-      }else {
+      } else {
         playerTurn = "player2";
       }
 
