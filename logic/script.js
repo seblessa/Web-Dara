@@ -97,22 +97,22 @@ function generatePossibleMoves(x, y) {
     }
   }
   if (x - 1 >= 0) {
-    if (board[x - 1][y] == 0) {
+    if (board[x - 1][y] === 0) {
       possibleMoves[x - 1][y] = 1;
     }
   }
   if (x + 1 < rows) {
-    if (board[x + 1][y] == 0) {
+    if (board[x + 1][y] === 0) {
       possibleMoves[x + 1][y] = 1;
     }
   }
   if (y - 1 >= 0) {
-    if (board[x][y - 1] == 0) {
+    if (board[x][y - 1] === 0) {
       possibleMoves[x][y - 1] = 1;
     }
   }
   if (y + 1 < columns) {
-    if (board[x][y + 1] == 0) {
+    if (board[x][y + 1] === 0) {
       possibleMoves[x][y + 1] = 1;
     }
   }
@@ -125,7 +125,7 @@ function renderPossibleMoves(x, y) {
   const cells = document.querySelectorAll(".cell");
   cells.forEach(function (cell) {
     let [x, y] = cell.id.split("-");
-    if (possibleMoves[parseInt(x)][parseInt(y)] == 1) {
+    if (possibleMoves[parseInt(x)][parseInt(y)] === 1) {
       const possibleMove = document.createElement("div");
       possibleMove.classList.add("possible-move");
       cell.appendChild(possibleMove);
@@ -136,15 +136,15 @@ function renderPossibleMoves(x, y) {
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase == "Move") {
-        if (playerTurn == "player1") {
+      if (phase === "Move") {
+        if (playerTurn === "player1") {
           board[parseInt(x)][parseInt(y)] = 1;
           board[parseInt(startX)][parseInt(startY)] = 0;
           possibleMove.parentNode.appendChild(selected_piece);
           selected_piece = null;
           selected = false;
           playerTurn = "player2";
-        } else if (playerTurn == "player2") {
+        } else if (playerTurn === "player2") {
           board[parseInt(x)][parseInt(y)] = 2;
           board[parseInt(startX)][parseInt(startY)] = 0;
 
@@ -167,7 +167,7 @@ function renderPossibleMoves(x, y) {
 let phase = "Drop";
 let playerTurn = "player1";
 
-function startGame() {
+function startGame(difficulty) {
   //start move phase
   let DropabblePlayerPieces = 12;
   let DropabbleOpponentPieces = 12;
@@ -192,26 +192,26 @@ function startGame() {
   cells.forEach(function (cell) {
     cell.addEventListener("click", function () {
       let [x, y] = cell.id.split("-");
-      if (phase == "Drop") {
-        if (playerTurn == "player1" && DropabblePlayerPieces > 0) {
-          if (board[parseInt(x)][parseInt(y)] == 0) {
+      if (phase === "Drop") {
+        if (playerTurn === "player1" && DropabblePlayerPieces > 0) {
+          if (board[parseInt(x)][parseInt(y)] === 0) {
             board[parseInt(x)][parseInt(y)] = 1;
             cell.appendChild(playerPieces.lastChild);
             playerTurn = "player2";
             DropabblePlayerPieces--;
           }
-        } else if (playerTurn == "player2" && DropabbleOpponentPieces > 0) {
-          if (board[parseInt(x)][parseInt(y)] == 0) {
+        } else if (playerTurn === "player2" && DropabbleOpponentPieces > 0) {
+          if (board[parseInt(x)][parseInt(y)] === 0) {
             board[parseInt(x)][parseInt(y)] = 2;
             cell.appendChild(opponentPieces.lastChild);
             playerTurn = "player1";
             DropabbleOpponentPieces--;
           }
         }
-      } else if (phase == "Move") {
+      } else if (phase === "Move") {
         let [x, y] = cell.id.split("-");
         console.log(x, y);
-        if (playerTurn == "player1" && board[parseInt(x)][parseInt(y)] == 1) {
+        if (playerTurn === "player1" && board[parseInt(x)][parseInt(y)] === 1) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
@@ -227,7 +227,7 @@ function startGame() {
             selected = true;
             renderPossibleMoves(parseInt(x), parseInt(y));
           }
-        } else if (playerTurn == "player2" && board[parseInt(x)][parseInt(y)] == 2) {
+        } else if (playerTurn === "player2" && board[parseInt(x)][parseInt(y)] === 2) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
@@ -245,7 +245,7 @@ function startGame() {
           }
         }
       }
-      if (DropabblePlayerPieces == 0 && DropabbleOpponentPieces == 0) {
+      if (DropabblePlayerPieces === 0 && DropabbleOpponentPieces === 0) {
         phase = "Move";
       }
       messageBox.innerText = phase + " Phase " + playerTurn;
@@ -260,6 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const firstStep = document.querySelector(".first-step");
   const gameModeButtons = document.querySelectorAll(".toggle-button1");
   const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
+  const gameDifficulty = document.querySelectorAll(".toggle-button3");
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
 
@@ -307,17 +308,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  gameDifficulty.forEach(function (button) {
+    button.addEventListener("click", function () {
+      gameDifficulty.forEach(function (b) {
+        b.classList.remove("active");
+      });
+      this.classList.add("active");
+    });
+  });
+
   startButton.addEventListener("click", function () {
     const selectedGameModeButton = Array.from(gameModeButtons).find((button) => button.classList.contains("active"));
     const selectedBoardSelectorButton = Array.from(boardSelectorButtons).find((button) => button.classList.contains("active"));
+    const selectedGameDifficulty = Array.from(gameDifficulty).find((button) => button.classList.contains("active"));
     const player1Colour = document.getElementById("player1-colour").value;
     const player2Colour = document.getElementById("player2-colour").value;
 
     //get selected colour
 
-    if (!selectedGameModeButton || !selectedBoardSelectorButton) {
-      alert("Please select both a game mode and a board to start the game.");
+    if (!selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {
+      alert("Please select every option to start the game.");
     } else {
+      console.log("Game mode: " + selectedGameModeButton.textContent);
+      console.log("Board size: " + selectedBoardSelectorButton.textContent);
+      console.log("Game difficulty: " + selectedGameDifficulty.textContent);
       // Get the selected game board size
       const boardSize = selectedBoardSelectorButton.textContent;
       [rows, columns] = boardSize.split("x");
@@ -325,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Call generateGameBoard() with rows and columns
       generateGameBoard(parseInt(rows), parseInt(columns));
       generateGamePieces(player1Colour, player2Colour);
-      startGame();
+      startGame(selectedGameDifficulty.textContent);
 
       // Hide the 'first-step' div
       firstStep.style.display = "none";

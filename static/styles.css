@@ -27,7 +27,6 @@ h1 {
   -webkit-background-clip: text;
   background-clip: text;
   padding: 10px;
-  margin: 50px;
 }
 
 .header-container {
@@ -236,6 +235,18 @@ body {
 }
 
 .toggle-button2.active {
+  background-color: #e74c3c;
+}
+
+.toggle-button3 {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-button3.active {
   background-color: #e74c3c;
 }
 
