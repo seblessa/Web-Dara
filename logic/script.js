@@ -4,6 +4,7 @@ let isLoggedIn = false; // Variable to track the login status
 let rows;
 let columns;
 let board;
+let selected_piece;
 
 function login() {
   const usernameInput = document.getElementById("username").value;
@@ -88,25 +89,31 @@ function generateGamePieces(Playercolour, Opponentcolour) {
 }
 
 function generatePossibleMoves(x, y) {
-  let possibleMoves = [];
+  let possibleMoves = new Array(rows);
+  for (let i = 0; i < rows; i++) {
+    possibleMoves[i] = new Array(columns);
+    for (let j = 0; j < columns; j++) {
+      possibleMoves[i][j] = 0;
+    }
+  }
   if (x - 1 >= 0) {
     if (board[x - 1][y] == 0) {
-      possibleMoves.push([x - 1, y]);
+      possibleMoves[x - 1][y] = 1;
     }
   }
   if (x + 1 < rows) {
     if (board[x + 1][y] == 0) {
-      possibleMoves.push([x + 1, y]);
+      possibleMoves[x + 1][y] = 1;
     }
   }
   if (y - 1 >= 0) {
     if (board[x][y - 1] == 0) {
-      possibleMoves.push([x, y - 1]);
+      possibleMoves[x][y - 1] = 1;
     }
   }
   if (y + 1 < columns) {
     if (board[x][y + 1] == 0) {
-      possibleMoves.push([x, y + 1]);
+      possibleMoves[x][y + 1] = 1;
     }
   }
   return possibleMoves;
@@ -118,12 +125,37 @@ function renderPossibleMoves(x, y) {
   const cells = document.querySelectorAll(".cell");
   cells.forEach(function (cell) {
     let [x, y] = cell.id.split("-");
-    console.log("aos", x, y);
-    if (possibleMoves.includes([parseInt(x), parseInt(y)])) {
+    if (possibleMoves[parseInt(x)][parseInt(y)] == 1) {
       const possibleMove = document.createElement("div");
       possibleMove.classList.add("possible-move");
       cell.appendChild(possibleMove);
     }
+  });
+
+  document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
+    possibleMove.addEventListener("click", function () {
+      let [x, y] = possibleMove.parentNode.id.split("-");
+      if (phase == "Move") {
+        if (playerTurn == "player1") {
+          board[parseInt(x)][parseInt(y)] = 1;
+          possibleMove.parentNode.appendChild(selected_piece);
+          selected_piece = null;
+          playerTurn = "player2";
+        } else if (playerTurn == "player2") {
+          board[parseInt(x)][parseInt(y)] = 2;
+          possibleMove.parentNode.appendChild(selected_piece);
+          selected_piece = null;
+          playerTurn = "player1";
+        }
+      }
+      document.querySelectorAll(".selected").forEach(function (selected) {
+        selected.classList.remove("selected");
+      });
+      document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
+        possibleMove.remove();
+      });
+      messageBox.innerText = phase + " Phase " + playerTurn;
+    });
   });
 }
 let phase = "Drop";
@@ -135,7 +167,7 @@ function startGame() {
   let DropabbleOpponentPieces = 12;
   let TotalPlayerPieces = 12;
   let TotalOpponentPieces = 12;
-  let selectedPiece = false;
+  let selected = false;
   const cells = document.querySelectorAll(".cell");
   const pieces = document.querySelectorAll(".piece");
   const playerPieces = document.getElementById("player-pieces");
@@ -178,27 +210,34 @@ function startGame() {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
-            selectedPiece = false;
+            selected = false;
+            document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
+              possibleMove.remove();
+            });
             return;
           }
-
-          if (!selectedPiece) {
+          if (!selected) {
             cell.classList.add("selected");
-            selectedPiece = true;
+            selected_piece = cell.childNodes[0];
+            selected = true;
+            renderPossibleMoves(parseInt(x), parseInt(y));
           }
-          renderPossibleMoves(parseInt(x), parseInt(y));
         } else if (playerTurn == "player2" && board[parseInt(x)][parseInt(y)] == 2) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
-            selectedPiece = false;
+            selected = false;
+            document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
+              possibleMove.remove();
+            });
             return;
           }
-          if (!selectedPiece) {
+          if (!selected) {
             cell.classList.add("selected");
-            selectedPiece = true;
+            selected_piece = cell.childNodes[0];
+            selected = true;
+            renderPossibleMoves(parseInt(x), parseInt(y));
           }
-          renderPossibleMoves(parseInt(x), parseInt(y));
         }
       }
       if (DropabblePlayerPieces == 0 && DropabbleOpponentPieces == 0) {
