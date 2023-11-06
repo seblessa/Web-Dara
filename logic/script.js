@@ -4,6 +4,8 @@ let isLoggedIn = false; // Variable to track the login status
 let rows;
 let columns;
 let board;
+let phase = "Drop";
+let playerTurn = "player1";
 let selected_piece;
 let selected = false;
 function login() {
@@ -119,6 +121,14 @@ function generatePossibleMoves(x, y) {
   return possibleMoves;
 }
 
+function makeMove(x, y, startX, startY, possibleMove) {
+  board[parseInt(x)][parseInt(y)] = board[parseInt(startX)][parseInt(startY)];
+  board[parseInt(startX)][parseInt(startY)] = 0;
+  possibleMove.parentNode.appendChild(selected_piece);
+  selected_piece = null;
+  selected = false;
+}
+
 function renderPossibleMoves(x, y) {
   let possibleMoves = generatePossibleMoves(x, y);
   console.log(possibleMoves);
@@ -136,21 +146,12 @@ function renderPossibleMoves(x, y) {
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase === "Move") {
-        if (playerTurn === "player1") {
-          board[parseInt(x)][parseInt(y)] = 1;
-          board[parseInt(startX)][parseInt(startY)] = 0;
-          possibleMove.parentNode.appendChild(selected_piece);
-          selected_piece = null;
-          selected = false;
+      if (phase == "Move") {
+        if (playerTurn == "player1") {
+          makeMove(x, y, startX, startY, possibleMove);
           playerTurn = "player2";
-        } else if (playerTurn === "player2") {
-          board[parseInt(x)][parseInt(y)] = 2;
-          board[parseInt(startX)][parseInt(startY)] = 0;
-
-          possibleMove.parentNode.appendChild(selected_piece);
-          selected_piece = null;
-          selected = false;
+        } else if (playerTurn == "player2") {
+          makeMove(x, y, startX, startY, possibleMove);
           playerTurn = "player1";
         }
       }
@@ -164,8 +165,6 @@ function renderPossibleMoves(x, y) {
     });
   });
 }
-let phase = "Drop";
-let playerTurn = "player1";
 
 function startGame(difficulty) {
   //start move phase
