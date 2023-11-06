@@ -158,7 +158,7 @@ function canCapture(x, y) {
   return false;
 }
 
-function renderPossibleMoves(x, y){
+function renderPossibleMoves(x, y) {
   let possibleMoves = generatePossibleMoves(x, y);
   console.log(possibleMoves);
   const cells = document.querySelectorAll(".cell");
@@ -175,15 +175,15 @@ function renderPossibleMoves(x, y){
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase === "Move") {
-        if (playerTurn === "player1") {
+      if (phase == "Move") {
+        if (playerTurn == "player1") {
           makeMove(x, y, startX, startY, possibleMove);
-          console.log("player2", canCapture(parseInt(x), parseInt(y)));
+          //console.log("player2", canCapture(parseInt(x), parseInt(y)));
 
           playerTurn = "player2";
-        } else if (playerTurn === "player2") {
+        } else if (playerTurn == "player2") {
           makeMove(x, y, startX, startY, possibleMove);
-          console.log("player2", canCapture(parseInt(x), parseInt(y)));
+          //console.log("player2", canCapture(parseInt(x), parseInt(y)));
           playerTurn = "player1";
         }
       }
@@ -239,10 +239,10 @@ function startGame(difficulty) {
             DropabbleOpponentPieces--;
           }
         }
-      } else if (phase === "Move") {
+      } else if (phase == "Move") {
         let [x, y] = cell.id.split("-");
         console.log(x, y);
-        if (playerTurn === "player1" && board[parseInt(x)][parseInt(y)] === 1) {
+        if (playerTurn == "player1" && board[parseInt(x)][parseInt(y)] == 1) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
@@ -258,7 +258,7 @@ function startGame(difficulty) {
             selected = true;
             renderPossibleMoves(parseInt(x), parseInt(y));
           }
-        } else if (playerTurn === "player2" && board[parseInt(x)][parseInt(y)] === 2) {
+        } else if (playerTurn == "player2" && board[parseInt(x)][parseInt(y)] === 2) {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
