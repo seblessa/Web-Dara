@@ -181,7 +181,7 @@ function renderPossibleMoves(x, y) {
           playerTurn = "player2";
         } else if (playerTurn == "player2") {
           makeMove(x, y, startX, startY, possibleMove);
-          console.log("player2", canCapture(x, y));
+
           playerTurn = "player1";
         }
       }
