@@ -86,6 +86,14 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.possible-move {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .game-pieces .piece {
   margin: 10px;
   display: flex;
@@ -127,6 +135,7 @@ h1 {
 
 .selected {
   background-color: #e74c3c;
+  color: #0056b3;
 }
 
 #rules-button:hover {
@@ -351,6 +360,7 @@ body {
   align-self: center;
   padding: 8px;
   background: url("wooden-textured-background_53876-14865.avif");
+  background-size: cover;
   border: 10px solid #301e15;
   border-radius: 10px;
   cursor: pointer;
@@ -360,7 +370,6 @@ body {
   width: 120px;
   height: 120px;
   margin: 3px;
-  background: url("wooden-textured-background_53876-14865.avif");
   border: 8px solid #301e15;
   border-radius: 5px;
 }

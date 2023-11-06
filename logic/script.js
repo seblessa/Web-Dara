@@ -80,13 +80,52 @@ function generateGamePieces(Playercolour, Opponentcolour) {
   opponentPieces.innerHTML = "";
   for (let i = 0; i < 12; i++) {
     const piece = document.createElement("div");
-    piece.classList.add("piece");
     piece.id = "Opponentpiece-" + i;
+    piece.classList.add("piece");
     piece.style.backgroundColor = Opponentcolour;
     opponentPieces.appendChild(piece);
   }
 }
 
+function generatePossibleMoves(x, y) {
+  let possibleMoves = [];
+  if (x - 1 >= 0) {
+    if (board[x - 1][y] == 0) {
+      possibleMoves.push([x - 1, y]);
+    }
+  }
+  if (x + 1 < rows) {
+    if (board[x + 1][y] == 0) {
+      possibleMoves.push([x + 1, y]);
+    }
+  }
+  if (y - 1 >= 0) {
+    if (board[x][y - 1] == 0) {
+      possibleMoves.push([x, y - 1]);
+    }
+  }
+  if (y + 1 < columns) {
+    if (board[x][y + 1] == 0) {
+      possibleMoves.push([x, y + 1]);
+    }
+  }
+  return possibleMoves;
+}
+
+function renderPossibleMoves(x, y) {
+  let possibleMoves = generatePossibleMoves(x, y);
+  console.log(possibleMoves);
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach(function (cell) {
+    let [x, y] = cell.id.split("-");
+    console.log("aos", x, y);
+    if (possibleMoves.includes([parseInt(x), parseInt(y)])) {
+      const possibleMove = document.createElement("div");
+      possibleMove.classList.add("possible-move");
+      cell.appendChild(possibleMove);
+    }
+  });
+}
 let phase = "Drop";
 let playerTurn = "player1";
 
@@ -96,6 +135,7 @@ function startGame() {
   let DropabbleOpponentPieces = 12;
   let TotalPlayerPieces = 12;
   let TotalOpponentPieces = 12;
+  let selectedPiece = false;
   const cells = document.querySelectorAll(".cell");
   const pieces = document.querySelectorAll(".piece");
   const playerPieces = document.getElementById("player-pieces");
@@ -119,7 +159,7 @@ function startGame() {
         if (playerTurn == "player1" && DropabblePlayerPieces > 0) {
           if (board[parseInt(x)][parseInt(y)] == 0) {
             board[parseInt(x)][parseInt(y)] = 1;
-            cell.id = cell.appendChild(playerPieces.lastChild);
+            cell.appendChild(playerPieces.lastChild);
             playerTurn = "player2";
             DropabblePlayerPieces--;
           }
@@ -138,9 +178,27 @@ function startGame() {
           console.log("selected");
           if (cell.classList.contains("selected")) {
             cell.classList.remove("selected");
+            selectedPiece = false;
             return;
           }
-          cell.classList.add("selected");
+
+          if (!selectedPiece) {
+            cell.classList.add("selected");
+            selectedPiece = true;
+          }
+          renderPossibleMoves(parseInt(x), parseInt(y));
+        } else if (playerTurn == "player2" && board[parseInt(x)][parseInt(y)] == 2) {
+          console.log("selected");
+          if (cell.classList.contains("selected")) {
+            cell.classList.remove("selected");
+            selectedPiece = false;
+            return;
+          }
+          if (!selectedPiece) {
+            cell.classList.add("selected");
+            selectedPiece = true;
+          }
+          renderPossibleMoves(parseInt(x), parseInt(y));
         }
       }
       if (DropabblePlayerPieces == 0 && DropabbleOpponentPieces == 0) {
