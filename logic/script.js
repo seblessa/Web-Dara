@@ -4,6 +4,8 @@ let isLoggedIn = false; // Variable to track the login status
 let rows;
 let columns;
 let board;
+let phase = "Drop";
+let playerTurn = "player1";
 let selected_piece;
 let selected = false;
 function login() {
@@ -119,6 +121,43 @@ function generatePossibleMoves(x, y) {
   return possibleMoves;
 }
 
+function makeMove(x, y, startX, startY, possibleMove) {
+  board[parseInt(x)][parseInt(y)] = board[parseInt(startX)][parseInt(startY)];
+  board[parseInt(startX)][parseInt(startY)] = 0;
+  possibleMove.parentNode.appendChild(selected_piece);
+  selected_piece = null;
+  selected = false;
+}
+
+function canCapture(x, y) {
+  //check if the move to the x and y made a 3 in a row
+
+  if (board[x][y + 1] == board[x][y]) {
+    if (board[x][y + 2] == board[x][y]) {
+      return true;
+    }
+  }
+  if (board[x + 1][y] == board[x][y]) {
+    if (board[x + 2][y] == board[x][y]) {
+      return true;
+    }
+  }
+
+  if (board[x][y - 1] == board[x][y]) {
+    if (board[x][y - 2] == board[x][y]) {
+      return true;
+    }
+  }
+
+  if (board[x - 1][y] == board[x][y]) {
+    if (board[x - 2][y] == board[x][y]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function renderPossibleMoves(x, y, playerTurn){
   let possibleMoves = generatePossibleMoves(x, y);
   console.log(possibleMoves);
@@ -136,21 +175,15 @@ function renderPossibleMoves(x, y, playerTurn){
     possibleMove.addEventListener("click", function () {
       let [startX, startY] = selected_piece.parentNode.id.split("-");
       let [x, y] = possibleMove.parentNode.id.split("-");
-      if (phase === "Move") {
-        if (playerTurn === "player1") {
-          board[parseInt(x)][parseInt(y)] = 1;
-          board[parseInt(startX)][parseInt(startY)] = 0;
-          possibleMove.parentNode.appendChild(selected_piece);
-          selected_piece = null;
-          selected = false;
-          playerTurn = "player2";
-        } else if (playerTurn === "player2") {
-          board[parseInt(x)][parseInt(y)] = 2;
-          board[parseInt(startX)][parseInt(startY)] = 0;
+      if (phase == "Move") {
+        if (playerTurn == "player1") {
+          makeMove(x, y, startX, startY, possibleMove);
+          console.log("player2", canCapture(parseInt(x), parseInt(y)));
 
-          possibleMove.parentNode.appendChild(selected_piece);
-          selected_piece = null;
-          selected = false;
+          playerTurn = "player2";
+        } else if (playerTurn == "player2") {
+          makeMove(x, y, startX, startY, possibleMove);
+          console.log("player2", canCapture(parseInt(x), parseInt(y)));
           playerTurn = "player1";
         }
       }
