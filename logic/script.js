@@ -129,6 +129,35 @@ function makeMove(x, y, startX, startY, possibleMove) {
   selected = false;
 }
 
+function canCapture(x, y) {
+  //check if the move to the x and y made a 3 in a row
+
+  if (board[x][y + 1] == board[x][y]) {
+    if (board[x][y + 2] == board[x][y]) {
+      return true;
+    }
+  }
+  if (board[x + 1][y] == board[x][y]) {
+    if (board[x + 2][y] == board[x][y]) {
+      return true;
+    }
+  }
+
+  if (board[x][y - 1] == board[x][y]) {
+    if (board[x][y - 2] == board[x][y]) {
+      return true;
+    }
+  }
+
+  if (board[x - 1][y] == board[x][y]) {
+    if (board[x - 2][y] == board[x][y]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 function renderPossibleMoves(x, y) {
   let possibleMoves = generatePossibleMoves(x, y);
   console.log(possibleMoves);
@@ -152,6 +181,7 @@ function renderPossibleMoves(x, y) {
           playerTurn = "player2";
         } else if (playerTurn == "player2") {
           makeMove(x, y, startX, startY, possibleMove);
+          console.log("player2", canCapture(x, y));
           playerTurn = "player1";
         }
       }
