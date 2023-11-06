@@ -214,6 +214,18 @@ body {
   cursor: pointer;
 }
 
+.toggle-button0 {
+  background-color: #3498db; /* Initial color */
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-button0.active {
+  background-color: #e74c3c;
+}
+
 .toggle-button1 {
   background-color: #3498db; /* Initial color */
   color: #fff;
