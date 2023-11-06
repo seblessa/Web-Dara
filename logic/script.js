@@ -384,11 +384,9 @@ document.addEventListener("DOMContentLoaded", function () {
       generateGameBoard(parseInt(rows), parseInt(columns));
       generateGamePieces(player1Colour, player2Colour);
 
-      let playerTurn;
-
       if (firstPlayer.textContent === "Player 1") {
         playerTurn = "player1";
-      }else {
+      } else {
         playerTurn = "player2";
       }
 
