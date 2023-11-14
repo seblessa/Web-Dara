@@ -134,8 +134,7 @@ function canMove(x, y, startX, startY) {}
 
 function MoreThanThreeRow(x, y) {
   //check if the move to the x and y made more than 3 in a row
-
-  for (let i = x - 3; i < 7; i++) {
+  for (let i = x - 3; i < 8; i++) {
     if (i < 0) continue;
     if (i >= columns - 3) break;
     if (board[i][y] === board[i + 1][y] && board[i + 1][y] === board[i + 2][y] && board[i + 2][y] === board[i + 3][y]) {
@@ -143,7 +142,7 @@ function MoreThanThreeRow(x, y) {
     }
   }
 
-  for (let i = y - 3; i < 7; i++) {
+  for (let i = y - 3; i < 8; i++) {
     if (i < 0) continue;
     if (i >= rows - 3) break;
     if (board[x][i] === board[x][i + 1] && board[x][i + 1] === board[x][i + 2] && board[x][i + 2] === board[x][i + 3]) {
