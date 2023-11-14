@@ -1,5 +1,5 @@
-function game(rows, columns) {
-  let boardElement = document.getElementById("game-board");
+function game() {
+  console.log("Game started");
 }
 
 export { game };

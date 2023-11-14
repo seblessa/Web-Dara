@@ -1,4 +1,6 @@
+import { game } from "./game.js";
 // User object with the username and password
+
 const user = { username: "user", password: "user" };
 let isLoggedIn = false; // Variable to track the login status
 let rows;
@@ -9,12 +11,21 @@ let playerTurn;
 let selected_piece;
 let selected = false;
 
+function show_login_cred() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  console.log("\nLogin attempted:");
+  console.log("Username: " + username);
+  console.log("Password: " + password);
+}
+
 function login() {
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
   if (usernameInput === user.username && passwordInput === user.password) {
     isLoggedIn = true;
+    console.log("Login successful");
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
     document.getElementById("new-game-button").style.display = "block";
@@ -23,7 +34,6 @@ function login() {
     showErrorMessage();
   }
 }
-
 function showWelcomeMessage(username) {
   const welcomeMessage = document.getElementById("user-welcome-message"); // Updated ID here
   welcomeMessage.textContent = `Welcome ${username}`;
@@ -43,14 +53,6 @@ function hideLoginDiv() {
 function ShowLoginDiv() {
   const loginDiv = document.querySelector(".login-container");
   loginDiv.style.display = "block";
-}
-
-function show_login_cred() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  console.log("\nLogin attempted:");
-  console.log("Username: " + username);
-  console.log("Password: " + password);
 }
 
 function generateGameBoard(rows, columns) {
@@ -392,6 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gameDifficulty = document.querySelectorAll(".toggle-button3");
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
+  const loginbutton = document.getElementById("login-button");
 
   podiumContainer.style.display = "none";
   errorMessage.style.display = "none";
@@ -411,6 +414,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("close-popup").addEventListener("click", function () {
     document.getElementById("popup").style.display = "none";
+  });
+
+  loginbutton.addEventListener("click", function () {
+    show_login_cred();
+    login();
   });
 
   document.getElementById("logout-button").addEventListener("click", function () {
@@ -497,11 +505,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   // Show the podium when the "Podium" button is clicked
-  document.getElementById("podium-button").addEventListener("click", function () {
-    podiumContainer.style.display = "block";
-  });
-  // Hide the podium when the "Close Podium" button is clicked
-  document.getElementById("close-podium").addEventListener("click", function () {
-    podiumContainer.style.display = "none";
-  });
+  // document.getElementById("podium-button").addEventListener("click", function () {
+  //   podiumContainer.style.display = "block";
+  // });
+  // // Hide the podium when the "Close Podium" button is clicked
+  // document.getElementById("close-podium").addEventListener("click", function () {
+  //   podiumContainer.style.display = "none";
+  // });
 });
