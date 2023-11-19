@@ -101,22 +101,22 @@ function generatePossibleMoves(x, y) {
   }
   if (x - 1 >= 0) {
     if (board[x - 1][y] === 0) {
-      if (!MoreThanThreeRow(x - 1, y)) possibleMoves[x - 1][y] = 1;
+      if (MoreThanThreeRow(x - 1, y)) possibleMoves[x - 1][y] = 1;
     }
   }
   if (x + 1 < rows) {
     if (board[x + 1][y] === 0) {
-      if (!MoreThanThreeRow(x + 1, y)) possibleMoves[x + 1][y] = 1;
+      if (MoreThanThreeRow(x + 1, y)) possibleMoves[x + 1][y] = 1;
     }
   }
   if (y - 1 >= 0) {
     if (board[x][y - 1] === 0) {
-      if (!MoreThanThreeRow(x, y - 1)) possibleMoves[x][y - 1] = 1;
+      if (MoreThanThreeRow(x, y - 1)) possibleMoves[x][y - 1] = 1;
     }
   }
   if (y + 1 < columns) {
     if (board[x][y + 1] === 0) {
-      if (!MoreThanThreeRow(x, y + 1)) possibleMoves[x][y + 1] = 1;
+      if (MoreThanThreeRow(x, y + 1)) possibleMoves[x][y + 1] = 1;
     }
   }
   return possibleMoves;
@@ -200,6 +200,7 @@ function renderPossibleMoves(x, y) {
         } else if (playerTurn === "player2") {
           makeMove(x, y, startX, startY, possibleMove);
           console.log("player2", ThreeRow(parseInt(x), parseInt(y)));
+          console.log("ola", MoreThanThreeRow(parseInt(x), parseInt(y)));
           playerTurn = "player1";
         }
       }
@@ -252,6 +253,9 @@ function evaluateDARA(board) {
   // Return a higher score if the board favors the maximizing player
   // Return a lower score if the board favors the minimizing player
 }
+
+
+
 
 function startGame(difficulty) {
   //start move phase
@@ -306,16 +310,20 @@ function startGame(difficulty) {
     } else if (difficulty === "Medium") {
       // Call minimaxDARA function with low depth
       //const bestMove = minimaxDARA(board, /* specify the depth */, false);
-      // Apply the best move to the DARA board
-      // Update the DARA game state
-      // ...
-    } else if (difficulty === "Hard") {
-      // Call minimaxDARA function with deep depth
-      //const bestMove = minimaxDARA(board, /* specify a deeper depth */, false);
+
       // Apply the best move to the DARA board
       // Update the DARA game state
       // ...
     }
+    else if (difficulty === "Hard") {
+      // Call minimaxDARA function with deep depth
+      //const bestMove = minimaxDARA(board, /* specify a deeper depth */, false);
+
+      // Apply the best move to the DARA board
+      // Update the DARA game state
+      // ...
+    }
+
   }
 
   cells.forEach(function (cell) {
