@@ -216,48 +216,6 @@ function renderPossibleMoves(x, y) {
   });
 }
 
-// Minimax function for DARA
-/*
-function minimaxDARA(board, depth, maximizingPlayer) {
-  // Implement your DARA minimax logic here
-  if (depth === 0 || // Game over condition for DARA ) {
-    // Evaluate the board state and return a score based on DARA rules
-    return evaluateDARA(board);
-  }
-
-  if (maximizingPlayer) {
-    let maxEval = -Infinity;
-    let bestMove = null;
-    for (// Each possible move in DARA ) {
-      const eval = minimaxDARA(// Updated DARA board , depth - 1, false);
-      if (eval > maxEval) {
-        maxEval = eval;
-        bestMove = // Current move ;
-      }
-    }
-    return bestMove;
-  } else {
-    let minEval = Infinity;
-    for (// Each possible move in DARA ) {
-      const eval = minimaxDARA(// Updated DARA board , depth - 1, true);
-      minEval = Math.min(minEval, eval);
-    }
-    return minEval;
-  }
-}
-*/
-
-// DARA board evaluation function (customize based on DARA rules)
-function evaluateDARA(board) {
-  // Evaluate the DARA board state and return a score
-  // Consider factors like piece positions, connections, and game status
-  // Return a higher score if the board favors the maximizing player
-  // Return a lower score if the board favors the minimizing player
-}
-
-
-
-
 function startGame(difficulty) {
   //start move phase
   let DropabblePlayerPieces = 12;
@@ -309,22 +267,12 @@ function startGame(difficulty) {
         DropabbleOpponentPieces--;
       }
     } else if (difficulty === "Medium") {
-      // Call minimaxDARA function with low depth
-      //const bestMove = minimaxDARA(board, /* specify the depth */, false);
-
-      // Apply the best move to the DARA board
-      // Update the DARA game state
-      // ...
+      // Implement a low-depth miniMax AI logic here
+      // Example: makeMiniMaxMoveLowDepth();
+    } else if (difficulty === "Hard") {
+      // Implement a deep-depth miniMax AI logic here
+      // Example: makeMiniMaxMoveDeepDepth();
     }
-    else if (difficulty === "Hard") {
-      // Call minimaxDARA function with deep depth
-      //const bestMove = minimaxDARA(board, /* specify a deeper depth */, false);
-
-      // Apply the best move to the DARA board
-      // Update the DARA game state
-      // ...
-    }
-
   }
 
   cells.forEach(function (cell) {
