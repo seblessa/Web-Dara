@@ -1,4 +1,6 @@
+import { game } from "./game.js";
 // User object with the username and password
+
 const user = { username: "user", password: "user" };
 let isLoggedIn = false; // Variable to track the login status
 let rows;
@@ -9,12 +11,21 @@ let playerTurn;
 let selected_piece;
 let selected = false;
 
+function show_login_cred() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  console.log("\nLogin attempted:");
+  console.log("Username: " + username);
+  console.log("Password: " + password);
+}
+
 function login() {
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
   if (usernameInput === user.username && passwordInput === user.password) {
     isLoggedIn = true;
+    console.log("Login successful");
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
     document.getElementById("new-game-button").style.display = "block";
@@ -23,7 +34,6 @@ function login() {
     showErrorMessage();
   }
 }
-
 function showWelcomeMessage(username) {
   const welcomeMessage = document.getElementById("user-welcome-message"); // Updated ID here
   welcomeMessage.textContent = `Welcome ${username}`;
@@ -43,14 +53,6 @@ function hideLoginDiv() {
 function ShowLoginDiv() {
   const loginDiv = document.querySelector(".login-container");
   loginDiv.style.display = "block";
-}
-
-function show_login_cred() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  console.log("\nLogin attempted:");
-  console.log("Username: " + username);
-  console.log("Password: " + password);
 }
 
 function generateGameBoard(rows, columns) {
@@ -134,8 +136,7 @@ function canMove(x, y, startX, startY) {}
 
 function MoreThanThreeRow(x, y) {
   //check if the move to the x and y made more than 3 in a row
-
-  for (let i = x - 3; i < 7; i++) {
+  for (let i = x - 3; i < 8; i++) {
     if (i < 0) continue;
     if (i >= columns - 3) break;
     if (board[i][y] === board[i + 1][y] && board[i + 1][y] === board[i + 2][y] && board[i + 2][y] === board[i + 3][y]) {
@@ -143,7 +144,7 @@ function MoreThanThreeRow(x, y) {
     }
   }
 
-  for (let i = y - 3; i < 7; i++) {
+  for (let i = y - 3; i < 8; i++) {
     if (i < 0) continue;
     if (i >= rows - 3) break;
     if (board[x][i] === board[x][i + 1] && board[x][i + 1] === board[x][i + 2] && board[x][i + 2] === board[x][i + 3]) {
@@ -401,6 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gameDifficulty = document.querySelectorAll(".toggle-button3");
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
+  const loginbutton = document.getElementById("login-button");
 
   podiumContainer.style.display = "none";
   errorMessage.style.display = "none";
@@ -420,6 +422,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("close-popup").addEventListener("click", function () {
     document.getElementById("popup").style.display = "none";
+  });
+
+  loginbutton.addEventListener("click", function () {
+    show_login_cred();
+    login();
   });
 
   document.getElementById("logout-button").addEventListener("click", function () {
@@ -506,11 +513,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
   // Show the podium when the "Podium" button is clicked
-  document.getElementById("podium-button").addEventListener("click", function () {
-    podiumContainer.style.display = "block";
-  });
-  // Hide the podium when the "Close Podium" button is clicked
-  document.getElementById("close-podium").addEventListener("click", function () {
-    podiumContainer.style.display = "none";
-  });
+  // document.getElementById("podium-button").addEventListener("click", function () {
+  //   podiumContainer.style.display = "block";
+  // });
+  // // Hide the podium when the "Close Podium" button is clicked
+  // document.getElementById("close-podium").addEventListener("click", function () {
+  //   podiumContainer.style.display = "none";
+  // });
 });
