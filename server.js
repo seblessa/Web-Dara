@@ -12,5 +12,3 @@ server.on("connection", (socket) => {
   const { localAddress, localPort, remoteAddress, remotePort } = socket;
   console.log(`New connection: ${localAddress}:${localPort} -> ${remoteAddress}:${remotePort}`);
 });
-
-// Path: server.js

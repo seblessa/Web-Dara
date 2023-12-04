@@ -128,6 +128,7 @@ function makeMove(x, y, startX, startY, possibleMove) {
   possibleMove.parentNode.appendChild(selected_piece);
   selected_piece = null;
   selected = false;
+  bv;
 }
 
 function canMove(x, y, startX, startY) {}
@@ -154,8 +155,6 @@ function MoreThanThreeRow(x, y) {
 }
 
 function ThreeRow(x, y) {
-  //check if the move to the x and y made a 3 in a row
-
   for (let i = x - 2; i < 5; i++) {
     if (i < 0) continue;
     if (i >= columns - 2) break;
