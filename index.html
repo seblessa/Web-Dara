@@ -8,6 +8,7 @@
     <title>Web Dara</title>
     <script src="../logic/script.js"></script>
     <script src="../logic/game.js"></script>
+    <script src="../logic/podium.js"></script>
   </head>
   <body>
     <header id="header">
@@ -123,28 +124,18 @@
         </form>
         <div class="error-message">Wrong username or password</div>
       </div>
-      <div class="podium">
-        <div class="podium-item second">
-          <p class="podium-username">User 2</p>
-          <div class="podium-rank">
-            <span class="podium-position">2nd</span>
-            <span class="podium-games-won">8 Games Won</span>
-          </div>
-        </div>
-        <div class="podium-item first">
-          <p class="podium-username">User 1</p>
-          <div class="podium-rank">
-            <span class="podium-position">1st</span>
-            <span class="podium-games-won">10 Games Won</span>
-          </div>
-        </div>
-        <div class="podium-item third">
-          <p class="podium-username">User 3</p>
-          <div class="podium-rank">
-            <span class="podium-position">3rd</span>
-            <span class="podium-games-won">5 Games Won</span>
-          </div>
-        </div>
+      <div class="user-table">
+        <table>
+          <thead>
+          <tr>
+            <th>Username</th>
+            <th>Games Won</th>
+          </tr>
+          </thead>
+          <tbody id="user-table-body">
+          <!-- User data will be dynamically added here -->
+          </tbody>
+        </table>
       </div>
     </div>
   </body>
