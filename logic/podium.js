@@ -1,3 +1,15 @@
+// popup-user-table
+document.addEventListener("DOMContentLoaded", function () {
+    const closePopupUserTableButton = document.getElementById("close-popup-user-table");
+    const popupUserTable = document.getElementById("popup-user-table");
+
+    closePopupUserTableButton.addEventListener("click", function () {
+        popupUserTable.classList.add("hidden-popup-user-table");
+    });
+});
+
+
+
 // User data structure
 const users = [
     { username: "User 1", gamesWon: 10 },
@@ -24,7 +36,7 @@ function startGame(difficulty) {
     // ... (existing code)
 
     // Check for a winner and update user data
-    if (/* Condition for winning the game */) {
+    if (ThreeRow()) {
         const currentPlayer = playerTurn === "player1" ? "User 1" : "User 2";
         const currentUser = users.find(user => user.username === currentPlayer);
 

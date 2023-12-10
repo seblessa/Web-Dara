@@ -119,3 +119,49 @@ function renderPossibleMoves(x, y) {
         });
     });
 }
+
+/* Condition for winning the game */
+function checkWinCondition() {
+    // Check if a player can't make any more moves
+    let playerCanMove = false;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
+            if (board[i][j] === 1 && generatePossibleMoves(i, j).some(move => move === 1)) {
+                playerCanMove = true;
+                break;
+            }
+        }
+        if (playerCanMove) {
+            break;
+        }
+    }
+
+    // Check if all pieces of a player are removed
+    let playerPiecesRemaining = 0;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
+            if (board[i][j] === 1) {
+                playerPiecesRemaining++;
+            }
+        }
+    }
+
+    if (!playerCanMove || playerPiecesRemaining === 0) {
+        if (playerTurn === "player1") {
+            console.log("Player 2 wins!");
+        } else {
+            console.log("Player 1 wins!");
+        }
+        // You might want to add logic to end the game, reset, or display a message here.
+    }
+}
+
+function makeMove(x, y, startX, startY, possibleMove) {
+    board[parseInt(x)][parseInt(y)] = board[parseInt(startX)][parseInt(startY)];
+    board[parseInt(startX)][parseInt(startY)] = 0;
+    possibleMove.parentNode.appendChild(selected_piece);
+    selected_piece = null;
+    selected = false;
+
+    checkWinCondition();  // Call the function to check win condition after each move
+}
