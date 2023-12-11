@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 // User data structure
 const users = [
     { username: "User 1", gamesWon: 10 },
