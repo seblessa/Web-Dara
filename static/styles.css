@@ -283,6 +283,7 @@ body {
   width: 150px;
 }
 
+
 .spacer {
   flex: 1; /* This spacer expands to fill available space */
 }
@@ -410,6 +411,24 @@ tr {
   margin-top: 50px;
   padding: 30px;
 }
+#podium-button {
+  background-color: black;
+  color: white;
+  font-family: "Blanka", "Arial", sans-serif;
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+#podium-button:hover {
+  background-color: darkgrey;
+}
+
+#podium-button:focus {
+  outline: none; /* Remove focus outline on click */
+}
 
 .hidden-popup-user-table {
   display: none;
@@ -420,12 +439,33 @@ tr {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: #db6304;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 2;
 }
 
-.close-button {
+#popup-user-table h2 {
+  text-align: center;
+}
+
+#user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#user-table th, #user-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#user-table th {
+  background-color: #f2f2f2;
+}
+
+#close-popup-user-table {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -433,6 +473,11 @@ tr {
   font-size: 20px;
   color: #333;
 }
+
+#close-popup-user-table:hover {
+  background-color: #e0e0e0;
+}
+
 
 /* Media Query for responsive design */
 @media (max-width: 768px) {

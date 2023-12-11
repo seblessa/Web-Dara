@@ -11,6 +11,7 @@
   <script type="module" src="logic/script.js"></script>
   <script type="module" src="logic/game.js"></script>
   <script type="module" src="logic/api.js"></script>
+  <script type="module" src="logic/podium.js"></script>
     <header id="header">
       <div class="header-container">
         <div class="button-container">
@@ -126,20 +127,17 @@
       </div>
       <div id="popup-user-table" class="hidden-popup podium" style="display: none">
         <div id="popup-content-user-table">
-          <span id="close-popup-user-table" class="close-button">X</span>
-          <button id="close-podium">Close Podium</button>
+          <button id="close-popup-user-table" class="close-button">Close</button>
           <div class="user-table">
-            <table>
+            <h2>Wins</h2>
+            <table id="user-table">
               <thead>
               <tr>
-                <th>Username</th>
-                <th>Games Won</th>
+                <th>Players</th>
+                <th>games won</th>
               </tr>
               </thead>
-
-              <tbody id="user-table-body">
-              <!-- User data will be dynamically added here -->
-              </tbody>
+              <tbody id="user-table-body"></tbody>
             </table>
           </div>
         </div>

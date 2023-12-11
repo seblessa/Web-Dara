@@ -4,46 +4,66 @@ document.addEventListener("DOMContentLoaded", function () {
     const popupUserTable = document.getElementById("popup-user-table");
 
     closePopupUserTableButton.addEventListener("click", function () {
-        popupUserTable.classList.add("hidden-popup-user-table");
+        popupUserTable.style.display = "none";
     });
 });
 
+// Updated User data structure
+let users = [user];
 
-// User data structure
-const users = [
-    { username: "User 1", gamesWon: 10 },
-    { username: "User 2", gamesWon: 8 },
-    { username: "User 3", gamesWon: 5 }
-    // Add more user data as needed
-];
+function addUser(username) {
+    // Check if the user already exists
+    const existingUser = users.find(user => user.username === username);
 
-// Function to update the user table
-function updateUserTable() {
+    if (!existingUser) {
+        // If the user doesn't exist, add them to the array
+        users.push({
+            username: username,
+            gamesWon: 0,  // Initialize games won count
+        });
+    }
+}
+
+function updateUser(username, gamesWon) {
+    // Find the user and update their games won count
+    const user = users.find(user => user.username === username);
+
+    if (user) {
+        user.gamesWon = gamesWon;
+    }
+}
+
+function renderUserTable() {
+    // Add logic to dynamically create the table rows based on the users array
     const tableBody = document.getElementById("user-table-body");
+    tableBody.innerHTML = '';
 
-    // Clear existing rows
-    tableBody.innerHTML = "";
+    users.forEach(user => {
+        const row = document.createElement('tr');
+        const usernameCell = document.createElement('td');
+        const gamesWonCell = document.createElement('td');
 
-    // Iterate through user data and add rows to the table
-    users.forEach((user) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td>${user.username}</td><td>${user.gamesWon}</td>`;
+        usernameCell.textContent = user.username;
+        gamesWonCell.textContent = user.gamesWon;
+
+        row.appendChild(usernameCell);
+        row.appendChild(gamesWonCell);
+
         tableBody.appendChild(row);
     });
 }
+
 function startGame(difficulty) {
     // ... (existing code)
 
     // Check for a winner and update user data
     if (ThreeRow()) {
         const currentPlayer = playerTurn === "player1" ? "User 1" : "User 2";
-        const currentUser = users.find(user => user.username === currentPlayer);
+        addUser(currentPlayer); // Add the user if not already in the array
+        updateUser(currentPlayer, users.find(user => user.username === currentPlayer).gamesWon + 1);
 
-        if (currentUser) {
-            currentUser.gamesWon++;
-            // Update the user table
-            updateUserTable();
-        }
+        // Update the user table
+        renderUserTable();
 
         // Reset the game or perform other actions as needed
     }
