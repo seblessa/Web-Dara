@@ -156,6 +156,8 @@ function checkWinCondition() {
     }
 }
 
+
+/*
 function makeMove(x, y, startX, startY, possibleMove) {
     board[parseInt(x)][parseInt(y)] = board[parseInt(startX)][parseInt(startY)];
     board[parseInt(startX)][parseInt(startY)] = 0;
@@ -165,3 +167,5 @@ function makeMove(x, y, startX, startY, possibleMove) {
 
     checkWinCondition();  // Call the function to check win condition after each move
 }
+
+*/

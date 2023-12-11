@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="static/styles.css" />
     <link href="https://fonts.cdnfonts.com/css/blanka" rel="stylesheet" />
     <title>Web Dara</title>
-    <script src="logic/script.js"></script>
-    <script src="logic/game.js"></script>
-    <script src="logic/api.js"></script>
   </head>
   <body>
+  <script type="module" src="logic/script.js"></script>
+  <script type="module" src="logic/game.js"></script>
+  <script type="module" src="logic/api.js"></script>
     <header id="header">
       <div class="header-container">
         <div class="button-container">
@@ -127,6 +127,7 @@
       <div id="popup-user-table" class="hidden-popup podium" style="display: none">
         <div id="popup-content-user-table">
           <span id="close-popup-user-table" class="close-button">X</span>
+          <button id="close-podium">Close Podium</button>
           <div class="user-table">
             <table>
               <thead>

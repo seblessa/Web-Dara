@@ -1,5 +1,4 @@
-// User object with the username and password
-const user = { username: "user", password: "user" };
+const user = { username: "admin", password: "admin" };
 let isLoggedIn = false; // Variable to track the login status
 let rows;
 let columns;
@@ -9,16 +8,25 @@ let playerTurn;
 let selected_piece;
 let selected = false;
 
+
+import { register } from "./api.js";
 function login() {
+
+
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
+  register(usernameInput, passwordInput);
+
   if (usernameInput === user.username && passwordInput === user.password) {
     isLoggedIn = true;
+    console.log("Logged in as " + usernameInput);
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
     document.getElementById("new-game-button").style.display = "block";
     document.getElementById("logout-button").style.display = "block";
+
+    register(usernameInput, passwordInput);
   } else {
     showErrorMessage();
   }
@@ -274,8 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
 
-  // Call the function to update the user table
-  updateUserTable();
+  // updateUserTable();            // TODO: Complete podium
 
   podiumContainer.style.display = "none";
   errorMessage.style.display = "none";

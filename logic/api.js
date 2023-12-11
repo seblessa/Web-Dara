@@ -1,6 +1,5 @@
 
-
-const register = (nick, password) => {
+export const register = (nick, password) => {
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008//register', {
         method: 'POST',
         headers: {
@@ -14,7 +13,7 @@ const register = (nick, password) => {
 };
 
 
-const join = (group, nick, password, size) => {
+export const join = (group, nick, password, size) => {
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008//join', {
         method: 'POST',
         headers: {
@@ -27,7 +26,7 @@ const join = (group, nick, password, size) => {
         .catch(error => console.error('Erro:', error));
 };
 
-const leave = (nick, password, game) => {
+export const leave = (nick, password, game) => {
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008//leave', {
         method: 'POST',
         headers: {
@@ -40,7 +39,7 @@ const leave = (nick, password, game) => {
         .catch(error => console.error('Erro:', error));
 };
 
-const notify = (nick, password, game, move) => {
+export const notify = (nick, password, game, move) => {
     fetch('http://twserver.alunos.dcc.fc.up.pt:8008//notify', {
         method: 'POST',
         headers: {
@@ -53,7 +52,7 @@ const notify = (nick, password, game, move) => {
         .catch(error => console.error('Erro:', error));
 };
 
-const update = (game, nick) => {
+export const update = (game, nick) => {
     const url = `http://twserver.alunos.dcc.fc.up.pt:8008//update?game=${game}&nick=${nick}`;
     const eventSource = new EventSource(url);
 
@@ -69,7 +68,7 @@ const update = (game, nick) => {
 };
 
 
-const getRanking = (group, size) => {
+export const getRanking = (group, size) => {
     const url = `http://twserver.alunos.dcc.fc.up.pt:8008//ranking?group=${group}&size=${size}`;
     fetch(url)
         .then(response => response.json())
