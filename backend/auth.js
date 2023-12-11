@@ -6,6 +6,7 @@ export const register = async (req, res) => {
   let hash;
   let username;
   let jsonData;
+  let user;
   req.on("data", (chunk) => {
     data += chunk;
   });
@@ -15,7 +16,12 @@ export const register = async (req, res) => {
       try {
         jsonData = JSON.parse(data);
         username = jsonData.nick;
+        console.log(jsonData);
         hash = crypto.createHash("md5").update(jsonData["password"]).digest("hex");
+        user = {
+          username: username,
+          password: hash,
+        };
         res.end("Data received and parsed successfully");
       } catch (error) {
         console.error("Error parsing JSON:", error.message);
@@ -27,15 +33,24 @@ export const register = async (req, res) => {
       res.end("Received data: " + data);
     }
   });
-
-  const user = {
-    username: username,
-    password: hash,
-  };
+  console.log();
   const UsersData = readFileSync("backend/data/users.json");
-  const Users = JSON.parse(UsersData);
 
-  writeFileSync("../data/users.json", JSON.stringify(Users));
+  let Users;
+
+  try {
+    Users = JSON.parse(UsersData.toString());
+
+    Users = Array.isArray(Users) ? Users : [];
+  } catch (error) {
+    console.error("Error parsing existing users data:", error.message);
+    Users = [];
+  }
+
+  const updatedUsers = [...Users, user];
+
+  writeFileSync("backend/data/users.json", JSON.stringify(updatedUsers));
+
   res.writeHead(200, { "Content-Type": "text/plain", message: "User registered successfully" });
 
   return res.end();

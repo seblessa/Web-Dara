@@ -1,5 +1,5 @@
 import http from "http";
-import { register } from "./controllers/auth.js";
+import { register } from "./auth.js";
 
 const routes = {
   GET: {
