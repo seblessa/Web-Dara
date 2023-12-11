@@ -11,28 +11,20 @@ let selected = false;
 import { register } from "./api.js";
 
 
-let admin_details = {
-    nick: "admin",
-    password: "admin"
-    }
-
-function login() {
+async function login() {
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
-  let login_info =  {
+  let login_info = {
     nick: usernameInput,
     password: passwordInput
   }
 
-  // let message = register(JSON.stringify(login_info));
+  const data = await register(login_info);
 
-  // console.log(message);
-
-  if (!(usernameInput===admin_details.nick && passwordInput===admin_details.password)){
-    //showErrorMessage(message);
-    console.log("Login Failed");
-  }else {
+  if (data.error) {
+    showErrorMessage(data.error);
+  } else {
     show_login_cred();
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
@@ -321,10 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("logout-button").addEventListener("click", function () {
-    document.getElementById("user-welcome-message").style.display = "none";
-    document.getElementById("logout-button").style.display = "none";
-    document.getElementById("new-game-button").style.display = "none"; // Hide the "New Game" button on logout
-    document.getElementById("game-board").style.display = "none"; // Hide the game board on logout
+    location.reload();
   });
 
   firstPlayerButtons.forEach(function (button) {

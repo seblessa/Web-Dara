@@ -1,20 +1,15 @@
 
-export const register = (login_info) => {
-
-    let error
-
-    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/register', {
+export const register = async (login_info) => {
+    const response = await fetch('http://twserver.alunos.dcc.fc.up.pt:8008/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: (login_info),
-    })
-    .then(response => response.json())
-    .then(data => {error = data.error})
+        body: JSON.stringify(login_info),
+    });
+    return await response.json();
+};
 
-    return error
-}
 
 
 export const join = (group, nick, password, size) => {
