@@ -1,20 +1,24 @@
 
-export const register = (nick, password) => {
-    fetch('http://twserver.alunos.dcc.fc.up.pt:8008//register', {
+export const register = (login_info) => {
+
+    let error
+
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ nick, password }),
+        body: (login_info),
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Erro:', error));
-};
+    .then(response => response.json())
+    .then(data => {error = data.error})
+
+    return error
+}
 
 
 export const join = (group, nick, password, size) => {
-    fetch('http://twserver.alunos.dcc.fc.up.pt:8008//join', {
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/join', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,10 +28,10 @@ export const join = (group, nick, password, size) => {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Erro:', error));
-};
+}
 
 export const leave = (nick, password, game) => {
-    fetch('http://twserver.alunos.dcc.fc.up.pt:8008//leave', {
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/leave', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -40,7 +44,7 @@ export const leave = (nick, password, game) => {
 };
 
 export const notify = (nick, password, game, move) => {
-    fetch('http://twserver.alunos.dcc.fc.up.pt:8008//notify', {
+    fetch('http://twserver.alunos.dcc.fc.up.pt:8008/notify', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +57,7 @@ export const notify = (nick, password, game, move) => {
 };
 
 export const update = (game, nick) => {
-    const url = `http://twserver.alunos.dcc.fc.up.pt:8008//update?game=${game}&nick=${nick}`;
+    const url = `http://twserver.alunos.dcc.fc.up.pt:8008/update?game=${game}&nick=${nick}`;
     const eventSource = new EventSource(url);
 
     eventSource.onmessage = event => {
@@ -69,7 +73,7 @@ export const update = (game, nick) => {
 
 
 export const getRanking = (group, size) => {
-    const url = `http://twserver.alunos.dcc.fc.up.pt:8008//ranking?group=${group}&size=${size}`;
+    const url = `http://twserver.alunos.dcc.fc.up.pt:8008/ranking?group=${group}&size=${size}`;
     fetch(url)
         .then(response => response.json())
         .then(data => console.log(data))
