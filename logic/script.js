@@ -1,4 +1,3 @@
-const user = { username: "admin", password: "admin" };
 let isLoggedIn = false; // Variable to track the login status
 let rows;
 let columns;
@@ -10,26 +9,37 @@ let selected = false;
 
 
 import { register } from "./api.js";
+
+
+let admin_details = {
+    nick: "admin",
+    password: "admin"
+    }
+
 function login() {
-
-
   const usernameInput = document.getElementById("username").value;
   const passwordInput = document.getElementById("password").value;
 
-  register(usernameInput, passwordInput);
+  let login_info =  {
+    nick: usernameInput,
+    password: passwordInput
+  }
 
-  if (usernameInput === user.username && passwordInput === user.password) {
-    isLoggedIn = true;
-    console.log("Logged in as " + usernameInput);
+  // let message = register(JSON.stringify(login_info));
+
+  // console.log(message);
+
+  if (!(usernameInput===admin_details.nick && passwordInput===admin_details.password)){
+    //showErrorMessage(message);
+    console.log("Login Failed");
+  }else {
+    show_login_cred();
     hideLoginDiv();
     showWelcomeMessage(usernameInput);
     document.getElementById("new-game-button").style.display = "block";
     document.getElementById("logout-button").style.display = "block";
-
-    register(usernameInput, passwordInput);
-  } else {
-    showErrorMessage();
   }
+
 }
 
 function showWelcomeMessage(username) {
@@ -38,8 +48,9 @@ function showWelcomeMessage(username) {
   welcomeMessage.style.display = "block";
 }
 
-function showErrorMessage() {
-  const errorMessage = document.querySelector(".error-message");
+function showErrorMessage(message) {
+  const errorMessage = document.getElementById("error-message")
+  errorMessage.innerText = message;
   errorMessage.style.display = "block";
 }
 
@@ -56,7 +67,7 @@ function ShowLoginDiv() {
 function show_login_cred() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
-  console.log("\nLogin attempted:");
+  console.log("\nLogin Successful:");
   console.log("Username: " + username);
   console.log("Password: " + password);
 }
@@ -289,6 +300,11 @@ document.addEventListener("DOMContentLoaded", function () {
   welcomeMessage.style.display = "none";
   gameBoard.style.display = "none";
   firstStep.style.display = "none";
+
+  document.getElementById("login-button").addEventListener("click", function (ev) {
+    ev.preventDefault();
+    login();
+  });
 
   document.getElementById("new-game-button").style.display = "none";
 

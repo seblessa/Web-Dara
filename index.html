@@ -110,7 +110,7 @@
     </div>
     <div class="center-container">
       <div class="login-container">
-        <form id="login-form" onsubmit="show_login_cred();login(); return false;">
+        <form id="login-form" > <!-- onsubmit="show_login_cred();login(); return false;"-->
           <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" placeholder="Enter your username" required />
@@ -120,10 +120,10 @@
             <input type="password" id="password" placeholder="Enter your password" required />
           </div>
           <div class="button-container">
-            <button type="submit">Login</button>
+            <button id="login-button">Login</button>
           </div>
         </form>
-        <div class="error-message">Wrong username or password</div>
+        <div id="error-message" class="error-message"></div>
       </div>
       <div id="popup-user-table" class="hidden-popup podium" style="display: none">
         <div id="popup-content-user-table">
