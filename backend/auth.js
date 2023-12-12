@@ -1,58 +1,41 @@
 import crypto from "crypto";
 import { writeFileSync, readFileSync } from "fs";
+import { readUsersData, writeUserData, getUsersData, checkUserExists, addUser } from "./data/data.js";
 
 export const register = async (req, res) => {
   let data = "";
-  let hash;
-  let username;
   let jsonData;
   let user;
+
   req.on("data", (chunk) => {
     data += chunk;
   });
   req.on("end", () => {
-    // If the content type is JSON, parse the data
     if (req.headers["content-type"] === "application/json") {
+      jsonData = JSON.parse(data);
       try {
-        jsonData = JSON.parse(data);
-        username = jsonData.nick;
-        console.log(jsonData);
-        hash = crypto.createHash("md5").update(jsonData["password"]).digest("hex");
         user = {
-          username: username,
-          password: hash,
+          username: jsonData.nick,
+          hash: crypto.createHash("md5").update(jsonData.password).digest("hex"),
         };
-        res.end("Data received and parsed successfully");
+        if (checkUserExists(user.username)) {
+          console.log("User already exists");
+          res.statusCode = 200;
+          return res.end();
+        } else {
+          addUser(user);
+        }
+        res.statusCode = 201; // Created
+        return res.end("User created");
       } catch (error) {
         console.error("Error parsing JSON:", error.message);
         res.statusCode = 400; // Bad Request
-        res.end("Error parsing JSON");
+        return res.end("Error parsing JSON");
       }
     } else {
-      // Handle other content types as needed
       res.end("Received data: " + data);
     }
   });
-  console.log();
-  const UsersData = readFileSync("backend/data/users.json");
-
-  let Users;
-
-  try {
-    Users = JSON.parse(UsersData.toString());
-
-    Users = Array.isArray(Users) ? Users : [];
-  } catch (error) {
-    console.error("Error parsing existing users data:", error.message);
-    Users = [];
-  }
-
-  const updatedUsers = [...Users, user];
-
-  writeFileSync("backend/data/users.json", JSON.stringify(updatedUsers));
-
-  res.writeHead(200, { "Content-Type": "text/plain", message: "User registered successfully" });
-
   return res.end();
 };
 
