@@ -3,7 +3,7 @@ let rows;
 let columns;
 let board;
 let phase = "Drop";
-let playerTurn;
+let playerTurn="player1";
 let selected_piece;
 let selected = false;
 
@@ -252,7 +252,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorMessage = document.querySelector(".error-message");
   const gameBoard = document.querySelector(".game-container");
   const firstStep = document.querySelector(".first-step");
-  const firstPlayerButtons = document.querySelectorAll(".toggle-button0");
   const gameModeButtons = document.querySelectorAll(".toggle-button1");
   const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
   const gameDifficulty =document.getElementById("game-difficulty");
@@ -301,15 +300,6 @@ document.addEventListener("DOMContentLoaded", function () {
     location.reload();
   });
 
-  firstPlayerButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      firstPlayerButtons.forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-    });
-  });
-
   gameModeButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         gameModeButtons.forEach(function (b) {
@@ -345,7 +335,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   startButton.addEventListener("click", function () {
-    const firstPlayer = Array.from(firstPlayerButtons).find((button) => button.classList.contains("active"));
     const selectedGameModeButton = Array.from(gameModeButtons).find((button) => button.classList.contains("active"));
     const selectedBoardSelectorButton = Array.from(boardSelectorButtons).find((button) => button.classList.contains("active"));
     const selectedGameDifficulty = Array.from(gameDifficultyButton).find((button) => button.classList.contains("active"));
@@ -356,28 +345,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (gameMode === "pvp") {
-      if (!firstPlayer || !selectedGameModeButton || !selectedBoardSelectorButton) {
+      if (!selectedGameModeButton || !selectedBoardSelectorButton) {
         alert("Please select every option to start the game.");
       }else{
         console.log("PLAYING ONLINE")
-        console.log("First player: " + firstPlayer.textContent);
         console.log("Game mode: " + selectedGameModeButton.textContent);
         console.log("Board size: " + selectedBoardSelectorButton.textContent);
 
         [rows, columns] = selectedBoardSelectorButton.textContent.split("x");
 
-        lookForGame(nick,password,rows,columns)
+        lookForGame(nick,password,parseInt(rows),parseInt(columns))
 
 
         // CONTINUE PROCESSING AFTER RECEIVING GAME ID
 
       }
     }else {
-      if (!firstPlayer || !selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {
+      if (!selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {
         alert("Please select every option to start the game.");
       } else {
         console.log("PLAYING OFFLINE")
-        console.log("First player: " + firstPlayer.textContent);
         console.log("Game mode: " + selectedGameModeButton.textContent);
         console.log("Board size: " + selectedBoardSelectorButton.textContent);
         console.log("Game difficulty: " + selectedGameDifficulty.textContent);
@@ -389,11 +376,6 @@ document.addEventListener("DOMContentLoaded", function () {
         generateGameBoard(parseInt(rows), parseInt(columns));
         generateGamePieces(player1Colour, player2Colour);
 
-        if (firstPlayer.textContent === "Player 1") {
-          playerTurn = "player1";
-        } else {
-          playerTurn = "player2";
-        }
 
         startGame(selectedGameDifficulty.textContent);
 
