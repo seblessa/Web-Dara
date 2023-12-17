@@ -1,3 +1,4 @@
+/*
 // popup-user-table
 document.addEventListener("DOMContentLoaded", function () {
     const closePopupUserTableButton = document.getElementById("close-popup-user-table");
@@ -67,4 +68,4 @@ function startGame(difficulty) {
 
         // Reset the game or perform other actions as needed
     }
-}
+}*/
