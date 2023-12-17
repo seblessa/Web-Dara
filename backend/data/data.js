@@ -15,8 +15,12 @@ export function getUser(user) {}
 export function readUsersData() {
   let jsonData = readFileSync("backend/data/users.json");
   let Users;
-  Users = JSON.parse(jsonData.toString());
-  UsersData = Array.isArray(Users) ? Users : [];
+  if (jsonData != "") {
+    Users = JSON.parse(jsonData.toString());
+    UsersData = Array.isArray(Users) ? Users : [];
+  } else {
+    UsersData = [];
+  }
 }
 
 export function addUser(user) {

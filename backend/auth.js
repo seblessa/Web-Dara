@@ -17,8 +17,16 @@ export const register = async (req, res) => {
         user = {
           username: jsonData.nick,
           hash: crypto.createHash("md5").update(jsonData.password).digest("hex"),
-          games: 0,
-          victories: 0,
+          games: {
+            "6x5": [],
+            "6x6": [],
+            "5x6": [],
+          },
+          victories: {
+            "6x5": 0,
+            "6x6": 0,
+            "5x6": 0,
+          },
         };
 
         let result = checkUserExists(user.username);
