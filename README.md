@@ -21,7 +21,10 @@ The versions of the operating systems used to develop and test this application 
 - 3.11.5
 
 ## Requirements
-$ pip3 install -r requirements.txt
+
+```bash
+pip3 install -r requirements.txt
+```
 
 
 ## Usage
