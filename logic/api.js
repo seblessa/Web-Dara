@@ -44,13 +44,14 @@ async function login(usernameInput, passwordInput) {
 }
 
 // TODO: JOIN REQUEST
-async function lookForGame(nick, password, rows, columns){
+async function lookForGame(nick, password, rows, columns,status){
     let response_json = await callServer("join", {group, nick, password, "size":{rows, columns}});
     if ("game" in response_json) {
         console.log("Sucessfuly joined a game with ID: "+ response_json.game);
         game = response_json.game;
-
-        await update(nick);
+        status.innerText = "Waiting for opponent..."
+        status.style.display = "block";
+        await update(nick,status);
     }
     else{
         console.log("Join failed. Response:");
@@ -93,7 +94,7 @@ async function notify(row, column){
 
 
 // TODO: UPDATE REQUEST (SSE)
-async function update(nick){
+async function update(nick,status){
     let url = SERVER + "update?nick="+nick+"&game="+game;
     const eventSource = new EventSource(url);
     eventSource.onmessage = function(message){
@@ -114,32 +115,18 @@ async function update(nick){
             console.log("Successfuly received an update from server");
             console.log("Game finished - Winner: " + json.winner);
             eventSource.close();
-            let message = document.getElementById("text");
-            message.innerText = "Game finished - Winner: " + json.winner;
-            document.getElementById("give-up-button").style.display = "none";
-            document.getElementById("quit-game-button").style.display = "flex";
-            document.getElementById("quit-game-button").innerHTML = "BACK&nbsp;&nbsp;&nbsp;TO&nbsp;&nbsp;&nbsp;MENU";
+
+            status.innerText = "Winner: " + json.winner;
         }
         else if ("board" in json){
             game_board = json.board;
-            // go to the game page if still at the waiting page
-            if (document.getElementById("wait-game").style.display=="flex"){
-                console.log("Successfuly received an update from server");
-                // create HTML for the board and side boards
-                createBoardHTML(game_board);
-                createSideBoardsHTML();
-                document.getElementById("give-up-button").style.display = "flex";
-                document.getElementById("quit-game-button").style.display = "none";
-                document.getElementById("winner").innerText = "";
-                document.getElementById("AI").innerText = "";
-                switchPage("wait-game", "game");
-            }
+            console.log("Successfuly received an update from server");
             // change the board and game messages in the browser side
             let phase = json.phase;
             let step = json.step;
             let turn = json.turn;
             updateBoardPvP(game_board);
-            updateMessage(phase, step, turn);
+            updateMessage(status, phase, step, turn);
         }
     }
 }
@@ -190,24 +177,6 @@ async function ranking(){
 
 
 // TODO: AUXILIAR FUNCTIONS
-
-function createBoardHTML(board){
-    for (let i = 0; i < board.length; i++){
-        for (let j = 0; j < board[0].length; j++){
-            let tile = document.createElement("div");
-            tile.id = i.toString() + "-" + j.toString();
-            tile.classList.add("tile");
-            tile.addEventListener("click", onClick);
-            let piece_img = document.createElement("img");
-            piece_img.setAttribute("src", "images/player0.png");
-            piece_img.setAttribute("id", "img-"+tile.id);
-            piece_img.style.width = "100%";
-            piece_img.style.height = "100%";
-            tile.append(piece_img);
-            document.getElementById("board").append(tile);
-        }
-    }
-}
 
 function createSideBoardsHTML() {
     for (let r = 0; r < 6; r++) {
@@ -306,18 +275,18 @@ function clearPvP() {
     }
 }
 
-function updateMessage(phase, step, turn){
-    let message = document.getElementById("text");
-    if (phase == "drop"){
+function updateMessage(message, phase, step, turn){
+
+    if (phase === "drop"){
         message.innerText = "[Drop Phase] Turn: " + turn;
     }
-    else if (step == "from"){
+    else if (step === "from"){
         message.innerText = "[Move Phase - Select Piece] Turn: " + turn;
     }
-    else if (step == "to"){
+    else if (step === "to"){
         message.innerText = "[Move Phase - Select Destination] Turn: " + turn;
     }
-    else if (step == "take"){
+    else if (step === "take"){
         message.innerText = "[Move Phase - Take Oponent's Piece] Turn: " + turn;
     }
 }

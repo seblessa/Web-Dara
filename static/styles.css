@@ -189,6 +189,18 @@ body {
   align-items: flex-end;
 }
 
+
+
+.status {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  font-size: larger;
+}
+
+
 .first-step {
   display: flex;
   flex-direction: row;

@@ -258,12 +258,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const gameDifficultyButton =document.querySelectorAll(".toggle-button3")
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
+  const status = document.getElementById("status");
   let gameMode = null
   let nick = null
   let password = null
 
   // updateUserTable();            // TODO: Complete podium
-
+  status.style.display = "none";
   gameDifficulty.style.display = "none";
   podiumContainer.style.display = "none";
   errorMessage.style.display = "none";
@@ -354,10 +355,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         [rows, columns] = selectedBoardSelectorButton.textContent.split("x");
 
-        lookForGame(nick,password,parseInt(rows),parseInt(columns))
+        lookForGame(nick,password,parseInt(rows),parseInt(columns),status)
 
-
-        // CONTINUE PROCESSING AFTER RECEIVING GAME ID
+        firstStep.style.display = "none";
+        generateGameBoard(parseInt(rows), parseInt(columns));
+        generateGamePieces(player1Colour, player2Colour);
+        gameBoard.style.display = "flex";
 
       }
     }else {
