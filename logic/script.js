@@ -3,10 +3,9 @@ let rows;
 let columns;
 let board;
 let phase = "Drop";
-let playerTurn="player1";
+let playerTurn = "player1";
 let selected_piece;
 let selected = false;
-
 
 function showWelcomeMessage(username) {
   const welcomeMessage = document.getElementById("user-welcome-message"); // Updated ID here
@@ -15,7 +14,7 @@ function showWelcomeMessage(username) {
 }
 
 function showErrorMessage(message) {
-  const errorMessage = document.getElementById("error-message")
+  const errorMessage = document.getElementById("error-message");
   errorMessage.innerText = message;
   errorMessage.style.display = "block";
 }
@@ -75,9 +74,6 @@ function generateGamePieces(Playercolour, Opponentcolour) {
     opponentPieces.appendChild(piece);
   }
 }
-
-
-
 
 // Minimax function for DARA
 /*
@@ -254,14 +250,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const firstStep = document.querySelector(".first-step");
   const gameModeButtons = document.querySelectorAll(".toggle-button1");
   const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
-  const gameDifficulty =document.getElementById("game-difficulty");
-  const gameDifficultyButton =document.querySelectorAll(".toggle-button3")
+  const gameDifficulty = document.getElementById("game-difficulty");
+  const gameDifficultyButton = document.querySelectorAll(".toggle-button3");
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
   const status = document.getElementById("status");
-  let gameMode = null
-  let nick = null
-  let password = null
+  let gameMode = null;
+  let nick = null;
+  let password = null;
 
   // updateUserTable();            // TODO: Complete podium
   status.style.display = "none";
@@ -276,10 +272,10 @@ document.addEventListener("DOMContentLoaded", function () {
     ev.preventDefault();
     const usernameInput = document.getElementById("username").value;
     const passwordInput = document.getElementById("password").value;
-    isLoggedIn = login(usernameInput,passwordInput);
-    if (isLoggedIn){
-      nick = usernameInput
-      password = passwordInput
+    isLoggedIn = login(usernameInput, passwordInput);
+    if (isLoggedIn) {
+      nick = usernameInput;
+      password = passwordInput;
     }
   });
 
@@ -303,19 +299,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   gameModeButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-        gameModeButtons.forEach(function (b) {
-            b.classList.remove("active");
-            if (button.id === "ai-button") {
-                gameMode = "pvAI";
-                gameDifficulty.style.display = "block";
-            } else {
-                gameMode = "pvp";
-                gameDifficulty.style.display = "none";
-            }
-        });
-        this.classList.add("active");
+      gameModeButtons.forEach(function (b) {
+        b.classList.remove("active");
+        if (button.id === "ai-button") {
+          gameMode = "pvAI";
+          gameDifficulty.style.display = "block";
+        } else {
+          gameMode = "pvp";
+          gameDifficulty.style.display = "none";
+        }
+      });
+      this.classList.add("active");
     });
-});
+  });
 
   gameDifficultyButton.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -344,30 +340,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //get selected colour
 
-
     if (gameMode === "pvp") {
       if (!selectedGameModeButton || !selectedBoardSelectorButton) {
         alert("Please select every option to start the game.");
-      }else{
-        console.log("PLAYING ONLINE")
+      } else {
+        console.log("PLAYING ONLINE");
         console.log("Game mode: " + selectedGameModeButton.textContent);
         console.log("Board size: " + selectedBoardSelectorButton.textContent);
 
         [rows, columns] = selectedBoardSelectorButton.textContent.split("x");
 
-        lookForGame(nick,password,parseInt(rows),parseInt(columns),status)
+        lookForGame(nick, password, parseInt(rows), parseInt(columns));
+
+        // CONTINUE PROCESSING AFTER RECEIVING GAME ID
+        lookForGame(nick, password, parseInt(rows), parseInt(columns), status);
 
         firstStep.style.display = "none";
         generateGameBoard(parseInt(rows), parseInt(columns));
         generateGamePieces(player1Colour, player2Colour);
         gameBoard.style.display = "flex";
-
       }
-    }else {
+    } else {
       if (!selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {
         alert("Please select every option to start the game.");
       } else {
-        console.log("PLAYING OFFLINE")
+        console.log("PLAYING OFFLINE");
         console.log("Game mode: " + selectedGameModeButton.textContent);
         console.log("Board size: " + selectedBoardSelectorButton.textContent);
         console.log("Game difficulty: " + selectedGameDifficulty.textContent);
@@ -379,7 +376,6 @@ document.addEventListener("DOMContentLoaded", function () {
         generateGameBoard(parseInt(rows), parseInt(columns));
         generateGamePieces(player1Colour, player2Colour);
 
-
         startGame(selectedGameDifficulty.textContent);
 
         // Hide the 'first-step' div
@@ -389,14 +385,13 @@ document.addEventListener("DOMContentLoaded", function () {
         gameBoard.style.display = "flex";
       }
     }
-
   });
   // Show the podium when the "Podium" button is clicked
   document.getElementById("podium-button").addEventListener("click", function () {
     podiumContainer.style.display = "block";
   });
   // Hide the podium when the "Close Podium" button is clicked
-  //document.getElementById("close-podium").addEventListener("click", function () {
-  //  podiumContainer.style.display = "none";
-  //});
+  document.getElementById("close-podium").addEventListener("click", function () {
+    podiumContainer.style.display = "none";
+  });
 });
