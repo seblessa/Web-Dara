@@ -49,8 +49,8 @@ async function lookForGame(nick, password, rows, columns){
     if ("game" in response_json) {
         console.log("Sucessfuly joined a game with ID: "+ response_json.game);
         game = response_json.game;
-        // switchPage("menu", "wait-game");
-        await update();
+
+        await update(nick);
     }
     else{
         console.log("Join failed. Response:");
@@ -93,8 +93,7 @@ async function notify(row, column){
 
 
 // TODO: UPDATE REQUEST (SSE)
-async function update(){
-    let nick = document.getElementById("username-input").value;
+async function update(nick){
     let url = SERVER + "update?nick="+nick+"&game="+game;
     const eventSource = new EventSource(url);
     eventSource.onmessage = function(message){
@@ -103,7 +102,7 @@ async function update(){
         if ("error" in json){
             console.log("Update error. Response:");
             console.log(json);
-            switchPage("wait-game", "menu");
+            // switchPage("wait-game", "menu");
         }
         if ("winner" in json){
             // in case the game is completely done / no forfeit occurs
