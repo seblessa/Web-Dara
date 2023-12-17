@@ -390,8 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("podium-button").addEventListener("click", function () {
     podiumContainer.style.display = "block";
   });
-  // Hide the podium when the "Close Podium" button is clicked
-  document.getElementById("close-podium").addEventListener("click", function () {
+  document.getElementById("close-popup-user-table").addEventListener("click", function () {
     podiumContainer.style.display = "none";
   });
 });
