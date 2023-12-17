@@ -8,32 +8,6 @@ let selected_piece;
 let selected = false;
 
 
-import { register } from "./api.js";
-
-
-async function login() {
-  const usernameInput = document.getElementById("username").value;
-  const passwordInput = document.getElementById("password").value;
-
-  let login_info = {
-    nick: usernameInput,
-    password: passwordInput
-  }
-
-  const data = await register(login_info);
-
-  if (data.error) {
-    showErrorMessage(data.error);
-  } else {
-    show_login_cred();
-    hideLoginDiv();
-    showWelcomeMessage(usernameInput);
-    document.getElementById("new-game-button").style.display = "block";
-    document.getElementById("logout-button").style.display = "block";
-  }
-
-}
-
 function showWelcomeMessage(username) {
   const welcomeMessage = document.getElementById("user-welcome-message"); // Updated ID here
   welcomeMessage.textContent = `Welcome ${username}`;
@@ -281,12 +255,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const firstPlayerButtons = document.querySelectorAll(".toggle-button0");
   const gameModeButtons = document.querySelectorAll(".toggle-button1");
   const boardSelectorButtons = document.querySelectorAll(".toggle-button2");
-  const gameDifficulty = document.querySelectorAll(".toggle-button3");
+  const gameDifficulty =document.getElementById("game-difficulty");
+  const gameDifficultyButton =document.querySelectorAll(".toggle-button3")
   const startButton = document.getElementById("start-button");
   const podiumContainer = document.querySelector(".podium");
+  let gameMode = null
+  let nick = null
+  let password = null
 
   // updateUserTable();            // TODO: Complete podium
 
+  gameDifficulty.style.display = "none";
   podiumContainer.style.display = "none";
   errorMessage.style.display = "none";
   welcomeMessage.style.display = "none";
@@ -295,7 +274,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("login-button").addEventListener("click", function (ev) {
     ev.preventDefault();
-    login();
+    const usernameInput = document.getElementById("username").value;
+    const passwordInput = document.getElementById("password").value;
+    isLoggedIn = login(usernameInput,passwordInput);
+    if (isLoggedIn){
+      nick = usernameInput
+      password = passwordInput
+    }
   });
 
   document.getElementById("new-game-button").style.display = "none";
@@ -327,7 +312,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   gameModeButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-      gameModeButtons.forEach(function (b) {
+        gameModeButtons.forEach(function (b) {
+            b.classList.remove("active");
+            if (button.id === "ai-button") {
+                gameMode = "pvAI";
+                gameDifficulty.style.display = "block";
+            } else {
+                gameMode = "pvp";
+                gameDifficulty.style.display = "none";
+            }
+        });
+        this.classList.add("active");
+    });
+});
+
+  gameDifficultyButton.forEach(function (button) {
+    button.addEventListener("click", function () {
+      gameDifficultyButton.forEach(function (b) {
         b.classList.remove("active");
       });
       this.classList.add("active");
@@ -343,61 +344,74 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  gameDifficulty.forEach(function (button) {
-    button.addEventListener("click", function () {
-      gameDifficulty.forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-    });
-  });
-
   startButton.addEventListener("click", function () {
     const firstPlayer = Array.from(firstPlayerButtons).find((button) => button.classList.contains("active"));
     const selectedGameModeButton = Array.from(gameModeButtons).find((button) => button.classList.contains("active"));
     const selectedBoardSelectorButton = Array.from(boardSelectorButtons).find((button) => button.classList.contains("active"));
-    const selectedGameDifficulty = Array.from(gameDifficulty).find((button) => button.classList.contains("active"));
+    const selectedGameDifficulty = Array.from(gameDifficultyButton).find((button) => button.classList.contains("active"));
     const player1Colour = document.getElementById("player1-colour").value;
     const player2Colour = document.getElementById("player2-colour").value;
 
     //get selected colour
 
-    if (!firstPlayer || !selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {
-      alert("Please select every option to start the game.");
-    } else {
-      console.log("First player: " + firstPlayer.textContent);
-      console.log("Game mode: " + selectedGameModeButton.textContent);
-      console.log("Board size: " + selectedBoardSelectorButton.textContent);
-      console.log("Game difficulty: " + selectedGameDifficulty.textContent);
-      // Get the selected game board size
-      const boardSize = selectedBoardSelectorButton.textContent;
-      [rows, columns] = boardSize.split("x");
 
-      // Call generateGameBoard() with rows and columns
-      generateGameBoard(parseInt(rows), parseInt(columns));
-      generateGamePieces(player1Colour, player2Colour);
+    if (gameMode === "pvp") {
+      if (!firstPlayer || !selectedGameModeButton || !selectedBoardSelectorButton) {
+        alert("Please select every option to start the game.");
+      }else{
+        console.log("PLAYING ONLINE")
+        console.log("First player: " + firstPlayer.textContent);
+        console.log("Game mode: " + selectedGameModeButton.textContent);
+        console.log("Board size: " + selectedBoardSelectorButton.textContent);
 
-      if (firstPlayer.textContent === "Player 1") {
-        playerTurn = "player1";
-      } else {
-        playerTurn = "player2";
+        [rows, columns] = selectedBoardSelectorButton.textContent.split("x");
+
+        lookForGame(nick,password,rows,columns)
+
+
+        // CONTINUE PROCESSING AFTER RECEIVING GAME ID
+
       }
+    }else {
+      if (!firstPlayer || !selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {
+        alert("Please select every option to start the game.");
+      } else {
+        console.log("PLAYING OFFLINE")
+        console.log("First player: " + firstPlayer.textContent);
+        console.log("Game mode: " + selectedGameModeButton.textContent);
+        console.log("Board size: " + selectedBoardSelectorButton.textContent);
+        console.log("Game difficulty: " + selectedGameDifficulty.textContent);
+        // Get the selected game board size
+        const boardSize = selectedBoardSelectorButton.textContent;
+        [rows, columns] = boardSize.split("x");
 
-      startGame(selectedGameDifficulty.textContent);
+        // Call generateGameBoard() with rows and columns
+        generateGameBoard(parseInt(rows), parseInt(columns));
+        generateGamePieces(player1Colour, player2Colour);
 
-      // Hide the 'first-step' div
-      firstStep.style.display = "none";
+        if (firstPlayer.textContent === "Player 1") {
+          playerTurn = "player1";
+        } else {
+          playerTurn = "player2";
+        }
 
-      // Show the game board
-      gameBoard.style.display = "flex";
+        startGame(selectedGameDifficulty.textContent);
+
+        // Hide the 'first-step' div
+        firstStep.style.display = "none";
+
+        // Show the game board
+        gameBoard.style.display = "flex";
+      }
     }
+
   });
   // Show the podium when the "Podium" button is clicked
   document.getElementById("podium-button").addEventListener("click", function () {
     podiumContainer.style.display = "block";
   });
   // Hide the podium when the "Close Podium" button is clicked
-  document.getElementById("close-podium").addEventListener("click", function () {
-    podiumContainer.style.display = "none";
-  });
+  //document.getElementById("close-podium").addEventListener("click", function () {
+  //  podiumContainer.style.display = "none";
+  //});
 });
