@@ -1,18 +1,14 @@
 import http from "http";
-import { register } from "./controllers/auth.js";
+import { register } from "./auth.js";
 
 const routes = {
   GET: {
-    "/": (req, res) => {
-      res.writeHead(200, { "Content-Type": "text/plain" });
-      res.end("cona!\n");
-    },
     "/register": register,
-    "/about": (req, res) => {
+    "/notify": (req, res) => {
       res.writeHead(200, { "Content-Type": "text/plain" });
       res.end("About us!\n");
     },
-    "/contact": (req, res) => {
+    "/join": (req, res) => {
       res.writeHead(200, { "Content-Type": "text/plain" });
       res.end("Contact us!\n");
     },
