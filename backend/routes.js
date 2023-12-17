@@ -1,4 +1,3 @@
-import http from "http";
 import { register } from "./auth.js";
 import { ranking } from "./controllers/rank.js";
 import { join } from "./controllers/game.js";
