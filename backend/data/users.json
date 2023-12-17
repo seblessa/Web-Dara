@@ -1,14 +1,1 @@
-[
-  {
-    "username": "cao",
-    "hash": "18452d47d97eb0f306c59ae38087fcb0",
-    "games": { "6x5": [], "6x6": [], "5x6": [] },
-    "victories": { "6x5": 4, "6x6": 1, "5x6": 1 }
-  },
-  {
-    "username": "vaca",
-    "hash": "90f077d7759d0d4d21e6867727d4b2bd",
-    "games": { "6x5": [], "6x6": [], "5x6": [] },
-    "victories": { "6x5": 1, "6x6": 4, "5x6": 2 }
-  }
-]
+[{"username":"cao","hash":"18452d47d97eb0f306c59ae38087fcb0","games":{"6x5":[],"6x6":[],"5x6":[]},"victories":{"6x5":4,"6x6":1,"5x6":1}},{"username":"vaca","hash":"90f077d7759d0d4d21e6867727d4b2bd","games":{"6x5":[],"6x6":[],"5x6":[]},"victories":{"6x5":1,"6x6":4,"5x6":2}},{"username":"vaca1","hash":"672c7d1ef05ae279e385340c78278f81","games":{"6x5":[],"6x6":[],"5x6":[]},"victories":{"6x5":0,"6x6":0,"5x6":0}}]

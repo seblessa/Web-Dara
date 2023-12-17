@@ -6,52 +6,47 @@ export const register = async (req, res) => {
   let data = "";
   let jsonData;
   var user;
-
+  let toWrite;
+  var status;
   req.on("data", (chunk) => {
     data += chunk;
   });
   req.on("end", () => {
     if (req.headers["content-type"] === "application/json") {
       jsonData = JSON.parse(data);
-      try {
-        user = {
-          username: jsonData.nick,
-          hash: crypto.createHash("md5").update(jsonData.password).digest("hex"),
-          games: {
-            "6x5": [],
-            "6x6": [],
-            "5x6": [],
-          },
-          victories: {
-            "6x5": 0,
-            "6x6": 0,
-            "5x6": 0,
-          },
-        };
-
-        let result = checkUserExists(user.username);
-        if (result.value) {
-          console.log("User already exists");
-          if (validatePassword(jsonData.password, result.user.hash)) {
-            console.log("Password correct");
-            res.statusCode = 200;
-          }
-          res.end();
+      user = {
+        username: jsonData.nick,
+        hash: crypto.createHash("md5").update(jsonData.password).digest("hex"),
+        games: {
+          "6x5": [],
+          "6x6": [],
+          "5x6": [],
+        },
+        victories: {
+          "6x5": 0,
+          "6x6": 0,
+          "5x6": 0,
+        },
+      };
+      let result = checkUserExists(user.username);
+      if (result.value) {
+        console.log("User already exists");
+        if (validatePassword(jsonData.password, result.user.hash)) {
+          status = 200;
         } else {
-          addUser(user);
+          let body = { error: "User registered with a different password" };
+          status = 401;
+          toWrite = body;
         }
-        res.statusCode = 201; // Created
-        return res.end("User created");
-      } catch (error) {
-        console.error("Error parsing JSON:", error.message);
-        res.statusCode = 400; // Bad Request
-        return res.end("Error parsing JSON");
+      } else {
+        addUser(user);
+        status = 201;
       }
-    } else {
-      res.end("Received data: " + data);
     }
+    res.statusCode = status;
+    res.write(JSON.stringify(toWrite));
+    return res.end();
   });
-  return res.end();
 };
 
 function validatePassword(password, hash) {
