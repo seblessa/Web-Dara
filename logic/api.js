@@ -125,8 +125,8 @@ async function update(nick,status){
             let phase = json.phase;
             let step = json.step;
             let turn = json.turn;
-            updateBoardPvP(game_board);
             updateMessage(status, phase, step, turn);
+            updateBoardPvP(game_board);
         }
     }
 }
