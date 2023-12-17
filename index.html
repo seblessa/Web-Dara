@@ -8,10 +8,10 @@
     <title>Web Dara</title>
   </head>
   <body>
-  <script type="module" src="logic/script.js"></script>
-  <script type="module" src="logic/game.js"></script>
-  <script type="module" src="logic/api.js"></script>
-  <script type="module" src="logic/podium.js"></script>
+  <script src="logic/script.js"></script>
+  <script src="logic/api.js"></script>
+  <script src="logic/game.js"></script>
+  <script src="logic/podium.js"></script>
     <header id="header">
       <div class="header-container">
         <div class="button-container">
@@ -65,14 +65,14 @@
 
     <div class="first-step">
       <div class="Player's colours">
-        <h2>Colour's of the player's pieces</h2>
+        <h2>Color of the player's pieces</h2>
         <label for="player1-colour"> Player 1</label>
         <input type="color" id="player1-colour" value="#0000FF" />
         <label for="player2-colour"> Player 2</label>
         <input type="color" id="player2-colour" value="#FF0000" />
       </div>
       <div class="first-player">
-        <h2>Choose first Player</h2>
+        <h2>Choose the first Player</h2>
         <button id="player1-button" class="toggle-button0">Player 1</button>
         <button id="player2-button" class="toggle-button0">Player 2</button>
       </div>
@@ -87,7 +87,7 @@
         <button id="game-board6x6" class="toggle-button2">6x6</button>
         <button id="game-board6x5" class="toggle-button2">6x5</button>
       </div>
-      <div class="game-difficulty">
+      <div id="game-difficulty" class="game-difficulty">
         <h2>Game Difficulty</h2>
         <button id="easy" class="toggle-button3">Easy</button>
         <button id="medium" class="toggle-button3">Medium</button>
