@@ -28,9 +28,18 @@ export function addUser(user) {
   console.log("User added");
   return true;
 }
-
 export function checkUserExists(username) {
-  return UsersData.some((user) => user.username === username);
+  let value;
+  let useR;
+  UsersData.some((user) => {
+    value = user.username === username;
+    useR = user;
+  });
+  let data = {
+    value: value,
+    user: useR,
+  };
+  return data;
 }
 
 export function writeUserData() {

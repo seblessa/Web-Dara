@@ -1,1 +1,5 @@
-[{"username":"lenda","hash":"b0c44dc7bd2ecec1ccfd77f4bfbd35cc"}]
+[
+  { "username": "rei", "hash": "b0c44dc7bd2ecec1ccfd77f4bfbd35cc", "games": 0, "victories": 2 },
+  { "username": "lenda", "hash": "16cd1e9f3194130decce4d96eaf5e38a", "games": 0, "victories": 0 },
+  { "username": "cao", "hash": "18452d47d97eb0f306c59ae38087fcb0", "games": 0, "victories": 4 }
+]

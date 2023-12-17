@@ -5,7 +5,7 @@ import { readUsersData, writeUserData, getUsersData, checkUserExists, addUser } 
 export const register = async (req, res) => {
   let data = "";
   let jsonData;
-  let user;
+  var user;
 
   req.on("data", (chunk) => {
     data += chunk;
@@ -17,11 +17,18 @@ export const register = async (req, res) => {
         user = {
           username: jsonData.nick,
           hash: crypto.createHash("md5").update(jsonData.password).digest("hex"),
+          games: 0,
+          victories: 0,
         };
-        if (checkUserExists(user.username)) {
+
+        let result = checkUserExists(user.username);
+        if (result.value) {
           console.log("User already exists");
-          res.statusCode = 200;
-          return res.end();
+          if (validatePassword(jsonData.password, result.user.hash)) {
+            console.log("Password correct");
+            res.statusCode = 200;
+          }
+          res.end();
         } else {
           addUser(user);
         }

@@ -1,9 +1,9 @@
 import http from "http";
 import { register } from "./auth.js";
+import { ranking } from "./controllers/rank.js";
 
 const routes = {
   GET: {
-    "/register": register,
     "/notify": (req, res) => {
       res.writeHead(200, { "Content-Type": "text/plain" });
       res.end("About us!\n");
@@ -15,6 +15,7 @@ const routes = {
   },
   POST: {
     "/register": register,
+    "/ranking": ranking,
   },
   default: (req, res) => {
     res.writeHead(404, { "Content-Type": "text/plain" });
