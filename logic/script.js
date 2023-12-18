@@ -360,16 +360,14 @@ document.addEventListener("DOMContentLoaded", function () {
     podiumContainer.style.display = "block";
     podiumButtons.forEach(function (button) {
       button.addEventListener("click", function () {
-        podiumButtons.forEach(function (b) {
-          b.classList.remove("active");
-          if (button.id === "5x6") {
-            ranking(5, 6, podiumTable);
-          } else if((button.id === "6x6")){
-            ranking(5, 6, podiumTable);
-          } else if((button.id === "6x5")){
-            ranking(5, 6, podiumTable);
-          }
-        });
+        console.log(button.id);
+        if (button.id === "5x6") {
+          ranking(5, 6, podiumTable);
+        } else if((button.id === "6x6")){
+          ranking(6, 6, podiumTable);
+        } else if((button.id === "6x5")){
+          ranking(6, 5, podiumTable);
+        }
         this.classList.add("active");
       });
     });
@@ -381,6 +379,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("close-popup-user-table-section").addEventListener("click", function () {
     podiumTable.style.display = "none";
+    podiumTable.querySelector("tbody").innerHTML = "";
   });
 
 

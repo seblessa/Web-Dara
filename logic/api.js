@@ -129,10 +129,8 @@ async function ranking(rows, columns, table) {
   if (!("error" in response_json)) {
     table.style.display = "block";
     console.log("Successfuly received the ranking table");
-    console.log(response_json);
     // generate the table here
-    let tbody = table.querySelector("tbody");
-
+    let tbody = table.querySelector("tbody")
     // generate the new table
     let ranking_list = response_json.ranking;
     for (let player_stats of ranking_list) {
@@ -144,6 +142,8 @@ async function ranking(rows, columns, table) {
       }
       tbody.appendChild(row);
     }
+
+
   } else {
     console.log("Ranking error. Response:");
     console.log(response_json);
