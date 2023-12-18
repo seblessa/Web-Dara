@@ -1,6 +1,5 @@
 import crypto from "crypto";
-import { writeFileSync, readFileSync } from "fs";
-import { readUsersData, writeUserData, getUsersData, checkUserExists, addUser } from "./data/data.js";
+import { checkUserExists, addUser } from "./data/data.js";
 
 export const register = async (req, res) => {
   let data = "";
@@ -34,9 +33,8 @@ export const register = async (req, res) => {
         if (validatePassword(jsonData.password, result.user.hash)) {
           status = 200;
         } else {
-          let body = { error: "User registered with a different password" };
+          toWrite = { error: "User registered with a different password" };
           status = 401;
-          toWrite = body;
         }
       } else {
         addUser(user);
@@ -44,7 +42,7 @@ export const register = async (req, res) => {
       }
     }
     res.statusCode = status;
-    res.write(JSON.stringify(toWrite));
+    if (toWrite) res.write(JSON.stringify(toWrite));
     return res.end();
   });
 };
