@@ -244,6 +244,10 @@ function startGame(difficulty) {
   });
 }
 
+function log_in() {
+
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const welcomeMessage = document.querySelector(".welcome-message");
   const errorMessage = document.querySelector(".error-message");
@@ -258,11 +262,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const podiumTable = document.getElementById("user-table-section");
   const status = document.getElementById("status");
   const podiumButtons = document.querySelectorAll(".podium-size-buttons");
+  const quitGame = document.getElementById("quit-game-button");
+  const newGameButton = document.getElementById("new-game-button")
   let gameMode = null;
   let nick = null;
   let password = null;
 
-  // updateUserTable();            // TODO: Complete podium
+  quitGame.style.display = "none";
   status.style.display = "none";
   gameDifficulty.style.display = "none";
   podiumContainer.style.display = "none";
@@ -271,19 +277,25 @@ document.addEventListener("DOMContentLoaded", function () {
   welcomeMessage.style.display = "none";
   gameBoard.style.display = "none";
   firstStep.style.display = "none";
+  newGameButton.style.display = "none";
+
+  function main_menu(user, password){
+    isLoggedIn = login(user, password);
+    if (isLoggedIn) {
+      show_login_cred();
+      hideLoginDiv();
+      showWelcomeMessage(nick);
+      newGameButton.style.display = "block";
+      document.getElementById("logout-button").style.display = "block";
+    }
+  }
 
   document.getElementById("login-button").addEventListener("click", function (ev) {
     ev.preventDefault();
-    const usernameInput = document.getElementById("username").value;
-    const passwordInput = document.getElementById("password").value;
-    isLoggedIn = login(usernameInput, passwordInput);
-    if (isLoggedIn) {
-      nick = usernameInput;
-      password = passwordInput;
-    }
+    nick = document.getElementById("username").value;
+    password = document.getElementById("password").value;
+    main_menu(nick, password);
   });
-
-  document.getElementById("new-game-button").style.display = "none";
 
   document.getElementById("new-game-button").addEventListener("click", function () {
     firstStep.style.display = "block";
@@ -295,6 +307,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("close-popup").addEventListener("click", function () {
     document.getElementById("popup").style.display = "none";
+  });
+
+  quitGame.addEventListener("click", function () {
+    giveUpRequest(nick, password)
+    quitGame.style.display = "none";
+    status.style.display = "none";
+    gameBoard.style.display = "none";
+    main_menu(nick,password)
   });
 
   document.getElementById("logout-button").addEventListener("click", function () {
@@ -389,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
         generateGameBoard(parseInt(rows), parseInt(columns));
         generateGamePieces(player1Colour, player2Colour);
         gameBoard.style.display = "flex";
+        quitGame.style.display = "block";
       }
     } else {
       if (!selectedGameModeButton || !selectedBoardSelectorButton || !selectedGameDifficulty) {

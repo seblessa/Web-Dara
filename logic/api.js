@@ -31,11 +31,6 @@ async function login(usernameInput, passwordInput) {
     showErrorMessage(data.error);
     return false;
   } else {
-    show_login_cred();
-    hideLoginDiv();
-    showWelcomeMessage(usernameInput);
-    document.getElementById("new-game-button").style.display = "block";
-    document.getElementById("logout-button").style.display = "block";
     return true;
   }
 }
@@ -68,8 +63,6 @@ async function giveUpRequest(nick, password) {
   let response_json = await callServer("leave", { nick, password, game });
   if (!("error" in response_json)) {
     console.log("Successfuly left the game");
-    //if (document.getElementById("wait-game").style.display === "flex"){switchPage("wait-game", "menu"); game = null;}
-    //else if (document.getElementById("game").style.display === "flex"){switchPage("game", "menu");}
   } else {
     console.log("Leave failed. Response:");
     console.log(response_json);
