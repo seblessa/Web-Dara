@@ -350,9 +350,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         [rows, columns] = selectedBoardSelectorButton.textContent.split("x");
 
-        lookForGame(nick, password, parseInt(rows), parseInt(columns));
-
-        // CONTINUE PROCESSING AFTER RECEIVING GAME ID
         lookForGame(nick, password, parseInt(rows), parseInt(columns), status);
 
         firstStep.style.display = "none";

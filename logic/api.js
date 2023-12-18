@@ -60,9 +60,7 @@ async function lookForGame(nick, password, rows, columns,status){
 }
 
 // TODO: LEAVE REQUEST
-async function giveUpRequest(){
-    let nick = document.getElementById("username-input").value;
-    let password = document.getElementById("password-input").value;
+async function giveUpRequest(nick, password){
     let response_json = await callServer("leave", {nick, password, game});
     if (!("error" in response_json)){
         console.log("Successfuly left the game");
@@ -177,37 +175,6 @@ async function ranking(){
 
 
 // TODO: AUXILIAR FUNCTIONS
-
-function createSideBoardsHTML() {
-    for (let r = 0; r < 6; r++) {
-        let row = [];
-        for (let c = 0; c < 2; c++) {
-            row.push(0);
-
-            let tile_e = document.createElement("div");
-            tile_e.id = "E" + r.toString() + "-" + c.toString();
-            tile_e.classList.add("tile");
-            let piece_img = document.createElement("img");
-            piece_img.setAttribute("src", "images/player1.png");
-            piece_img.setAttribute("id", "img-"+tile_e.id);
-            piece_img.style.width = "100%";
-            piece_img.style.height = "100%";
-            tile_e.append(piece_img);
-            document.getElementById("esquerda").append(tile_e);
-
-            let tile_d = document.createElement("div");
-            tile_d.id = "D" + r.toString() + "-" + c.toString();
-            tile_d.classList.add("tile");
-            piece_img = document.createElement("img");
-            piece_img.setAttribute("src", "images/player2.png");
-            piece_img.setAttribute("id", "img-"+tile_d.id);
-            piece_img.style.width = "100%";
-            piece_img.style.height = "100%";
-            tile_d.append(piece_img);
-            document.getElementById("direita").append(tile_d);
-        }
-    }
-}
 
 function updateBoardPvP(board){
     let color_value = {"empty":0, "white":1, "black":2};
