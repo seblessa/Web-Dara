@@ -2,7 +2,7 @@
 Assignment for Web Technologies, 3º Year, 1º Semester, Bachelor in Artificial Intelligence and Data Science.
 
 ## Summary
-Classification of urban sounds using machine learning algorithms.
+Web game of Dara, a traditional game from Mozambique, developed in Javavascript, HTML and CSS.
 
 **Autores:**
 - [Sebastião Santos Lessa](https://github.com/seblessa/)
@@ -10,7 +10,7 @@ Classification of urban sounds using machine learning algorithms.
 - [Diogo Alves](https://github.com/digaso/)
 
 
-## Versões
+## Versions
 The versions of the operating systems used to develop and test this application are:
 
 - Fedora 38
