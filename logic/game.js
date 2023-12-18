@@ -35,7 +35,6 @@ function makeMove(x, y, startX, startY, possibleMove) {
     possibleMove.parentNode.appendChild(selected_piece);
     selected_piece = null;
     selected = false;
-    bv;
 }
 
 function canMove(x, y, startX, startY) {}
@@ -85,14 +84,29 @@ function renderPossibleMoves(x, y) {
     let possibleMoves = generatePossibleMoves(x, y);
     console.log(possibleMoves);
     const cells = document.querySelectorAll(".cell");
+
+    // Remove existing possible-move elements
+    document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
+        possibleMove.remove();
+    });
+
     cells.forEach(function (cell) {
-        let [x, y] = cell.id.split("-");
-        if (possibleMoves[parseInt(x)][parseInt(y)] === 1) {
+        let [i, j] = cell.id.split("-");
+        if (possibleMoves[parseInt(i)][parseInt(j)] === 1 && board[parseInt(i)][parseInt(j)] === 0) {
             const possibleMove = document.createElement("div");
             possibleMove.classList.add("possible-move");
             cell.appendChild(possibleMove);
+
+            // Add click event listener to each possible move
+            possibleMove.addEventListener("click", function () {
+                // Call your move piece logic here
+                // For example, you can call a function like makeMove(x, y, i, j);
+                // Update the logic based on your requirements
+            });
         }
     });
+}
+
 
     document.querySelectorAll(".possible-move").forEach(function (possibleMove) {
         possibleMove.addEventListener("click", function () {
@@ -118,7 +132,6 @@ function renderPossibleMoves(x, y) {
             document.getElementById("message-box").innerText = phase + " Phase " + playerTurn;
         });
     });
-}
 
 /* Condition for winning the game */
 function checkWinCondition() {
@@ -156,16 +169,3 @@ function checkWinCondition() {
     }
 }
 
-
-/*
-function makeMove(x, y, startX, startY, possibleMove) {
-    board[parseInt(x)][parseInt(y)] = board[parseInt(startX)][parseInt(startY)];
-    board[parseInt(startX)][parseInt(startY)] = 0;
-    possibleMove.parentNode.appendChild(selected_piece);
-    selected_piece = null;
-    selected = false;
-
-    checkWinCondition();  // Call the function to check win condition after each move
-}
-
-*/
