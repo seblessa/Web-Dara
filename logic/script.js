@@ -58,7 +58,7 @@ function generateGamePieces(Playercolour, Opponentcolour) {
   playerPieces.innerHTML = "";
   for (let i = 0; i < 12; i++) {
     const piece = document.createElement("div");
-    piece.id = "Playerpiece-" + i;
+    piece.id = "player1-" + i;
     piece.classList.add("piece");
     piece.style.backgroundColor = Playercolour;
     playerPieces.appendChild(piece);
@@ -68,7 +68,7 @@ function generateGamePieces(Playercolour, Opponentcolour) {
   opponentPieces.innerHTML = "";
   for (let i = 0; i < 12; i++) {
     const piece = document.createElement("div");
-    piece.id = "Opponentpiece-" + i;
+    piece.id = "player2-" + i;
     piece.classList.add("piece");
     piece.style.backgroundColor = Opponentcolour;
     opponentPieces.appendChild(piece);
