@@ -5,6 +5,7 @@ let board;
 let phase = "Drop";
 let playerTurn = "player1";
 let selected_piece;
+let waiting = false;
 let selected = false;
 
 function showWelcomeMessage(username) {
@@ -54,7 +55,7 @@ function generateGameBoard(rows, columns) {
 }
 
 function generateGamePieces(Playercolour, Opponentcolour) {
-  const playerPieces = document.getElementById("player-pieces");
+  const playerPieces = document.getElementById("player1-pieces");
   playerPieces.innerHTML = "";
   for (let i = 0; i < 12; i++) {
     const piece = document.createElement("div");
@@ -64,7 +65,7 @@ function generateGamePieces(Playercolour, Opponentcolour) {
     playerPieces.appendChild(piece);
   }
 
-  const opponentPieces = document.getElementById("opponent-pieces");
+  const opponentPieces = document.getElementById("player2-pieces");
   opponentPieces.innerHTML = "";
   for (let i = 0; i < 12; i++) {
     const piece = document.createElement("div");
@@ -122,8 +123,8 @@ function startGame(difficulty) {
   let TotalOpponentPieces = 12;
   const cells = document.querySelectorAll(".cell");
   const pieces = document.querySelectorAll(".piece");
-  const playerPieces = document.getElementById("player-pieces");
-  const opponentPieces = document.getElementById("opponent-pieces");
+  const playerPieces = document.getElementById("player1-pieces");
+  const opponentPieces = document.getElementById("player2-pieces");
   const messageBox = document.getElementById("message-box");
   messageBox.style.display = "block";
   messageBox.innerText = phase + " Phase " + playerTurn;
@@ -183,7 +184,7 @@ function startGame(difficulty) {
     cell.addEventListener("click", function () {
       let [x, y] = cell.id.split("-");
       if (phase === "Drop") {
-        if (playerTurn === "player1" && DropabblePlayerPieces > 0) {
+        if (playerTurn === nick && DropabblePlayerPieces > 0) {
           if (board[parseInt(x)][parseInt(y)] === 0) {
             board[parseInt(x)][parseInt(y)] = 1;
             cell.appendChild(playerPieces.lastChild);

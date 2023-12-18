@@ -8,10 +8,10 @@
     <title>Web Dara</title>
   </head>
   <body>
-  <script src="logic/script.js"></script>
-  <script src="logic/api.js"></script>
-  <script src="logic/game.js"></script>
-  <script src="logic/podium.js"></script>
+    <script src="logic/script.js"></script>
+    <script src="logic/api.js"></script>
+    <script src="logic/game.js"></script>
+    <script src="logic/podium.js"></script>
     <header id="header">
       <div class="header-container">
         <div class="button-container">
@@ -71,7 +71,7 @@
         <label for="player2-colour"> Player 2</label>
         <input type="color" id="player2-colour" value="#FF0000" />
       </div>
-      <br/>
+      <br />
       <div class="game-board-selector">
         <h2>Choose board</h2>
         <button id="game-board5x6" class="toggle-button2">5x6</button>
@@ -99,9 +99,9 @@
     <div>
       <div class="message-box" id="message-box">Test</div>
       <div class="game-container">
-        <div id="player-pieces" class="game-pieces"></div>
+        <div id="player1-pieces" class="game-pieces"></div>
         <table id="game-board" class="game-board"></table>
-        <div id="opponent-pieces" class="game-pieces"></div>
+        <div id="player2-pieces" class="game-pieces"></div>
       </div>
     </div>
     <div class="center-container">
@@ -128,10 +128,10 @@
             <h2>Wins</h2>
             <table id="user-table">
               <thead>
-              <tr>
-                <th>Players</th>
-                <th>games won</th>
-              </tr>
+                <tr>
+                  <th>Players</th>
+                  <th>games won</th>
+                </tr>
               </thead>
               <tbody id="user-table-body"></tbody>
             </table>
