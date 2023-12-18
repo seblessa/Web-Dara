@@ -34,7 +34,7 @@ async function login(usernameInput, passwordInput) {
   }
 }
 
-// TODO: JOIN REQUEST
+// JOIN REQUEST
 async function lookForGame(nick, password, rows, columns, status) {
   let response_json = await callServer("join", { group, nick, password, size: { rows, columns } });
   let cells = document.querySelectorAll(".cell");
@@ -57,7 +57,7 @@ async function lookForGame(nick, password, rows, columns, status) {
   }
 }
 
-// TODO: LEAVE REQUEST
+// LEAVE REQUEST
 async function giveUpRequest(nick, password) {
   let response_json = await callServer("leave", { nick, password, game });
   if (!("error" in response_json)) {
@@ -85,7 +85,7 @@ async function notify(row, column, nick, password) {
   }
 }
 
-// TODO: UPDATE REQUEST (SSE)
+// UPDATE REQUEST
 async function update(nick, status) {
   let url = SERVER + "update?nick=" + nick + "&game=" + game;
   const eventSource = new EventSource(url);
@@ -123,7 +123,7 @@ async function update(nick, status) {
   };
 }
 
-// TODO: RANKING REQUEST
+// RANKING REQUEST
 async function ranking(rows, columns, table) {
   let response_json = await callServer("ranking", { group, size: { rows, columns } });
   if (!("error" in response_json)) {
@@ -150,7 +150,6 @@ async function ranking(rows, columns, table) {
   }
 }
 
-// TODO: AUXILIAR FUNCTIONS
 function updateBoardPvP(board, phase, step, move) {
   let color_value = { empty: 0, white: 1, black: 2 };
   let piece_count = [0, 0];
@@ -180,30 +179,6 @@ function updateBoardPvP(board, phase, step, move) {
   if (phase === "move" && step === "from") {
     let tile = document.getElementById(move.row.toString() + "-" + move.column.toString());
     tile.classList.add("selected");
-  }
-}
-
-function clearPvP() {
-  for (let r = 0; r < game_board.length; r++) {
-    for (let c = 0; c < game_board[0].length; c++) {
-      let tile = document.getElementById(r.toString() + "-" + c.toString());
-      if (tile != null) {
-        tile.remove();
-      }
-    }
-  }
-
-  for (let r = 0; r < 6; r++) {
-    for (let c = 0; c < 2; c++) {
-      let tile_e = document.getElementById("E" + r.toString() + "-" + c.toString());
-      if (tile_e != null) {
-        tile_e.remove();
-      }
-      let tile_d = document.getElementById("D" + r.toString() + "-" + c.toString());
-      if (tile_d != null) {
-        tile_d.remove();
-      }
-    }
   }
 }
 

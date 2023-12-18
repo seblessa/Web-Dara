@@ -20,10 +20,6 @@ The versions of the operating systems used to develop and test this application 
 - macOS Sonoma 14.0
 - Linux Mint 20.2
 
-## Python Versions:
-
-- 3.11.5
-
 ## Requirements
 
 - Node.js up to 14.18.1

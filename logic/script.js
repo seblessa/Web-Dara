@@ -5,7 +5,6 @@ let board;
 let phase = "Drop";
 let playerTurn = "player1";
 let selected_piece;
-let waiting = false;
 let selected = false;
 
 function showWelcomeMessage(username) {
@@ -23,11 +22,6 @@ function showErrorMessage(message) {
 function hideLoginDiv() {
   const loginDiv = document.querySelector(".login-container");
   loginDiv.style.display = "none";
-}
-
-function ShowLoginDiv() {
-  const loginDiv = document.querySelector(".login-container");
-  loginDiv.style.display = "block";
 }
 
 function show_login_cred() {
@@ -107,22 +101,11 @@ function minimaxDARA(board, depth, maximizingPlayer) {
 }
 */
 
-// DARA board evaluation function (customize based on DARA rules)
-function evaluateDARA(board) {
-  // Evaluate the DARA board state and return a score
-  // Consider factors like piece positions, connections, and game status
-  // Return a higher score if the board favors the maximizing player
-  // Return a lower score if the board favors the minimizing player
-}
-
-function startGame(difficulty) {
+function startGame() {
   //start move phase
   let DropabblePlayerPieces = 12;
   let DropabbleOpponentPieces = 12;
-  let TotalPlayerPieces = 12;
-  let TotalOpponentPieces = 12;
   const cells = document.querySelectorAll(".cell");
-  const pieces = document.querySelectorAll(".piece");
   const playerPieces = document.getElementById("player1-pieces");
   const opponentPieces = document.getElementById("player2-pieces");
   const messageBox = document.getElementById("message-box");
@@ -137,48 +120,6 @@ function startGame(difficulty) {
     }
   }
 
-  // Define a function to handle the AI's move based on the chosen difficulty
-  function handleAIMove() {
-    if (difficulty === "Easy") {
-      // Implement a random player AI logic here
-
-      // Generate a random available move
-      const availableMoves = [];
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < columns; j++) {
-          if (board[i][j] === 0) {
-            availableMoves.push({ x: i, y: j });
-          }
-        }
-      }
-
-      if (availableMoves.length > 0) {
-        const randomMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
-        const { x, y } = randomMove;
-
-        // Update the board and move the AI piece
-        board[x][y] = 2; // Assuming AI's pieces are represented by 2
-        const cell = document.getElementById(`cell-${x}-${y}`);
-        cell.appendChild(opponentPieces.lastChild);
-        playerTurn = "player1"; // Switch back to the player's turn
-
-        // Update the remaining pieces count for the AI
-        DropabbleOpponentPieces--;
-      }
-    } else if (difficulty === "Medium") {
-      // Call minimaxDARA function with low depth
-      //const bestMove = minimaxDARA(board, /* specify the depth */, false);
-      // Apply the best move to the DARA board
-      // Update the DARA game state
-      // ...
-    } else if (difficulty === "Hard") {
-      // Call minimaxDARA function with deep depth
-      //const bestMove = minimaxDARA(board, /* specify a deeper depth */, false);
-      // Apply the best move to the DARA board
-      // Update the DARA game state
-      // ...
-    }
-  }
 
   cells.forEach(function (cell) {
     cell.addEventListener("click", function () {
