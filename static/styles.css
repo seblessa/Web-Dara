@@ -434,6 +434,7 @@ tr {
   margin-top: 50px;
   padding: 30px;
 }
+
 #podium-button {
   background-color: black;
   color: white;
@@ -445,7 +446,21 @@ tr {
   width: 150px;
 }
 
-#podium-button:hover {
+#close-popup-user-table, #close-popup-user-table-section {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: black;
+  color: white;
+  font-family: "Blanka", "Arial", sans-serif;
+  font-size: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+#podium-button:hover, #close-popup-user-table:hover, #close-popup-user-table-section:hover {
   background-color: darkgrey;
 }
 
@@ -460,15 +475,22 @@ tr {
   margin-top: 20px;
 }
 
-#popup-user-table {
+#popup-user-table, #user-table-section {
+  z-index: 3;
+  display: inline-flex;
+  flex-direction: row;
+  background-color: #db6304;
+  width: 500px;
+  height: auto;
+  text-align: justify;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #db6304;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 2;
+  transform: translate(-50%, -70%);
+  padding: 70px;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 #popup-user-table h2 {
@@ -489,19 +511,6 @@ tr {
 
 #user-table th {
   background-color: #f2f2f2;
-}
-
-#close-popup-user-table {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #333;
-}
-
-#close-popup-user-table:hover {
-  background-color: #e0e0e0;
 }
 
 
