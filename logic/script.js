@@ -244,10 +244,6 @@ function startGame(difficulty) {
   });
 }
 
-function log_in() {
-
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const welcomeMessage = document.querySelector(".welcome-message");
   const errorMessage = document.querySelector(".error-message");
