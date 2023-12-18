@@ -254,8 +254,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const gameDifficulty = document.getElementById("game-difficulty");
   const gameDifficultyButton = document.querySelectorAll(".toggle-button3");
   const startButton = document.getElementById("start-button");
-  const podiumContainer = document.querySelector(".podium");
+  const podiumContainer = document.getElementById("popup-user-table");
+  const podiumTable = document.getElementById("user-table-section");
   const status = document.getElementById("status");
+  const podiumButtons = document.querySelectorAll(".podium-size-buttons");
   let gameMode = null;
   let nick = null;
   let password = null;
@@ -264,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
   status.style.display = "none";
   gameDifficulty.style.display = "none";
   podiumContainer.style.display = "none";
+  podiumTable.style.display = "none";
   errorMessage.style.display = "none";
   welcomeMessage.style.display = "none";
   gameBoard.style.display = "none";
@@ -332,6 +335,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // Show the podium when the "Podium" button is clicked
+  document.getElementById("podium-button").addEventListener("click", function () {
+    podiumContainer.style.display = "block";
+    podiumButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        podiumButtons.forEach(function (b) {
+          b.classList.remove("active");
+          if (button.id === "5x6") {
+            ranking(5, 6, podiumTable);
+          } else if((button.id === "6x6")){
+            ranking(5, 6, podiumTable);
+          } else if((button.id === "6x5")){
+            ranking(5, 6, podiumTable);
+          }
+        });
+        this.classList.add("active");
+      });
+    });
+
+  });
+  document.getElementById("close-popup-user-table").addEventListener("click", function () {
+    podiumContainer.style.display = "none";
+  });
+
+  document.getElementById("close-popup-user-table-section").addEventListener("click", function () {
+    podiumTable.style.display = "none";
+  });
+
+
   startButton.addEventListener("click", function () {
     const selectedGameModeButton = Array.from(gameModeButtons).find((button) => button.classList.contains("active"));
     const selectedBoardSelectorButton = Array.from(boardSelectorButtons).find((button) => button.classList.contains("active"));
@@ -383,12 +415,5 @@ document.addEventListener("DOMContentLoaded", function () {
         gameBoard.style.display = "flex";
       }
     }
-  });
-  // Show the podium when the "Podium" button is clicked
-  document.getElementById("podium-button").addEventListener("click", function () {
-    podiumContainer.style.display = "block";
-  });
-  document.getElementById("close-popup-user-table").addEventListener("click", function () {
-    podiumContainer.style.display = "none";
   });
 });

@@ -2,8 +2,8 @@ const SERVER = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 //const SERVER = "http://localhost:8014/"
 let turn;
 const group = 14;
-var game = 0;
-var game_board = [[]];
+let game = 0;
+let game_board = [[]];
 
 async function callServer(request_name, info) {
   console.log(request_name);
@@ -76,7 +76,7 @@ async function giveUpRequest(nick, password) {
   }
 }
 
-// TODO: NOTIFY REQUEST
+// NOTIFY REQUEST
 async function notify(row, column, nick, password) {
   let intRow = parseInt(row);
   let intColumn = parseInt(column);
@@ -129,50 +129,30 @@ async function update(nick, status) {
 }
 
 // TODO: RANKING REQUEST
-async function ranking() {
-  let size =
-    document.getElementById("board-size-filter").options[document.getElementById("board-size-filter").selectedIndex].text;
-  let rows, columns;
-  if (size === "6 X 5") {
-    rows = 6;
-    columns = 5;
-  } else if (size === "5 X 6") {
-    rows = 5;
-    columns = 6;
-  } else if (size === "6 X 6") {
-    rows = 6;
-    columns = 6;
-  } else if (size === "7 X 6") {
-    rows = 7;
-    columns = 6;
-  }
-  let response_json = await callServer("ranking", { group, size: { rows, columns } });
-  console.log(response_json);
-  if (!("error" in response_json)) {
-    console.log("Successfuly received the ranking table");
-    console.log(response_json);
-    // generate the table here
-    let table = document.getElementById("win-rate-table");
-    let tbody = table.querySelector("tbody");
-    // remove all rows from the tbody except the first header (header)
-    while (tbody.rows.length > 1) {
-      tbody.deleteRow(1);
+async function ranking(rows, columns, table){
+    let response_json = await callServer("ranking", {group, "size": {rows, columns}});
+    if (!("error" in response_json)) {
+        table.style.display = "block";
+        console.log("Successfuly received the ranking table");
+        console.log(response_json);
+        // generate the table here
+        let tbody = table.querySelector("tbody");
+
+        // generate the new table
+        let ranking_list = response_json.ranking;
+        for (let player_stats of ranking_list) {
+            let row = document.createElement("tr");
+            for (let [key, value] of Object.entries(player_stats)) {
+                let cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            }
+            tbody.appendChild(row);
+        }
+    } else {
+        console.log("Ranking error. Response:");
+        console.log(response_json);
     }
-    // generate the new table
-    let ranking_list = response_json.ranking;
-    for (let player_stats of ranking_list) {
-      let row = document.createElement("tr");
-      for (let [key, value] of Object.entries(player_stats)) {
-        var cell = document.createElement("td");
-        cell.textContent = value;
-        row.appendChild(cell);
-      }
-      tbody.appendChild(row);
-    }
-  } else {
-    console.log("Ranking error. Response:");
-    console.log(response_json);
-  }
 }
 
 // TODO: AUXILIAR FUNCTIONS
@@ -202,8 +182,6 @@ function updateBoardPvP(board) {
       }
     }
   }
-  // update the side boards
-  //updateSideBoardsPvP(piece_count[0], piece_count[1]);
 }
 
 function updateSideBoardsPvP(p1_count, p2_count) {
