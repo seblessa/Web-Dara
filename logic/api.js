@@ -1,6 +1,5 @@
 const SERVER = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 //const SERVER = "http://localhost:8014/"
-let turn;
 const group = 14;
 let game = 0;
 let game_board = [[]];
@@ -80,6 +79,8 @@ async function notify(row, column, nick, password) {
     let message = document.getElementById("text");
     message.innerText = response_json.error;
   } else {
+    turn = response_json.turn;
+    phase = response_json.phase;
     console.log("Successfuly notified the server");
   }
 }
@@ -100,7 +101,7 @@ async function update(nick, status) {
       // in case the game is completely done / no forfeit occurs
       if ("board" in json) {
         game_board = json.board;
-        updateBoardPvP(game_board);
+        updateBoardPvP(game_board, json.phase, json.step);
       }
       // update the game message
       console.log("Successfuly received an update from server");
@@ -112,45 +113,45 @@ async function update(nick, status) {
       game_board = json.board;
       console.log("Successfuly received an update from server");
       // change the board and game messages in the browser side
-      let phase = json.phase;
-      let step = json.step;
+      phase = json.phase;
+      step = json.step;
       turn = json.turn;
+      move = json.move;
       updateMessage(status, phase, step, turn);
-      updateBoardPvP(game_board);
+      updateBoardPvP(game_board, phase, step, move);
     }
   };
 }
 
 // TODO: RANKING REQUEST
-async function ranking(rows, columns, table){
-    let response_json = await callServer("ranking", {group, "size": {rows, columns}});
-    if (!("error" in response_json)) {
-        table.style.display = "block";
-        console.log("Successfuly received the ranking table");
-        console.log(response_json);
-        // generate the table here
-        let tbody = table.querySelector("tbody");
+async function ranking(rows, columns, table) {
+  let response_json = await callServer("ranking", { group, size: { rows, columns } });
+  if (!("error" in response_json)) {
+    table.style.display = "block";
+    console.log("Successfuly received the ranking table");
+    console.log(response_json);
+    // generate the table here
+    let tbody = table.querySelector("tbody");
 
-        // generate the new table
-        let ranking_list = response_json.ranking;
-        for (let player_stats of ranking_list) {
-            let row = document.createElement("tr");
-            for (let [key, value] of Object.entries(player_stats)) {
-                let cell = document.createElement("td");
-                cell.textContent = value;
-                row.appendChild(cell);
-            }
-            tbody.appendChild(row);
-        }
-    } else {
-        console.log("Ranking error. Response:");
-        console.log(response_json);
+    // generate the new table
+    let ranking_list = response_json.ranking;
+    for (let player_stats of ranking_list) {
+      let row = document.createElement("tr");
+      for (let [key, value] of Object.entries(player_stats)) {
+        let cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+      }
+      tbody.appendChild(row);
     }
+  } else {
+    console.log("Ranking error. Response:");
+    console.log(response_json);
+  }
 }
 
 // TODO: AUXILIAR FUNCTIONS
-
-function updateBoardPvP(board) {
+function updateBoardPvP(board, phase, step, move) {
   let color_value = { empty: 0, white: 1, black: 2 };
   let piece_count = [0, 0];
   //map the values "empty", "white", "black" to 0, 1, 2
@@ -175,30 +176,10 @@ function updateBoardPvP(board) {
       }
     }
   }
-}
-
-function updateSideBoardsPvP(p1_count, p2_count) {
-  for (let r = 5; r >= 0; r--) {
-    for (let c = 1; c >= 0; c--) {
-      let tile = document.getElementById("E" + r.toString() + "-" + c.toString());
-      document.getElementById("img-" + tile.id).setAttribute("src", "images/player1.png");
-      if (p1_count <= 0) {
-        continue;
-      }
-      document.getElementById("img-" + tile.id).setAttribute("src", "images/player0.png");
-      p1_count--;
-    }
-  }
-  for (let r = 5; r >= 0; r--) {
-    for (let c = 1; c >= 0; c--) {
-      let tile = document.getElementById("D" + r.toString() + "-" + c.toString());
-      document.getElementById("img-" + tile.id).setAttribute("src", "images/player2.png");
-      if (p2_count <= 0) {
-        continue;
-      }
-      document.getElementById("img-" + tile.id).setAttribute("src", "images/player0.png");
-      p2_count--;
-    }
+  //take row and colum and make cell selected
+  if (phase === "move" && step === "from") {
+    let tile = document.getElementById(move.row.toString() + "-" + move.column.toString());
+    tile.classList.add("selected");
   }
 }
 
